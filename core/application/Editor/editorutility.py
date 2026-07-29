@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 
 class EditorUtility:
     def __init__(self,app_interface):
@@ -32,6 +33,12 @@ class EditorUtility:
 
         with filename.open("w") as file:
             json.dump(project_data, file, indent=4)
+
+        if project_type == "Menu":
+            self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+        
+        elif project_type == "Form":
+            self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
 
         return filename
 
