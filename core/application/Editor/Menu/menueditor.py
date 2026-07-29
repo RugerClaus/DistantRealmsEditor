@@ -5,7 +5,7 @@ class MenuEditor(UIEditor):
     def __init__(self,system):
         super().__init__(system)
 
-    def handle_event(self):
+    def handle_event(self,event):
         pass
 
     def update(self):

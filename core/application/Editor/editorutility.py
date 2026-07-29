@@ -34,10 +34,11 @@ class EditorUtility:
         with filename.open("w") as file:
             json.dump(project_data, file, indent=4)
 
-        if project_type == "Menu":
+        if project_type == "Menu" and self.app_interface.app_object:
             self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+            self.app_interface.ui_controller.clear()
         
-        elif project_type == "Form":
+        elif project_type == "Form" and self.app_interface.app_object:
             self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
 
         return filename
@@ -57,4 +58,3 @@ class EditorUtility:
                 return
     
             self.create_project_file(data)
-    

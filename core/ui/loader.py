@@ -18,8 +18,9 @@ class UILoader:
         self.actions = actions
         self.menu = None
         self.form = None
-        self.current_form = None
-        self.current_menu = None
+
+    def set_view(self,view):
+        self.current_view = view
 
     def load(self, filename):
         with open(filename, "r") as file:

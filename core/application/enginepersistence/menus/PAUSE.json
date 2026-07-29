@@ -5,19 +5,19 @@
     "elements": [
         {
             "type": "button",
-            "id": "new_project_button",
-            "text": "New Project",
+            "id": "resume_button",
+            "text": "Resume",
             "font_size": 40,
             "position": [0.1, 0.5],
-            "action": "new_project_form"
+            "action": "app_resume"
         },
         {
             "type": "button",
-            "id": "load_project_button",
-            "text": "Load Project",
+            "id": "main_menu_button",
+            "text": "Main Menu",
             "font_size": 40,
             "position": [0.5, 0.5],
-            "action": "open_project_menu"
+            "action": "app_to_menu"
         },
         {
             "type": "button",

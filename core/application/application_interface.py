@@ -20,6 +20,18 @@ class AppInterface:
         self.app_object = None
         self.action_registrar = ActionRegistrar(self)
 
+    def toggle_freeze(self):
+        print(self.ui.current_form)
+        if self.state.is_state(APP_STATE.FROZEN):
+            self.state.set_state(APP_STATE.RUNNING)
+            
+        elif self.state.is_state(APP_STATE.RUNNING):
+            if self.ui.current_view == "form":
+                self.ui_controller.show_form(self.ui.current_form)
+            elif self.ui.current_view == "menu":
+                self.ui_controller.show_menu(self.ui.current_menu)
+            self.state.set_state(APP_STATE.FROZEN)
+
     def reload_actions(self):
         import importlib
         from core.application import action_register
@@ -53,20 +65,30 @@ class AppInterface:
         if self.system.control_state.is_state(DEVELOPER_MODE.ON):
             command = self.system.input.handle_event(event)
             if command == "reload_ui":
-                if self.ui.current_view == "form":
+
+                print(self.ui.current_view)
+                if self.ui.current_view == "form" and self.ui.current_form is not None:
                     self.ui_controller.show_form(self.ui.current_form)
-                elif self.ui.current_view == "menu":
+                elif self.ui.current_view == "menu" and self.ui.current_menu is not None:
                     self.ui_controller.show_menu(self.ui.current_menu)
+                
                 self.reload_actions()
                 print("Reloading User Interface...")
             elif command == "reload_application":
                 self.reload_application()
                 print("Reloading Application...")
+        if self.app_object:
+            if self.state.is_state(APP_STATE.RUNNING):
+                self.app_object.handle_event(event)
+            if event.type == self.system.input.keydown():
+                if event.key == self.system.input.keys.escape_key():
+                    self.toggle_freeze()
 
     def draw(self):
         if self.app_object:
             self.app_object.draw()
         self.ui_controller.draw()
+        
 
     def save_game(self):
         self.system.save_telemetry = ""
@@ -94,14 +116,16 @@ class AppInterface:
         self.app_object = Application(self)
 
         self.action_registrar.register()
+        
 
     def reset_game(self):
         self.app_object.reset()
 
     def update(self):
         self.ui_controller.update()
-        if self.app_object:
-            self.app_object.update()
+        if self.state.is_state(APP_STATE.RUNNING):
+            if self.app_object:
+                self.app_object.update()
 
     def quit_to_menu(self):
         self.remove_debug_info_from_system()

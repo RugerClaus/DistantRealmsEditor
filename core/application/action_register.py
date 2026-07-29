@@ -8,6 +8,9 @@ class ActionRegistrar:
     def register(self):
         self.app_interface.actions.register("create_project",self.app_interface.app_object.util.create_project)
 
+        self.app_interface.actions.register("app_to_menu", self.app_interface.app_object.navigation.main_menu)
+        self.app_interface.actions.register("app_resume", self.app_interface.toggle_freeze)
+
         self.app_interface.actions.register("main_menu", lambda: self.app_interface.ui_controller.show_menu("createprojectmenu"))
 
         self.app_interface.actions.register("new_project_form",lambda: self.app_interface.ui_controller.show_form("newprojectform"))
