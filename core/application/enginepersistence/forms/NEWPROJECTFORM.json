@@ -1,0 +1,63 @@
+{
+    "type": "form",
+    "name": "NEWPROJECTFORM",
+
+    "elements": [
+        {
+            "type": "header",
+            "id": "create_new_project_header",
+            "text": "NEW  PROJECT",
+            "position": [0.5, 0.1],
+            "font_size": 100
+        },
+        {
+            "type": "label",
+            "id": "project_type_selector_label",
+            "text": "Project Type:",
+            "position": [0.6,0.2]
+        },
+        {
+            "type": "select",
+            "id": "project_type_selector",
+            "position": [0.75, 0.2],
+            "options":["Menu","Form","blah","This","Pass","Test","Jane"],
+            "field": "project_type"
+        },
+        {
+            "type": "label",
+            "id": "project_name_textbox_label",
+            "text": "Project Name:",
+            "position": [0.15,0.2]
+        },
+        {
+            "type": "textbox",
+            "id": "project_name_textbox",
+            "field": "name",
+            "position": [0.3, 0.2]
+        },
+        {
+            "type": "button",
+            "id": "create_project_button",
+            "text": "Create Project",
+            "font_size": 40,
+            "position": [0.5, 0.4],
+            "action": "create_project"
+        },
+        {
+            "type": "button",
+            "id": "back_button",
+            "text": "Back",
+            "font_size": 40,
+            "position": [0.9, 0.8],
+            "action": "main_menu"
+        },
+        {
+            "type": "label",
+            "id": "error_message",
+            "text": "",
+            "position": [0.5, 0.8]
+        }
+        
+    ],
+    "error_element": "error_message"
+}
