@@ -4,5 +4,5 @@ class Navigation:
         self.app_interface = app_interface
 
     def main_menu(self):
-        self.app_interface.ui_controller.show_menu("createprojectmenu")
+        self.app_interface.ui_controller.show_ui("createprojectmenu")
         self.app_interface.app_object.state.set_state(EDITOR_STATE.NONE)

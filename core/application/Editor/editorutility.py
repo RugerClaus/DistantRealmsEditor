@@ -4,20 +4,21 @@ from pathlib import Path
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 
 class EditorUtility:
-    def __init__(self,app_interface):
+    def __init__(self, app_interface):
         self.app_interface = app_interface
 
     def create_project_file(self, data):
-        
         project_name = data["name"].strip().upper()
         project_type = data["project_type"]
-        print("creating project: ",project_name,"of type: ",project_type)
+
+        print("creating project:", project_name, "of type:", project_type)
+
+        persistence = self.app_interface.system.persistence
+
         if project_type == "Menu":
-            directory = Path("core/application/enginepersistence/menus")
-
+            directory = persistence.project_menus or persistence.engine_menus
         elif project_type == "Form":
-            directory = Path("core/application/enginepersistence/forms")
-
+            directory = persistence.project_forms or persistence.engine_forms
         else:
             raise ValueError(f"Unknown project type: {project_type}")
 
@@ -34,27 +35,29 @@ class EditorUtility:
         with filename.open("w") as file:
             json.dump(project_data, file, indent=4)
 
+        print("Created:", filename.resolve())
+
         if project_type == "Menu" and self.app_interface.app_object:
             self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
             self.app_interface.ui_controller.clear()
-        
+
         elif project_type == "Form" and self.app_interface.app_object:
             self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
 
         return filename
 
     def create_project(self):
-            form = self.app_interface.ui_controller.get_active_ui()
-    
-            data = {
-                "name": form.get_field("name").get_return_string(),
-                "project_type": form.get_field("project_type").get_return_string()
-            }
+        form = self.app_interface.ui_controller.get_active_ui()
 
-            print("FORM DATA:", data)
+        data = {
+            "name": form.get_field("name").get_return_string(),
+            "project_type": form.get_field("project_type").get_return_string()
+        }
 
-            if not data["name"]:
-                form.set_error("Project name is required.")
-                return
-    
-            self.create_project_file(data)
+        print("FORM DATA:", data)
+
+        if not data["name"]:
+            form.set_error("Project name is required.")
+            return
+
+        self.create_project_file(data)

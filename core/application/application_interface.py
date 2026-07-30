@@ -21,25 +21,34 @@ class AppInterface:
         self.action_registrar = ActionRegistrar(self)
 
     def toggle_freeze(self):
-        print(self.ui.current_form)
+        print("toggling pause")
         if self.state.is_state(APP_STATE.FROZEN):
             self.state.set_state(APP_STATE.RUNNING)
-            
         elif self.state.is_state(APP_STATE.RUNNING):
-            if self.ui.current_view == "form":
-                self.ui_controller.show_form(self.ui.current_form)
-            elif self.ui.current_view == "menu":
-                self.ui_controller.show_menu(self.ui.current_menu)
             self.state.set_state(APP_STATE.FROZEN)
 
     def reload_actions(self):
         import importlib
+        from core.ui import actionmanager, loader
+        from core.guts.UI import uicontroller
         from core.application import action_register
 
+        current_ui = self.ui_controller.active_name
+
+        importlib.reload(actionmanager)
+        importlib.reload(loader)
+        importlib.reload(uicontroller)
         importlib.reload(action_register)
+
+        self.actions = actionmanager.UIActionManager()
+        self.ui = loader.UILoader(self.system, self.actions)
+        self.ui_controller = uicontroller.UIController(self.system, self.ui)
 
         self.action_registrar = action_register.ActionRegistrar(self)
         self.action_registrar.register()
+
+        if current_ui:
+            self.ui_controller.show_ui(current_ui)
 
     def reload_application(self):
         import importlib
@@ -60,18 +69,11 @@ class AppInterface:
 
         if event.type == self.system.input.video_resize_event():
             self.app_object.resize()
-            self.ui.scale()
+            self.ui_controller.scale()
 
         if self.system.control_state.is_state(DEVELOPER_MODE.ON):
             command = self.system.input.handle_event(event)
             if command == "reload_ui":
-
-                print(self.ui.current_view)
-                if self.ui.current_view == "form" and self.ui.current_form is not None:
-                    self.ui_controller.show_form(self.ui.current_form)
-                elif self.ui.current_view == "menu" and self.ui.current_menu is not None:
-                    self.ui_controller.show_menu(self.ui.current_menu)
-                
                 self.reload_actions()
                 print("Reloading User Interface...")
             elif command == "reload_application":
@@ -80,9 +82,6 @@ class AppInterface:
         if self.app_object:
             if self.state.is_state(APP_STATE.RUNNING):
                 self.app_object.handle_event(event)
-            if event.type == self.system.input.keydown():
-                if event.key == self.system.input.keys.escape_key():
-                    self.toggle_freeze()
 
     def draw(self):
         if self.app_object:
@@ -106,17 +105,13 @@ class AppInterface:
         
     def init(self):
         main_menu = self.system.persistence.get_menu("MAIN")
-
         if main_menu.exists():
-            self.ui_controller.show_menu("MAIN")
+            self.ui_controller.show_ui("MAIN")
             self.system.sound.play_music("LoFiSi")
-
         self.system.runtime_state.set_state(RUNTIME_STATE.APPLICATION)
-
         self.app_object = Application(self)
-
         self.action_registrar.register()
-        
+        self.app_object.init()
 
     def reset_game(self):
         self.app_object.reset()
