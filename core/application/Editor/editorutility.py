@@ -1,7 +1,7 @@
 import json
-from pathlib import Path
 
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
+
 
 class EditorUtility:
     def __init__(self, app_interface):
@@ -11,14 +11,14 @@ class EditorUtility:
         project_name = data["name"].strip().upper()
         project_type = data["project_type"]
 
-        print("creating project:", project_name, "of type:", project_type)
+        print("Creating project:", project_name, "of type:", project_type)
 
         persistence = self.app_interface.system.persistence
 
         if project_type == "Menu":
-            directory = persistence.project_menus or persistence.engine_menus
+            directory = persistence.workspace_menus
         elif project_type == "Form":
-            directory = persistence.project_forms or persistence.engine_forms
+            directory = persistence.workspace_forms
         else:
             raise ValueError(f"Unknown project type: {project_type}")
 
@@ -37,12 +37,12 @@ class EditorUtility:
 
         print("Created:", filename.resolve())
 
-        if project_type == "Menu" and self.app_interface.app_object:
-            self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
-            self.app_interface.ui_controller.clear()
-
-        elif project_type == "Form" and self.app_interface.app_object:
-            self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+        if self.app_interface.app_object:
+            if project_type == "Menu":
+                self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+                self.app_interface.ui_controller.clear()
+            else:
+                self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
 
         return filename
 
@@ -56,8 +56,8 @@ class EditorUtility:
 
         print("FORM DATA:", data)
 
-        if not data["name"]:
+        if not data["name"].strip():
             form.set_error("Project name is required.")
             return
 
-        self.create_project_file(data)
+        return self.create_project_file(data)

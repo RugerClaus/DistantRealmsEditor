@@ -16,7 +16,7 @@ From the root directory, run:
 ```
 python3 -m venv virtualenv
 source virtualenv/bin/activate
-pip install pygame-ce pyinstaller mutagen requests
+pip install pygame-ce pyinstaller mutagen requests platformdirs
 python3 setup.py
 python3 main.py --dev
 ```
