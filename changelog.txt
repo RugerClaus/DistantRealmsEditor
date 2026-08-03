@@ -1,3 +1,1 @@
-Development version Alpha 0.0.1 - 2026-08-XX
-- Initialized repository and configuration
-- Made editor menu and project creator tool that outputs a menu/form file
+Development version Alpha 0.0.2 - 2026-08-XX

@@ -1,4 +1,5 @@
 import json
+from systemlogging import log_event
 
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 
@@ -11,7 +12,7 @@ class EditorUtility:
         project_name = data["name"].strip().upper()
         project_type = data["project_type"]
 
-        print("Creating project:", project_name, "of type:", project_type)
+        log_event(f"Creating project: {project_name}, of type: {project_type}" , "EditorUtility.create_project_file")
 
         persistence = self.app_interface.system.persistence
 
@@ -35,7 +36,7 @@ class EditorUtility:
         with filename.open("w") as file:
             json.dump(project_data, file, indent=4)
 
-        print("Created:", filename.resolve())
+        log_event(f"Created: {filename.resolve()}", "EditorUtility.create_project_file")
 
         if self.app_interface.app_object:
             if project_type == "Menu":
@@ -54,7 +55,7 @@ class EditorUtility:
             "project_type": form.get_field("project_type").get_return_string()
         }
 
-        print("FORM DATA:", data)
+        log_event(f"FORM DATA:{data}","EditorUtility.create_project")
 
         if not data["name"].strip():
             form.set_error("Project name is required.")

@@ -3,5 +3,12 @@
 LEGEND:
 Development version <VERSION x.x.x> - <DATE> yyyy-mm-dd - Specifies latest version, not current changes in this codebase. use UNRELEASED for the date if that is the case
 
-Development version Alpha 0.0.1 - 2026-04-13
+Development version Alpha 0.0.1 - 2026-08-03
 -----------------------------------------------
+- Initialized repository and configuration
+- Made editor menu and project creator tool that outputs a menu/form file
+- Boundary between framework/engine and the editor established
+- Added export functionality
+- Editor knows if it's being developed or if it's built and being used in a workspace and knows where to put and update UI files
+- UI hot reloading
+- Application hot reloading
