@@ -17,7 +17,7 @@
             "text": "Main Menu",
             "font_size": 40,
             "position": [0.5, 0.5],
-            "action": "app_to_menu"
+            "action": "main_menu"
         },
         {
             "type": "button",

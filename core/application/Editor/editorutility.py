@@ -45,7 +45,7 @@ class EditorUtility:
             else:
                 self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
 
-        return filename
+        self.load_project_file(filename)
 
     def create_project(self):
         form = self.app_interface.ui_controller.get_active_ui()
@@ -62,3 +62,24 @@ class EditorUtility:
             return
 
         return self.create_project_file(data)
+
+    def load_project_file(self, filename):
+        if not filename.exists():
+            log_event(f"File does not exist: {filename}", "EditorUtility.load_project_file")
+            return False
+
+        with open(filename, "r") as file:
+            data = json.load(file)
+
+        project_type = data.get("type")
+
+        if project_type == "menu":
+            self.app_interface.app_object.initialize_menu_editor()
+        elif project_type == "form":
+            self.app_interface.app_object.initialize_form_editor()
+        else:
+            log_event(f"Unknown project type in file: {project_type}", "EditorUtility.load_project_file")
+            return False
+
+        log_event(f"Loaded project file: {filename.resolve()}", "EditorUtility.load_project_file")
+        return data

@@ -19,7 +19,9 @@ class CommandModule:
             "raise_opacity": [pygame.K_F8,pygame.K_5],
             "lower_opacity": [pygame.K_F8,pygame.K_6],
             "reload_ui": [pygame.K_F1,pygame.K_1],
-            "reload_application": [pygame.K_F1,pygame.K_2]
+            "reload_application": [pygame.K_F1,pygame.K_2],
+            "reload_menu_editor": [pygame.K_F1,pygame.K_3],
+            "reload_form_editor": [pygame.K_F1,pygame.K_4]
         }
         self.buffer = []
         self.buffer_timer = 0

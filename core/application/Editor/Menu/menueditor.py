@@ -2,8 +2,8 @@
 from core.application.Editor.uieditor import UIEditor
 
 class MenuEditor(UIEditor):
-    def __init__(self,system):
-        super().__init__(system)
+    def __init__(self,app_interface):
+        super().__init__(app_interface)
 
     def handle_event(self,event):
         pass
@@ -12,4 +12,4 @@ class MenuEditor(UIEditor):
         pass
 
     def draw(self):
-        pass
+        self.app_interface.system.window.fill((0,255,0))
