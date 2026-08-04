@@ -1,3 +1,6 @@
 Development version Alpha 0.0.2 - 2026-08-XX
 - Editors can be hot-reloaded
 - Editor Utility now loads the current project into memory on creation
+- Created basic layout for editors with a canvas, widgets, options, and properties viewports
+- Added ability to add buttons, drag them around, save the UI file, and then load it dynamically with proper state, next is the rest of the UI widgets
+- Updated framework assumptions and migrated them back to the framework repo

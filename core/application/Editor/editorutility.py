@@ -44,8 +44,9 @@ class EditorUtility:
                 self.app_interface.ui_controller.clear()
             else:
                 self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+                self.app_interface.ui_controller.clear()
 
-        self.load_project_file(filename)
+        self.app_interface.app_object.editor.active_file = self.load_project_file(filename)
 
     def create_project(self):
         form = self.app_interface.ui_controller.get_active_ui()
@@ -65,21 +66,112 @@ class EditorUtility:
 
     def load_project_file(self, filename):
         if not filename.exists():
-            log_event(f"File does not exist: {filename}", "EditorUtility.load_project_file")
+            log_event(
+                f"File does not exist: {filename}",
+                "EditorUtility.load_project_file"
+            )
             return False
 
-        with open(filename, "r") as file:
+        with filename.open("r") as file:
             data = json.load(file)
 
         project_type = data.get("type")
 
         if project_type == "menu":
             self.app_interface.app_object.initialize_menu_editor()
+            self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+            self.app_interface.ui_controller.clear()
         elif project_type == "form":
             self.app_interface.app_object.initialize_form_editor()
+            self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+            self.app_interface.ui_controller.clear()
         else:
-            log_event(f"Unknown project type in file: {project_type}", "EditorUtility.load_project_file")
+            log_event(
+                f"Unknown project type in file: {project_type}",
+                "EditorUtility.load_project_file"
+            )
             return False
 
-        log_event(f"Loaded project file: {filename.resolve()}", "EditorUtility.load_project_file")
+        editor = self.app_interface.app_object.editor
+
+        editor.active_filename = filename
+        editor.active_file = data
+
+        log_event(
+            f"Loaded project file: {filename.resolve()}",
+            "EditorUtility.load_project_file"
+        )
+
         return data
+
+    def load_project(self, filename, project_type="menu"):
+            persistence = self.app_interface.system.persistence
+    
+            if project_type == "menu":
+                path = persistence.get_menu(filename)
+            elif project_type == "form":
+                path = persistence.get_form(filename)
+            else:
+                log_event(
+                    f"Unknown project type: {project_type}",
+                    "EditorUtility.load_project_file"
+                )
+                return False
+    
+            if not path.exists():
+                log_event(
+                    f"Project file does not exist: {path}",
+                    "EditorUtility.load_project_file"
+                )
+                return False
+    
+            with path.open("r") as file:
+                data = json.load(file)
+    
+            file_type = data.get("type")
+    
+            if file_type == "menu":
+                self.app_interface.app_object.initialize_menu_editor()
+                self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+                self.app_interface.ui_controller.clear()
+            elif file_type == "form":
+                self.app_interface.app_object.initialize_form_editor()
+                self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+                self.app_interface.ui_controller.clear()
+            else:
+                log_event(
+                    f"Unknown project type in file: {file_type}",
+                    "EditorUtility.load_project_file"
+                )
+                return False
+    
+            editor = self.app_interface.app_object.editor
+    
+            editor.active_filename = path
+            editor.active_file = data
+            editor.load_canvas()
+    
+            log_event(
+                f"Loaded project file: {path.resolve()}",
+                "EditorUtility.load_project_file"
+            )
+    
+            return data
+
+    def save_project_file(self, filename, data):
+        if not filename.exists():
+            log_event(
+                f"Cannot save nonexistent project file: {filename}",
+                "EditorUtility.save_project_file"
+            )
+            return False
+
+        with filename.open("w") as file:
+            json.dump(data, file, indent=4)
+
+        log_event(
+            f"Saved project file: {filename.resolve()}",
+            "EditorUtility.save_project_file"
+        )
+
+        return True

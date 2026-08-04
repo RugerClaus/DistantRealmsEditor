@@ -1,5 +1,30 @@
 {
     "type": "menu",
     "name": "TESTMENU",
-    "elements": []
+    "elements": [
+        {
+            "id": "new_button",
+            "type": "button",
+            "font": "default",
+            "text": "Button",
+            "position": [
+                0.7825,
+                0.5007
+            ],
+            "action": "None",
+            "styles": null
+        },
+        {
+            "id": "new_button",
+            "type": "button",
+            "font": "default",
+            "text": "Button",
+            "position": [
+                0.19920000000000002,
+                0.6252
+            ],
+            "action": "None",
+            "styles": null
+        }
+    ]
 }

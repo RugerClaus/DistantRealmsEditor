@@ -1,6 +1,6 @@
 {
     "type": "form",
-    "name": "APP",
+    "name": "MENU_EDITOR_NOPROPS",
     "elements": [
         {
             "type": "button",
@@ -20,24 +20,6 @@
         },
 
         {
-            "type": "button",
-            "id": "create_new_label",
-            "text": "Label",
-            "font_size": 35,
-            "position": [0.93, 0.1],
-            "action": "create_new_label"
-        },
-        {
-            "type": "button",
-            "id": "create_new_label",
-            "text": "Label",
-            "font_size": 35,
-            "position": [0.93, 0.1],
-            "action": "create_new_label"
-        },
-
-
-        {
             "type": "label",
             "id": "widgets_label",
             "text": "Widgets",
@@ -49,11 +31,36 @@
             "type": "label",
             "id": "property_editor_label",
             "text": "Properties: ",
-            "position": [0.065, 0.9],
+            "position": [0.065, 0.8],
+            "font_size": 30,
+            "color": [0,0,0]
+        },
+
+        {
+            "type": "label",
+            "id": "options_label",
+            "text": "options: ",
+            "position": [0.89, 0.55],
             "font_size": 40,
             "color": [0,0,0]
-        }
+        },
 
+        {
+            "type": "button",
+            "id": "main_menu_button",
+            "text": "Main Menu",
+            "font_size": 35,
+            "position": [0.85, 0.9],
+            "action": "main_menu"
+        },
+        {
+            "type": "button",
+            "id": "quit_button",
+            "text": "Quit",
+            "font_size": 35,
+            "position": [0.95, 0.9],
+            "action": "quit"
+        }
 
     ]
 }

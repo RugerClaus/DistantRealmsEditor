@@ -3,45 +3,25 @@ from core.state.RuntimeLayer.DevTools.DeveloperMode.state import DEVELOPER_MODE
 
 from core.util.colors import *
 from core.state.ApplicationLayer.Editor.statemanager import EditorStateManager
-from core.state.ApplicationLayer.Editor.Pause.statemanager import PauseStateManager
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
-from core.state.ApplicationLayer.Editor.Pause.state import PAUSE_STATE
 from core.application.Editor.editorutility import EditorUtility
-from core.application.Editor.Form.formeditor import FormEditor
 from core.application.Editor.navigation import Navigation
 
 class Application:
-    def __init__(self,app_interface): # why is init the constructor. I get it initializes the class, but I would like to be free to call init/whatever form in my programs
+    def __init__(self,app_interface):
         self.app_interface = app_interface
         self.state = EditorStateManager()
-        self.pause_state = PauseStateManager()
         self.util = EditorUtility(app_interface)
         self.editor = None
         self.navigation = Navigation(app_interface)
         self.init()
 
-    def toggle_pause(self):
-        if self.pause_state.is_state(PAUSE_STATE.PAUSED):
-            self.pause_state.set_state(PAUSE_STATE.ACTIVE)
-            self.app_interface.ui_controller.clear()
-            if self.state.is_state(EDITOR_STATE.MENU):
-                self.app_interface.ui_controller.show_ui("menu_editor_ui")
-            elif self.state.is_state(EDITOR_STATE.FORM):
-                self.app_interface.ui_controller.show_ui("form_editor_ui")
-        elif self.pause_state.is_state(PAUSE_STATE.ACTIVE):
-            self.pause_state.set_state(PAUSE_STATE.PAUSED)
-            self.app_interface.ui_controller.show_ui("pause")
-
     def handle_event(self,event,command=None):
         if self.state.is_state(EDITOR_STATE.NONE):
             return
-        if event.type == self.app_interface.system.input.keydown():
-            if event.key == self.app_interface.system.input.keys.escape_key():
-                self.toggle_pause()
-
-        if self.pause_state.is_state(PAUSE_STATE.ACTIVE):
-            if self.editor:
-                self.editor.handle_event(event)
+        
+        if self.editor:
+            self.editor.handle_event(event)
 
         if self.app_interface.system.control_state.is_state(DEVELOPER_MODE.ON):
 
@@ -58,28 +38,26 @@ class Application:
 
             pulse = sine(self.app_interface.system.time.get_current_time())
             fade_color = (
-                int(255 * pulse), 
-                int(255 * pulse), 
-                int(255 * pulse)
+                int(50 * pulse), 
+                int(50 * pulse), 
+                int(50 * pulse)
             )
             self.app_interface.system.window.fill((fade_color))
             self.clean_up_states()
         else:
-            if self.pause_state.is_state(PAUSE_STATE.ACTIVE):
-                if self.editor:
-                    self.editor.update()
+            if self.editor:
+                self.editor.update()
         
     def draw(self):
         
         if self.editor:
             self.editor.draw()
-        
 
     def resize(self):
         pass
 
     def clean_up_states(self):
-        self.app_interface.system.clean_up_states([self.state.state,self.pause_state.state])
+        self.app_interface.system.clean_up_states([self.state.state])
 
     def register_debug_telemetry(self):
         # exmaple:
@@ -98,7 +76,7 @@ class Application:
         importlib.reload(menueditor)
         self.editor = menueditor.MenuEditor(self.app_interface)
         self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("menu_editor_ui")
+        self.app_interface.ui_controller.show_ui("menu_editor_noprops")
 
     def initialize_form_editor(self):
         import importlib
@@ -106,4 +84,4 @@ class Application:
         importlib.reload(formeditor)
         self.editor = formeditor.FormEditor(self.app_interface)
         self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("form_editor_ui")
+        self.app_interface.ui_controller.show_ui("form_editor_noprops")
