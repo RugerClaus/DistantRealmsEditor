@@ -4,6 +4,30 @@
 
     "elements": [
         {
+            "type": "header",
+            "id": "main_menu_header1",
+            "text": "DISTANT",
+            "position": [0.3, 0.1],
+            "font_size": 100,
+            "color": [220,0,224]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header2",
+            "text": "REALMS",
+            "position": [0.5, 0.1],
+            "font_size": 100,
+            "color": [106,177,255]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header3",
+            "text": "EDITOR",
+            "position": [0.7, 0.1],
+            "font_size": 100,
+            "color": [220,0,224]
+        },
+        {
             "type": "button",
             "id": "new_project_button",
             "text": "New Project",

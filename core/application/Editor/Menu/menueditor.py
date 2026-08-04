@@ -5,11 +5,5 @@ class MenuEditor(UIEditor):
     def __init__(self,app_interface):
         super().__init__(app_interface)
 
-    def handle_event(self,event):
-        pass
-
     def update(self):
         pass
-
-    def draw(self):
-        self.app_interface.system.window.fill((0,255,0))

@@ -33,7 +33,10 @@
             "type": "textbox",
             "id": "project_name_textbox",
             "field": "name",
-            "position": [0.3, 0.2]
+            "position": [0.3, 0.2],
+            "dimensions": [0.16, 0.087],
+            "font_size": 25,
+            "active": true
         },
         {
             "type": "button",

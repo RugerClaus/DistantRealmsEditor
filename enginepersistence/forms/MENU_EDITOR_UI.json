@@ -1,0 +1,59 @@
+{
+    "type": "form",
+    "name": "APP",
+    "elements": [
+        {
+            "type": "button",
+            "id": "create_new_button",
+            "text": "Button",
+            "font_size": 35,
+            "position": [0.85, 0.1],
+            "action": "create_new_button"
+        },
+        {
+            "type": "button",
+            "id": "create_new_label",
+            "text": "Label",
+            "font_size": 35,
+            "position": [0.93, 0.1],
+            "action": "create_new_label"
+        },
+
+        {
+            "type": "button",
+            "id": "create_new_label",
+            "text": "Label",
+            "font_size": 35,
+            "position": [0.93, 0.1],
+            "action": "create_new_label"
+        },
+        {
+            "type": "button",
+            "id": "create_new_label",
+            "text": "Label",
+            "font_size": 35,
+            "position": [0.93, 0.1],
+            "action": "create_new_label"
+        },
+
+
+        {
+            "type": "label",
+            "id": "widgets_label",
+            "text": "Widgets",
+            "position": [0.89, 0.04],
+            "font_size": 40,
+            "color": [0,0,0]
+        },
+        {
+            "type": "label",
+            "id": "property_editor_label",
+            "text": "Properties: ",
+            "position": [0.065, 0.9],
+            "font_size": 40,
+            "color": [0,0,0]
+        }
+
+
+    ]
+}
