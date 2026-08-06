@@ -284,11 +284,8 @@ class UIEditor:
     def handle_event(self, event,command):
 
         if command == "save_project":
+            self.update_widget_properties(self.app_interface.ui_controller.get_active_ui().submit())
             self.save()
-
-        if event.type == self.app_interface.system.input.keydown():
-            if event.key == self.app_interface.system.input.keys.F10_key():
-                self.save()
 
         if event.type == self.app_interface.system.input.video_resize_event():
             self.load_canvas()
@@ -373,6 +370,24 @@ class UIEditor:
                     int(g),
                     int(b)
                 )
+
+        if ("x" in properties 
+            or "y" in properties 
+            or "id" in properties
+            or "font_size" in properties):
+            x = float(properties.get("x", element.data["position"][0] * 100)) / 100
+            y = float(properties.get("y", element.data["position"][1] * 100)) / 100
+            id = str(properties.get("id", element.data["id"]))
+            font_size = int(properties.get("font_size", element.data.get("font_size", 12)))
+
+            element.set_position((x, y))
+            element.set_id(id)
+            element.set_font_size(font_size)
+
+            properties.pop("x", None)
+            properties.pop("y", None)
+            properties.pop("id", None)
+            properties.pop("font_size", None)
 
         for name, value in properties.items():
 

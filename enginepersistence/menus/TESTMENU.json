@@ -3,15 +3,15 @@
     "name": "TESTMENU",
     "elements": [
         {
-            "id": "new_button",
+            "id": "test2id",
             "type": "button",
             "font": "default",
-            "text": "Button",
+            "text": "Test2",
             "position": [
-                0.35333333333333333,
-                0.6948148148148148
+                0.22,
+                0.64
             ],
-            "action": "None",
+            "action": "test",
             "styles": {
                 "idle": {
                     "background": [
@@ -28,7 +28,7 @@
                     "border_radius": 8,
                     "text_color": [
                         255,
-                        255,
+                        128,
                         255
                     ],
                     "padding": 5
@@ -113,7 +113,136 @@
                     ],
                     "padding": 5
                 }
+            },
+            "font_size": "25"
+        },
+        {
+            "id": "sounds",
+            "type": "button",
+            "font": "default",
+            "text": "Siberian Khatru",
+            "position": [
+                0.24670000000000003,
+                0.2
+            ],
+            "action": "YES",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 65
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
             }
+        },
+        {
+            "id": "test",
+            "type": "header",
+            "text": "Test2",
+            "position": [
+                0.2841666666666667,
+                0.4785185185185185
+            ],
+            "font_size": 60,
+            "color": [
+                255,
+                255,
+                255
+            ]
         }
     ]
 }

@@ -117,11 +117,6 @@ class EditorButton(EditorWidget):
         self.data["text"] = self.text
         self.scale()
 
-    def set_font_size(self, size):
-        self.font_size = int(size)
-        self.data["font_size"] = self.font_size
-        self.scale()
-
     def set_style(self, state_name, key, value):
         self.styles[state_name][key] = value
 

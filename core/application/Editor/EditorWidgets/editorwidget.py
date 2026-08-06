@@ -30,3 +30,12 @@ class EditorWidget:
 
     def save_property(self, name, value):
         self.data[name] = value
+
+    def set_id(self, id):
+        self.id = str(id)
+        self.data["id"] = self.id
+
+    def set_font_size(self, fs):
+        self.fs = str(fs)
+        self.data["font_size"] = self.fs
+        self.scale()

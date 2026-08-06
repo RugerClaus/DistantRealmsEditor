@@ -1,0 +1,134 @@
+{
+    "type": "menu",
+    "name": "TESTMENU5",
+    "elements": [
+        {
+            "id": "new_button",
+            "type": "button",
+            "font": "default",
+            "text": "Reina",
+            "position": [
+                0.33541666666666664,
+                0.3802469135802469
+            ],
+            "action": "test",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        0,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        0,
+                        255
+                    ],
+                    "padding": 10
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "new_header",
+            "type": "header",
+            "text": "Reina",
+            "position": [
+                0.3354,
+                0.38020000000000004
+            ],
+            "font_size": 60,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        }
+    ]
+}
