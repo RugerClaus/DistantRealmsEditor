@@ -18,7 +18,14 @@
             "position": [0.93, 0.1],
             "action": "create_new_label"
         },
-
+        {
+            "type": "button",
+            "id": "create_new_header",
+            "text": "HEADER",
+            "font_size": 35,
+            "position": [0.85, 0.2],
+            "action": "create_new_header"
+        },
         {
             "type": "label",
             "id": "widgets_label",

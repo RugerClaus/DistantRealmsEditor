@@ -71,7 +71,6 @@ class AppInterface:
             self.ui_controller.scale()
 
         if self.system.control_state.is_state(DEVELOPER_MODE.ON):
-            command = self.system.input.handle_event(event)
             if command == "reload_ui":
                 self.reload_actions()
                 print("Reloading User Interface...")

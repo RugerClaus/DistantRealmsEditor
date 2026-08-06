@@ -1,15 +1,16 @@
 from core.ui.font import FontEngine
+from core.util.colors import white
 from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
-class EditorLabel(EditorWidget):
+class EditorHeader(EditorWidget):
     def __init__(self, editor, data):
         super().__init__(editor, data)
 
-        self.text = str(data.get("text", "Label"))
-        self.font_size = data.get("font_size", 30)
+        self.text = str(data.get("text", "Header"))
+        self.font_size = data.get("font_size", 60)
         self.color = tuple(
-            data.get("color", [255, 255, 255])
+            data.get("color", white)
         )
 
         self.font = FontEngine(self.font_size).font
@@ -54,6 +55,9 @@ class EditorLabel(EditorWidget):
         )
 
     def draw(self):
+        if self.text is None:
+            return
+
         self.system.window.blit(
             self.surface,
             self.rect

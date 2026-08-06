@@ -15,10 +15,8 @@ class TextBox(UIElement):
 
         self.background_color = black
 
-        # Normalized dimensions
         self.width, self.height = dimensions
 
-        # Inner text area as a fraction of the textbox
         self.text_width = 0.9091
         self.text_height = 0.5
 
@@ -90,7 +88,6 @@ class TextBox(UIElement):
         ww = self.system.window.get_width()
         wh = self.system.window.get_height()
 
-        # Resolve normalized dimensions into pixels
         width = int(ww * self.width)
         height = int(wh * self.height)
 
@@ -105,7 +102,6 @@ class TextBox(UIElement):
 
         self.bounding_box.fill(self.background_color)
 
-        # Thin 2-pixel border
         border = 2
 
         text_width = max(1, width - border * 2)

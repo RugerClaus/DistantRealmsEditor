@@ -1,74 +1,43 @@
 from core.ui.font import FontEngine
-from core.state.RuntimeLayer.UI.Button.state import BUTTON_STATE
+from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
-class EditorButton:
+class EditorButton(EditorWidget):
     def __init__(self, editor, data):
-        self.editor = editor
-        self.system = editor.app_interface.system
+        super().__init__(editor, data)
 
-        self.data = data
+        if not self.data.get("styles"):
+            self.data["styles"] = self.editor.widgets.default_button_styles()
 
-        # These are deliberately exposed.
-        self.id = data.get("id", "button")
         self.text = data.get("text", "")
         self.font_size = data.get("font_size", 30)
-        self.position = tuple(data.get("position", [0.5, 0.5]))
         self.action = data.get("action")
 
-        self.state = BUTTON_STATE.IDLE
+        self.styles = self.editor.widgets.default_button_styles()
 
-        self.styles = {
-            BUTTON_STATE.IDLE: {
-                "background": (40, 40, 40),
-                "border": (255, 255, 255),
-                "border_width": 2,
-                "border_radius": 8,
-                "text_color": (255, 255, 255),
-                "padding": 5,
-            },
-
-            BUTTON_STATE.HOVER: {
-                "background": (60, 60, 60),
-                "border": (200, 20, 20),
-                "border_width": 3,
-                "border_radius": 8,
-                "text_color": (255, 255, 255),
-                "padding": 5,
-            },
-
-            BUTTON_STATE.PRESS: {
-                "background": (20, 20, 20),
-                "border": (255, 255, 255),
-                "border_width": 2,
-                "border_radius": 8,
-                "text_color": (255, 255, 255),
-                "padding": 5,
-            },
-
-            BUTTON_STATE.DISABLE: {
-                "background": (20, 20, 20),
-                "border": (100, 100, 100),
-                "border_width": 2,
-                "border_radius": 8,
-                "text_color": (100, 100, 100),
-                "padding": 5,
-            },
-
-            BUTTON_STATE.FOCUSED: {
-                "background": (40, 40, 40),
-                "border": (0, 255, 255),
-                "border_width": 3,
-                "border_radius": 8,
-                "text_color": (255, 255, 255),
-                "padding": 5,
-            }
-        }
+        self.load_styles()
 
         self.scale()
 
+    def load_styles(self):
+        saved_styles = self.data.get("styles", {})
+
+        for state_name, values in saved_styles.items():
+            if state_name not in self.styles:
+                continue
+
+            for key, value in values.items():
+                if key in ("background", "border", "text_color"):
+                    value = tuple(value)
+
+                self.styles[state_name][key] = value
+
+    def get_current_style(self):
+        state_name = self.editor.button_style_state.state.name.lower()
+        return state_name, self.styles[state_name]
+
     def scale(self):
-        style = self.styles[self.state]
+        _, style = self.get_current_style()
 
         self.font = FontEngine(self.font_size).font
 
@@ -109,7 +78,7 @@ class EditorButton:
         )
 
     def draw(self):
-        style = self.styles[self.state]
+        _, style = self.get_current_style()
 
         self.surface.fill((0, 0, 0, 0))
 
@@ -139,15 +108,8 @@ class EditorButton:
             self.rect
         )
 
-    def contains_point(self, point):
-        return self.rect.collidepoint(point)
-
-    def set_state(self, state):
-        if self.state != state:
-            self.state = state
-            self.scale()
-
     def set_action(self, action):
+        self.action = action
         self.data["action"] = action
 
     def set_text(self, text):
@@ -155,13 +117,17 @@ class EditorButton:
         self.data["text"] = self.text
         self.scale()
 
-    def set_position(self, position):
-        self.data["position"] = list(position)
-        self.position = tuple(position)
-
-        self.x_ratio, self.y_ratio = position
+    def set_font_size(self, size):
+        self.font_size = int(size)
+        self.data["font_size"] = self.font_size
         self.scale()
 
-    def set_id(self, element_id):
-        self.id = element_id
-        self.data["id"] = element_id
+    def set_style(self, state_name, key, value):
+        self.styles[state_name][key] = value
+
+        self.data.setdefault("styles", {})
+        self.data["styles"].setdefault(state_name, {})
+
+        self.data["styles"][state_name][key] = value
+
+        self.scale()

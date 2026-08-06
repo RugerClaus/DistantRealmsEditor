@@ -13,6 +13,6 @@ class EditorStateManager(BaseStateManager):
             initial_state=EDITOR_STATE.NONE,
             allowed_transitions=allowed_transitions,
             log_fn=lambda old, new, state_type: log_state_transition(old, new, state_type),
-            state_name="EDITOR_STATE.NONE",
+            state_name="EDITOR_STATE",
             type="APPLICATION"
         )

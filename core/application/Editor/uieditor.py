@@ -1,12 +1,33 @@
+import ast
 from core.util.colors import *
+from core.application.Editor.EditorWidgets.widgetutility import WidgetUtility
 from core.application.Editor.EditorWidgets.editorbutton import EditorButton
 from core.application.Editor.EditorWidgets.editorlabel import EditorLabel
+from core.application.Editor.EditorWidgets.editorheader import EditorHeader
+from core.application.Editor.EditorWidgets.editorcentertext import EditorCenterText
+from core.application.Editor.EditorWidgets.editorimage import EditorImage
+from core.application.Editor.EditorWidgets.editorquery import EditorQuery
+from core.application.Editor.EditorWidgets.editorscrollabletext import EditorScrollableText
+from core.application.Editor.EditorWidgets.editorselect import EditorSelect
+from core.application.Editor.EditorWidgets.editortextbox import EditorTextBox
+
+from core.state.ApplicationLayer.Editor.Button.Style.state import BUTTON_STYLE_STATE
+from core.state.ApplicationLayer.Editor.Button.Style.statemanager import ButtonStyleStateManager
 
 class UIEditor:
     def __init__(self, app_interface):
         self.app_interface = app_interface
+        system = app_interface.system
+
+        system.input.CommandModule.sequences["save_project"] = [system.input.keys.l_ctrl_key(),system.input.keys.s_key()]
+
         self.active_file = None
         self.active_filename = None
+
+        self.button_style_state = ButtonStyleStateManager()
+
+        self.widgets = WidgetUtility(self)
+
         self.selected_element = None
         self.dragging = False
         self.drag_offset = None
@@ -14,13 +35,13 @@ class UIEditor:
         self.element_types = {
             "button": EditorButton,
             "label": EditorLabel,
-            # "textbox": EditorTextBox,
-            # "header": EditorHeader,
-            # "image": EditorImage,
-            # "query": EditorQuery,
-            # "centertext": EditorCenterText,
-            # "scrollabletext": EditorScrollableText,
-            # "select": EditorSelect
+            "textbox": EditorTextBox,
+            "header": EditorHeader,
+            "image": EditorImage,
+            "query": EditorQuery,
+            "centertext": EditorCenterText,
+            "scrollabletext": EditorScrollableText,
+            "select": EditorSelect
             }
         self.load_canvas()
         self.load_widget_palette()
@@ -33,10 +54,14 @@ class UIEditor:
         element_class = self.element_types.get(element_type)
 
         if element_class is None:
-            raise ValueError(f"Unknown editor element type: {element_type}")
+            if element_type == "image":
+                return None
+
+            raise ValueError(
+                f"Unknown editor element type: {element_type}"
+            )
 
         return element_class(self, data)
-
 
     def add_element(self, element_type):
         element_class = self.element_types.get(element_type)
@@ -52,7 +77,7 @@ class UIEditor:
                 "text": "Button",
                 "position": [0.5, 0.5],
                 "action": None,
-                "styles": None
+                "styles": self.widgets.default_button_styles()
             },
 
             "label": {
@@ -61,6 +86,14 @@ class UIEditor:
                 "text": "Label",
                 "position": [0.5, 0.5],
                 "font_size": 30,
+                "color": [255, 255, 255]
+            },
+            "header": {
+                "id": "new_header",
+                "type": "header",
+                "text": "Header",
+                "position": [0.5, 0.1],
+                "font_size": 60,
                 "color": [255, 255, 255]
             }
         }
@@ -189,7 +222,7 @@ class UIEditor:
                 5
             )
 
-    def update_position_fields(self):
+    def update_fields(self):
         if self.selected_element is None:
             return
 
@@ -198,23 +231,33 @@ class UIEditor:
             [0.5, 0.5]
         )
 
-        x_field = self.app_interface.ui_controller.get_element("x")
-        y_field = self.app_interface.ui_controller.get_element("y")
-        id_field = self.app_interface.ui_controller.get_element("id")
-        action_field = self.app_interface.ui_controller.get_element("action")
+        fields = {
+            "x": str(round(x * 100, 2)),
+            "y": str(round(y * 100, 2)),
+            "id": self.selected_element.data.get("id", "")
+        }
 
-        if x_field:
-            x_field.set_text(str(round(x * 100, 2)))
+        if self.selected_element.type == "button":
 
-        if y_field:
-            y_field.set_text(str(round(y * 100, 2)))
+            fields["action"] = self.selected_element.data.get("action", "")
+            fields["button_text"] = self.selected_element.data.get("text", "")
 
-        if id_field:
-            id_field.set_text(self.selected_element.data.get("id", ""))
+            style_state = self.button_style_state.state.name.lower()
 
-        if action_field:
-            action_field.set_text(self.selected_element.data.get("action", ""))
+            styles = self.selected_element.data["styles"].get(
+                style_state,
+                {}
+            )
 
+            fields.update(
+                self.widgets.populate_button_style_fields(styles)
+            )
+
+        for name, value in fields.items():
+            field = self.app_interface.ui_controller.get_element(name)
+
+            if field:
+                field.set_text(value)
 
     def show_selected_properties(self):
         if self.selected_element is None:
@@ -224,30 +267,29 @@ class UIEditor:
         element_type = self.selected_element.data.get("type")
 
         if element_type == "button":
-            menu = "menu_editor_buttonprops"
+            if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
+                menu = "menu_editor_button_idle_style_properties"
+            elif self.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
+                menu = "menu_editor_button_hover_style_properties"
         elif element_type == "label":
             menu = "menu_editor_labelprops"
         else:
-            self.app_interface.ui_controller.show_ui("menu_editor_noprops")
+            menu = "menu_editor_noprops"
             return
 
         self.app_interface.ui_controller.show_ui(menu)
 
-        self.update_position_fields()
+        self.update_fields()
 
-        if element_type == "button":
-            text_field = self.app_interface.ui_controller.get_element("button_text")
-            action_field = self.app_interface.ui_controller.get_element("action")
+    def handle_event(self, event,command):
 
-            if text_field:
-                text_field.set_text(
-                    self.selected_element.data.get("text", "")
-                )
+        if command == "save_project":
+            self.save()
 
-            if action_field:
-                action_field.set_text(self.selected_element.data.get("action",""))
+        if event.type == self.app_interface.system.input.keydown():
+            if event.key == self.app_interface.system.input.keys.F10_key():
+                self.save()
 
-    def handle_event(self, event):
         if event.type == self.app_interface.system.input.video_resize_event():
             self.load_canvas()
             self.load_widget_palette()
@@ -258,11 +300,11 @@ class UIEditor:
             if event.button == 1:
                 if not self.canvas_rect.collidepoint(event.pos):
                     return
-
                 for element in reversed(self.canvas_elements):
                     if element.contains_point(event.pos):
-                        self.selected_element = element
-                        self.show_selected_properties()
+                        if self.selected_element != element:
+                            self.selected_element = element
+                            self.show_selected_properties()
                         self.dragging = True
 
                         mouse_x, mouse_y = event.pos
@@ -308,7 +350,7 @@ class UIEditor:
 
         element.set_position((x_ratio, y_ratio))
 
-        self.update_position_fields()
+        self.update_fields()
 
     def update_widget_properties(self, properties):
         element = self.selected_element
@@ -316,26 +358,40 @@ class UIEditor:
         if element is None:
             return
 
-        current_x, current_y = element.data.get("position", [0.5, 0.5])
+        style_name = self.button_style_state.state.name.lower()
 
-        x_value = properties.get("x", "")
-        y_value = properties.get("y", "")
+        # combine RGB fields
+        for color_name in ("background", "border", "text_color"):
 
-        x = current_x
-        y = current_y
+            r = properties.pop(f"{color_name}_r", None)
+            g = properties.pop(f"{color_name}_g", None)
+            b = properties.pop(f"{color_name}_b", None)
 
-        if x_value.strip():
-            x = max(0.0, min(1.0, float(x_value) / 100.0))
-
-        if y_value.strip():
-            y = max(0.0, min(1.0, float(y_value) / 100.0))
-
-        element.set_position((x, y))
-
-        properties.pop("x", None)
-        properties.pop("y", None)
+            if r is not None and g is not None and b is not None:
+                properties[color_name] = (
+                    int(r),
+                    int(g),
+                    int(b)
+                )
 
         for name, value in properties.items():
+
+            if element.type == "button" and name in element.styles.get(style_name, {}):
+
+                if name in ("background", "border", "text_color"):
+                    value = tuple(value)
+
+                elif name in ("border_width", "border_radius", "padding"):
+                    value = int(value)
+
+                element.set_style(
+                    style_name,
+                    name,
+                    value
+                )
+
+                continue
+
             setter = getattr(element, f"set_{name}", None)
 
             if setter:
@@ -365,3 +421,5 @@ class UIEditor:
             self.app_interface.system.window.blit(self.options,self.options_rect)
 
         
+    def clean_up_states(self):
+        self.app_interface.system.clean_up_states([self.button_style_state.state])

@@ -16,12 +16,12 @@ class Application:
         self.navigation = Navigation(app_interface)
         self.init()
 
-    def handle_event(self,event,command=None):
+    def handle_event(self,event,command):
         if self.state.is_state(EDITOR_STATE.NONE):
             return
         
         if self.editor:
-            self.editor.handle_event(event)
+            self.editor.handle_event(event,command)
 
         if self.app_interface.system.control_state.is_state(DEVELOPER_MODE.ON):
 
@@ -68,7 +68,7 @@ class Application:
         pass
 
     def init(self):
-        self.app_interface.ui_controller.show_ui("mainmenu")
+        self.app_interface.ui_controller.show_ui("editor_main_menu")
 
     def initialize_menu_editor(self):
         import importlib

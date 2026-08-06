@@ -8,23 +8,112 @@
             "font": "default",
             "text": "Button",
             "position": [
-                0.7825,
-                0.5007
+                0.35333333333333333,
+                0.6948148148148148
             ],
             "action": "None",
-            "styles": null
-        },
-        {
-            "id": "new_button",
-            "type": "button",
-            "font": "default",
-            "text": "Button",
-            "position": [
-                0.19920000000000002,
-                0.6252
-            ],
-            "action": "None",
-            "styles": null
+            "styles": {
+                "idle": {
+                    "background": [
+                        128,
+                        1,
+                        1
+                    ],
+                    "border": [
+                        255,
+                        2,
+                        2
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        255,
+                        6,
+                        255
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
         }
     ]
 }
