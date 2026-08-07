@@ -7,17 +7,14 @@ class EditorWidget:
 
         self.id = data.get("id", "")
         self.type = data.get("type", "")
+        self.font_size = data.get("font_size", "")
+        self.color = tuple(data.get("color", ""))
 
         self.position = tuple(
             data.get("position", [0.5, 0.5])
         )
 
         self.rect = None
-
-    def set_position(self, position):
-        self.position = tuple(position)
-        self.data["position"] = list(position)
-        self.scale()
 
     def contains_point(self, point):
         return self.rect and self.rect.collidepoint(point)
@@ -36,6 +33,21 @@ class EditorWidget:
         self.data["id"] = self.id
 
     def set_font_size(self, fs):
-        self.fs = str(fs)
-        self.data["font_size"] = self.fs
+        self.font_size = int(fs)
+        self.data["font_size"] = self.font_size
+        self.scale()
+
+    def set_text(self, text):
+        self.text = str(text)
+        self.data["text"] = self.text
+        self.scale()
+
+    def set_position(self, position):
+        self.position = tuple(position)
+        self.data["position"] = list(position)
+        self.scale()
+
+    def set_color(self,color):
+        self.color = tuple(color)
+        self.data["color"] = list(color)
         self.scale()

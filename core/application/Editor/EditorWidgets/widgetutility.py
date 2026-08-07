@@ -12,16 +12,16 @@ class WidgetUtility:
             "text_color": "text_color"
         }
 
-
     def toggle_button_style_state(self):
         if self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
             self.editor.button_style_state.set_state(BUTTON_STYLE_STATE.HOVER)
-            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_hover_style_properties")
+            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_hover_properties")
             self.editor.update_fields()
         elif self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
             self.editor.button_style_state.set_state(BUTTON_STYLE_STATE.IDLE)
-            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_idle_style_properties")
+            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_idle_properties")
             self.editor.update_fields()
+        self.editor.refresh_selected_element()
         self.editor.show_selected_properties()
 
     def default_button_styles(self):
@@ -68,6 +68,29 @@ class WidgetUtility:
             }
         }
 
+    def populate_color_fields(self, element):
+        fields = {}
+
+        if element.type == "button":
+            style_state = self.editor.button_style_state.state.name.lower()
+            styles = element.data["styles"].get(style_state, {})
+
+            for name, value in styles.items():
+                if name in self.button_color_properties:
+                    fields[f"{name}_r"] = str(value[0])
+                    fields[f"{name}_g"] = str(value[1])
+                    fields[f"{name}_b"] = str(value[2])
+                else:
+                    fields[name] = str(value)
+
+        elif "color" in element.data:
+            r, g, b = element.data["color"]
+            fields["color_r"] = str(r)
+            fields["color_g"] = str(g)
+            fields["color_b"] = str(b)
+
+        return fields
+
     def get_button_runtime_style_state(self):
         if self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
             return BUTTON_STATE.IDLE
@@ -82,46 +105,65 @@ class WidgetUtility:
             return BUTTON_STATE.DISABLE
 
         if self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.FOCUSED):
-            return BUTTON_STATE.FOCUSED
+            return BUTTON_STATE.FOCUSED 
 
-    def populate_button_style_fields(self, styles):
+    def populate_color_fields(self, element):
+
         fields = {}
 
-        for style_name, value in styles.items():
+        if element.type == "button":
+            style_name = self.editor.button_style_state.state.name.lower()
 
-            if style_name in self.button_color_properties:
-                fields[f"{style_name}_r"] = str(value[0])
-                fields[f"{style_name}_g"] = str(value[1])
-                fields[f"{style_name}_b"] = str(value[2])
+            styles = element.data["styles"].get(style_name, {})
 
-            else:
-                fields[style_name] = str(value)
+            for name, value in styles.items():
+
+                if name in self.button_color_properties:
+                    fields[f"{name}_r"] = str(value[0])
+                    fields[f"{name}_g"] = str(value[1])
+                    fields[f"{name}_b"] = str(value[2])
+                else:
+                    fields[name] = str(value)
+
+        elif "color" in element.data:
+            r, g, b = element.data["color"]
+
+            fields["color_r"] = str(r)
+            fields["color_g"] = str(g)
+            fields["color_b"] = str(b)
 
         return fields
 
+    def collect_color_properties(self, element, properties):
 
-    def collect_button_style_fields(self, properties):
+        collected = {}
 
-        styles = {}
+        if element.type == "button":
 
-        colors = {
-            "background",
-            "border",
-            "text_color"
-        }
+            for base in self.button_color_properties:
 
-        for name in list(properties.keys()):
+                r = properties.pop(f"{base}_r", None)
+                g = properties.pop(f"{base}_g", None)
+                b = properties.pop(f"{base}_b", None)
 
-            if name in colors:
-                continue
+                if r is not None and g is not None and b is not None:
+                    collected[base] = (
+                        int(r or 0),
+                        int(g or 0),
+                        int(b or 0)
+                    )
 
-            if name.endswith("_r"):
-                base = name[:-2]
+        else:
 
-                r = int(properties.pop(f"{base}_r"))
-                g = int(properties.pop(f"{base}_g"))
-                b = int(properties.pop(f"{base}_b"))
+            r = properties.pop("color_r", None)
+            g = properties.pop("color_g", None)
+            b = properties.pop("color_b", None)
 
-                styles[base] = [r, g, b]
+            if r is not None and g is not None and b is not None:
+                collected["color"] = (
+                    int(r or 0),
+                    int(g or 0),
+                    int(b or 0)
+                )
 
-        return styles
+        return collected

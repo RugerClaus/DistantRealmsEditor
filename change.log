@@ -12,3 +12,14 @@ Development version Alpha 0.0.1 - 2026-08-03
 - Editor knows if it's being developed or if it's built and being used in a workspace and knows where to put and update UI files
 - UI hot reloading
 - Application hot reloading
+
+Development version Alpha 0.0.2 - 2026-08-07
+-----------------------------------------------
+- Editors can be hot-reloaded
+- Editor Utility now loads the current project into memory on creation
+- Created basic layout for editors with a canvas, widgets, options, and properties viewports
+- Added all widgets, and editor support for headers, labels, and buttons. Button support is full
+- Updated framework assumptions and migrated them back to the framework repo
+- Removed Pause states. Generalized app navigation in editor's options section
+- Can save using CTRL+S
+- Editor can now edit its own main menu file

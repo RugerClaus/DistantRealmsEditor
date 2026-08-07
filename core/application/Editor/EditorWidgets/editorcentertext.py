@@ -21,22 +21,6 @@ class EditorCenterText(EditorWidget):
 
         self.scale()
 
-    def set_text(self, text):
-        self.text = str(text)
-        self.data["text"] = self.text
-
-        self.scale()
-
-    def set_font_size(self, font_size):
-        self.font_size = int(font_size)
-        self.data["font_size"] = self.font_size
-
-        self.font = FontEngine(
-            self.font_size
-        ).font
-
-        self.scale()
-
     def scale(self):
         ww = self.editor.canvas.get_width()
         wh = self.editor.canvas.get_height()

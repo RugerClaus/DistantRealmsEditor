@@ -1,0 +1,223 @@
+{
+    "type": "form",
+    "name": "MENU_EDITOR_LABEL_PROPERTIES",
+    "elements": [
+        {
+            "type": "button",
+            "id": "create_new_button",
+            "text": "Button",
+            "font_size": 35,
+            "position": [0.85, 0.1],
+            "action": "create_new_button"
+        },
+        {
+            "type": "button",
+            "id": "create_new_label",
+            "text": "Label",
+            "font_size": 35,
+            "position": [0.93, 0.1],
+            "action": "create_new_label"
+        },
+        {
+            "type": "button",
+            "id": "create_new_header",
+            "text": "HEADER",
+            "font_size": 35,
+            "position": [0.85, 0.2],
+            "action": "create_new_header"
+        },
+        {
+            "type": "label",
+            "id": "widgets_label",
+            "text": "Widgets",
+            "position": [0.89, 0.04],
+            "font_size": 40,
+            "color": [0,0,0]
+        },
+        {
+            "type": "label",
+            "id": "options_label",
+            "text": "options: ",
+            "position": [0.89, 0.55],
+            "font_size": 40,
+            "color": [0,0,0]
+        },
+
+        {
+            "type": "button",
+            "id": "main_menu_button",
+            "text": "Main Menu",
+            "font_size": 35,
+            "position": [0.85, 0.9],
+            "action": "main_menu"
+        },
+        {
+            "type": "button",
+            "id": "quit_button",
+            "text": "Quit",
+            "font_size": 35,
+            "position": [0.95, 0.9],
+            "action": "quit"
+        },
+        {
+            "type": "button",
+            "id": "update_widget_properties",
+            "text": "Save",
+            "font_size": 25,
+            "position": [0.6, 0.85],
+            "action": "update_widget_properties",
+            "styles": {
+                "idle":
+                    {
+                        "background": [0,220,0],
+                        "border": [128,128,128]
+                    },
+                "hover":
+                    {
+                        "background": [0,200,30],
+                        "border": [128,180,128]
+                    }
+                }
+        },
+        {
+            "type": "button",
+            "id": "delete_element",
+            "text": "Delete",
+            "font_size": 25,
+            "position": [0.6, 0.8],
+            "action": "delete_selected_element",
+            "styles": {
+                "idle":
+                    {
+                        "background": [244,0,0],
+                        "border": [128,128,128]
+                    },
+                "hover":
+                    {
+                        "background": [200,0,30],
+                        "border": [128,180,128]
+                    }
+                }
+        },
+        {
+            "type": "label",
+            "id": "button_text_label",
+            "text": "Text: ",
+            "position": [0.03, 0.83],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "text",
+            "field": "text",
+            "position": [0.125, 0.83],
+            "dimensions": [0.15, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "x_label",
+            "text": "X: ",
+            "position": [0.04, 0.86],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "x",
+            "field": "x",
+            "position": [0.1, 0.86],
+            "dimensions": [0.1, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "y_label",
+            "text": "Y: ",
+            "position": [0.04, 0.89],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "y",
+            "field": "y",
+            "position": [0.1, 0.89],
+            "dimensions": [0.1, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "id_label",
+            "text": "ID: ",
+            "position": [0.04, 0.92],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "id",
+            "field": "id",
+            "position": [0.1, 0.92],
+            "dimensions": [0.1, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "r_label",
+            "text": "R",
+            "position": [0.295, 0.8],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "label",
+            "id": "g_label",
+            "text": "G",
+            "position": [0.335, 0.8],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "label",
+            "id": "b_label",
+            "text": "B",
+            "position": [0.375, 0.8],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "label",
+            "id": "text_color_label",
+            "text": "TextColor:",
+            "position": [0.24, 0.83],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "color_r",
+            "field": "color_r",
+            "position": [0.295, 0.83],
+            "dimensions": [0.03, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "textbox",
+            "id": "color_g",
+            "field": "color_g",
+            "position": [0.335, 0.83],
+            "dimensions": [0.03, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "textbox",
+            "id": "color_b",
+            "field": "color_b",
+            "position": [0.375, 0.83],
+            "dimensions": [0.03, 0.03],
+            "font_size": 25
+        }
+    ]
+}

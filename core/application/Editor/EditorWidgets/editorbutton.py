@@ -10,8 +10,8 @@ class EditorButton(EditorWidget):
             self.data["styles"] = self.editor.widgets.default_button_styles()
 
         self.text = data.get("text", "")
-        self.font_size = data.get("font_size", 30)
         self.action = data.get("action")
+        self.color = None
 
         self.styles = self.editor.widgets.default_button_styles()
 
@@ -36,8 +36,11 @@ class EditorButton(EditorWidget):
         state_name = self.editor.button_style_state.state.name.lower()
         return state_name, self.styles[state_name]
 
-    def scale(self):
-        _, style = self.get_current_style()
+    def scale(self, state_name=None):
+        if state_name is None:
+            state_name, style = self.get_current_style()
+        else:
+            style = self.styles[state_name]
 
         self.font = FontEngine(self.font_size).font
 
@@ -78,6 +81,7 @@ class EditorButton(EditorWidget):
         )
 
     def draw(self):
+        
         _, style = self.get_current_style()
 
         self.surface.fill((0, 0, 0, 0))
@@ -112,11 +116,6 @@ class EditorButton(EditorWidget):
         self.action = action
         self.data["action"] = action
 
-    def set_text(self, text):
-        self.text = str(text)
-        self.data["text"] = self.text
-        self.scale()
-
     def set_style(self, state_name, key, value):
         self.styles[state_name][key] = value
 
@@ -126,3 +125,6 @@ class EditorButton(EditorWidget):
         self.data["styles"][state_name][key] = value
 
         self.scale()
+
+    def set_color(self):
+        pass

@@ -21,8 +21,9 @@ class ActionRegistrar:
                 self.app_interface.ui_controller.get_active_ui().submit()
             )
         )
+        self.app_interface.actions.register("delete_selected_element", lambda: self.app_interface.app_object.editor.delete_selected_element())
         self.app_interface.actions.register("main_menu", self.app_interface.app_object.navigation.main_menu)
 
         self.app_interface.actions.register("new_project_form",lambda: self.app_interface.ui_controller.show_ui("newprojectform"))
-        self.app_interface.actions.register("load_project", lambda: self.app_interface.app_object.util.load_project("testmenu"))
+        self.app_interface.actions.register("load_project", lambda: self.app_interface.app_object.util.load_project("editor_main_menu"))
         self.app_interface.actions.register("quit",self.system.quit)

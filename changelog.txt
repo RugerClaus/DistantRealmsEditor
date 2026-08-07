@@ -1,8 +1,1 @@
-Development version Alpha 0.0.2 - 2026-08-XX
-- Editors can be hot-reloaded
-- Editor Utility now loads the current project into memory on creation
-- Created basic layout for editors with a canvas, widgets, options, and properties viewports
-- Added all widgets, and editor support for headers, labels, and buttons. Button support is full
-- Updated framework assumptions and migrated them back to the framework repo
-- Removed Pause states. Generalized app navigation in editor's options section
-- Can save using CTRL+S
+Development version Alpha 0.0.3 - 2026-08-XX

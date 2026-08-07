@@ -3,7 +3,7 @@ import platform
 config = {
     "TITLE": "Distant Realms Editor",
     "AUTHORS": ["RugerClaus"],
-    "VERSION": "0.0.1-alpha",
+    "VERSION": "0.0.3-alpha",
     "OS": platform.system(),
     "OSV": platform.version(),
     "OSR": platform.release(),
@@ -12,7 +12,6 @@ config = {
     "UPDATER_LINUX": "",
     "UPDATER_VERSION": "",
     "API_KEY": "",
-    "APPLICATION_ENGINE_DATA_DIR": "../core/application/enginepersistence",
     "NSTATURL": "https://snowblitz.net",
     "API": {
         "LEADERBOARD": "",

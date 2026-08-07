@@ -20,6 +20,7 @@ class UIEditor:
         system = app_interface.system
 
         system.input.CommandModule.sequences["save_project"] = [system.input.keys.l_ctrl_key(),system.input.keys.s_key()]
+        system.input.CommandModule.sequences["delete_element"] = [system.input.keys.delete_key()]
 
         self.active_file = None
         self.active_filename = None
@@ -46,7 +47,6 @@ class UIEditor:
         self.load_canvas()
         self.load_widget_palette()
         self.load_options()
-
 
     def create_editor_element(self, data):
         element_type = data.get("type")
@@ -76,6 +76,7 @@ class UIEditor:
                 "font": "default",
                 "text": "Button",
                 "position": [0.5, 0.5],
+                "font_size": 30,
                 "action": None,
                 "styles": self.widgets.default_button_styles()
             },
@@ -112,6 +113,30 @@ class UIEditor:
 
         return element
 
+    def delete_selected_element(self):
+        if self.selected_element is None:
+            return
+
+        element = self.selected_element
+
+        if element in self.canvas_elements:
+            self.canvas_elements.remove(element)
+
+        if self.active_file is not None:
+            elements = self.active_file.get("elements", [])
+
+            if element.data in elements:
+                elements.remove(element.data)
+
+        self.selected_element = None
+        self.dragging = False
+        self.drag_offset = None
+
+        self.app_interface.ui_controller.show_ui("menu_editor_noprops")
+
+        self.dirty = True
+        self.save()
+
     def load_widget_palette(self):
         self.palette_x = 0.75
         self.palette_y = 0.0
@@ -132,6 +157,12 @@ class UIEditor:
         )
 
         self.widget_palette_rect = self.canvas.get_rect(topleft=(x, y))
+
+    def refresh_selected_element(self):
+        element = self.selected_element
+
+        if element and element.type == "button":
+            element.scale()
 
     def load_options(self):
             self.palette_x = 0.75
@@ -230,32 +261,23 @@ class UIEditor:
             "position",
             [0.5, 0.5]
         )
-
+        
         fields = {
             "x": str(round(x * 100, 2)),
             "y": str(round(y * 100, 2)),
-            "id": self.selected_element.data.get("id", "")
+            "id": self.selected_element.data.get("id", ""),
+            "font_size": self.selected_element.data.get("font_size", ""),
+            "text": self.selected_element.data.get("text", "")
         }
 
         if self.selected_element.type == "button":
-
             fields["action"] = self.selected_element.data.get("action", "")
-            fields["button_text"] = self.selected_element.data.get("text", "")
 
-            style_state = self.button_style_state.state.name.lower()
-
-            styles = self.selected_element.data["styles"].get(
-                style_state,
-                {}
-            )
-
-            fields.update(
-                self.widgets.populate_button_style_fields(styles)
-            )
-
+        fields.update(
+            self.widgets.populate_color_fields(self.selected_element)
+        )
         for name, value in fields.items():
             field = self.app_interface.ui_controller.get_element(name)
-
             if field:
                 field.set_text(value)
 
@@ -268,11 +290,13 @@ class UIEditor:
 
         if element_type == "button":
             if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
-                menu = "menu_editor_button_idle_style_properties"
+                menu = "menu_editor_button_idle_properties"
             elif self.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
-                menu = "menu_editor_button_hover_style_properties"
+                menu = "menu_editor_button_hover_properties"
         elif element_type == "label":
-            menu = "menu_editor_labelprops"
+            menu = "menu_editor_label_properties"
+        elif element_type == "header":
+            menu = "menu_editor_header_properties"
         else:
             menu = "menu_editor_noprops"
             return
@@ -286,6 +310,8 @@ class UIEditor:
         if command == "save_project":
             self.update_widget_properties(self.app_interface.ui_controller.get_active_ui().submit())
             self.save()
+        elif command == "delete_element":
+            self.delete_selected_element()
 
         if event.type == self.app_interface.system.input.video_resize_event():
             self.load_canvas()
@@ -356,42 +382,43 @@ class UIEditor:
             return
 
         style_name = self.button_style_state.state.name.lower()
+ 
+        properties.update(
+            self.widgets.collect_color_properties(
+                element,
+                properties
+            )
+        )
 
-        # combine RGB fields
-        for color_name in ("background", "border", "text_color"):
+        if "x" in properties:
+            element.set_position((
+                float(properties.pop("x")) / 100,
+                element.data["position"][1]
+            ))
 
-            r = properties.pop(f"{color_name}_r", None)
-            g = properties.pop(f"{color_name}_g", None)
-            b = properties.pop(f"{color_name}_b", None)
+        if "y" in properties:
+            element.set_position((
+                element.data["position"][0],
+                float(properties.pop("y")) / 100
+            ))
 
-            if r is not None and g is not None and b is not None:
-                properties[color_name] = (
-                    int(r),
-                    int(g),
-                    int(b)
-                )
+        if "id" in properties:
+            element.set_id(str(properties.pop("id")))
 
-        if ("x" in properties 
-            or "y" in properties 
-            or "id" in properties
-            or "font_size" in properties):
-            x = float(properties.get("x", element.data["position"][0] * 100)) / 100
-            y = float(properties.get("y", element.data["position"][1] * 100)) / 100
-            id = str(properties.get("id", element.data["id"]))
-            font_size = int(properties.get("font_size", element.data.get("font_size", 12)))
+        if "font_size" in properties:
+            element.set_font_size(int(properties.pop("font_size")))
 
-            element.set_position((x, y))
-            element.set_id(id)
-            element.set_font_size(font_size)
+        if "text" in properties:
+            element.set_text(str(properties.pop("text")))
 
-            properties.pop("x", None)
-            properties.pop("y", None)
-            properties.pop("id", None)
-            properties.pop("font_size", None)
+        if "color" in properties and hasattr(element, "set_color"):
+            element.set_color(tuple(properties.pop("color")))
 
-        for name, value in properties.items():
+        if element.type == "button":
+            for name, value in properties.items():
 
-            if element.type == "button" and name in element.styles.get(style_name, {}):
+                if name not in element.styles.get(style_name, {}):
+                    continue
 
                 if name in ("background", "border", "text_color"):
                     value = tuple(value)
@@ -405,12 +432,12 @@ class UIEditor:
                     value
                 )
 
-                continue
+        else:
+            for name, value in properties.items():
+                setter = getattr(element, f"set_{name}", None)
 
-            setter = getattr(element, f"set_{name}", None)
-
-            if setter:
-                setter(value)
+                if setter:
+                    setter(value)
 
         self.save()
 

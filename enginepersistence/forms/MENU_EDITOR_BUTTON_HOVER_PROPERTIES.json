@@ -1,6 +1,6 @@
 {
     "type": "form",
-    "name": "MENU_EDITOR_NOPROPS",
+    "name": "MENU_EDITOR_BUTTON_HOVER_PROPERTIES",
     "elements": [
         {
             "type": "button",
@@ -61,11 +61,11 @@
         },
         {
             "type": "button",
-            "id": "hover_style_mode_button",
-            "text": "Hover Styles",
+            "id": "idle_style_mode_button",
+            "text": "Idle Styles",
             "font_size": 25,
             "position": [0.6, 0.9],
-            "action": "button_hover_style_mode"
+            "action": "button_idle_style_mode"
         },
         {
             "type": "button",
@@ -88,6 +88,26 @@
                 }
         },
         {
+            "type": "button",
+            "id": "delete_element",
+            "text": "Delete",
+            "font_size": 25,
+            "position": [0.6, 0.8],
+            "action": "delete_selected_element",
+            "styles": {
+                "idle":
+                    {
+                        "background": [244,0,0],
+                        "border": [128,128,128]
+                    },
+                "hover":
+                    {
+                        "background": [200,0,30],
+                        "border": [128,180,128]
+                    }
+                }
+        },
+        {
             "type": "label",
             "id": "button_text_label",
             "text": "Text: ",
@@ -97,7 +117,7 @@
         },
         {
             "type": "textbox",
-            "id": "button_text",
+            "id": "text",
             "field": "text",
             "position": [0.1, 0.83],
             "dimensions": [0.1, 0.03],
@@ -345,7 +365,7 @@
         },
         {
             "type": "textbox",
-            "id": "font_size_text",
+            "id": "font_size",
             "field": "font_size",
             "position": [0.48, 0.86],
             "dimensions": [0.1, 0.03],
