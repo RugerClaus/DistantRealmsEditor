@@ -160,6 +160,8 @@ class EditorUtility:
 
             if browser:
                 self.app_interface.app_object.ProjectBrowser = None
+
+            self.app_interface.ui_controller.show_ui("editor_noprops")
     
             return data
 

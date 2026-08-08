@@ -339,7 +339,7 @@ class UIEditor:
 
                         break
                 else:
-                    self.app_interface.ui_controller.show_ui("menu_editor_noprops")
+                    self.app_interface.ui_controller.show_ui("editor_noprops")
                     self.selected_element = None
                     self.dragging = False
 

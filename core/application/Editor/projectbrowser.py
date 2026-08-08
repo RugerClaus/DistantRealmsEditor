@@ -1,5 +1,6 @@
-import os
 import json
+from pathlib import Path
+from systemlogging import log_warning
 
 from core.ui.widgets.button import Button
 
@@ -7,6 +8,8 @@ from core.ui.widgets.button import Button
 class ProjectBrowser:
 
     def __init__(self, application):
+        log_warning("ProjectBrowser: BEGIN")
+
         self.application = application
         self.dr = application.app_interface
 
@@ -17,10 +20,21 @@ class ProjectBrowser:
         self.row_height = 70
         self.scroll_speed = 40
 
+        log_warning("ProjectBrowser: before create_viewport")
         self.create_viewport()
-        self.get_project_dirs()
-        self.create_buttons()
+        log_warning("ProjectBrowser: after create_viewport")
 
+        log_warning("ProjectBrowser: before get_project_dirs")
+        self.get_project_dirs()
+        log_warning("ProjectBrowser: after get_project_dirs")
+
+        log_warning(f"ProjectBrowser: files = {self.files}")
+
+        log_warning("ProjectBrowser: before create_buttons")
+        self.create_buttons()
+        log_warning("ProjectBrowser: after create_buttons")
+
+        log_warning("ProjectBrowser: COMPLETE")
 
     def create_viewport(self):
         ww = self.dr.system.window.get_width()
@@ -43,18 +57,34 @@ class ProjectBrowser:
         ]
 
         for directory in dirs:
-            for filename in os.listdir(directory):
+            directory = Path(directory)
 
-                path = os.path.join(directory, filename)
+            if not directory.exists():
+                log_warning(f"Missing project directory: {directory}")
+                continue
 
-                if os.path.isfile(path):
-                    with open(path, "r") as file:
+            for path in directory.iterdir():
+
+                if not path.is_file() or path.suffix.lower() != ".json":
+                    continue
+
+                try:
+                    with path.open("r", encoding="utf-8") as file:
                         data = json.load(file)
+                except (OSError, json.JSONDecodeError) as e:
+                    log_warning(f"Skipping {path}: {e}")
+                    continue
 
-                    self.files.append({
-                        "name": os.path.splitext(filename)[0],
-                        "type": data.get("type")
-                    })
+                project_type = data.get("type")
+
+                if project_type not in ("menu", "form"):
+                    continue
+
+                self.files.append({
+                    "name": path.stem,
+                    "type": project_type
+                })
+
 
 
     def create_buttons(self):

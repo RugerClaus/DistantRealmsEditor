@@ -21,7 +21,6 @@ function copy_assets() {
   find "$ROOT/enginepersistence" -type f
 
   cp -r "$ROOT/assets" "$TARGET"
-  cp -r "$ROOT/logs" "$TARGET"
   cp -r "$ROOT/saves" "$TARGET"
   cp -r "$ROOT/environment" "$TARGET"
   cp -r "$ROOT/enginepersistence" "$TARGET"
@@ -30,6 +29,10 @@ function copy_assets() {
   cp "$ROOT/README.md" "$TARGET"
   cp "$ROOT/LICENSE" "$TARGET"
   cp "$ROOT/instructions.md" "$TARGET"
+
+  echo "making logs/ directory"
+  mkdir "$TARGET/logs"
+  echo "logs/ directory added"
 
   echo "Setting build environment to production mode..." 
   echo "false" > "$TARGET/environment/dev"
