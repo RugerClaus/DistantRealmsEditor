@@ -81,7 +81,6 @@ class EditorButton(EditorWidget):
         )
 
     def draw(self):
-        
         _, style = self.get_current_style()
 
         self.surface.fill((0, 0, 0, 0))
@@ -102,15 +101,23 @@ class EditorButton(EditorWidget):
                 border_radius=style["border_radius"]
             )
 
-        self.surface.blit(
-            self.text_surface,
-            self.text_rect
+        text_surface = self.font.render(
+            str(self.text),
+            True,
+            style["text_color"]
         )
+
+        text_rect = text_surface.get_rect(
+            center=self.surface.get_rect().center
+        )
+
+        self.surface.blit(text_surface, text_rect)
 
         self.system.window.blit(
             self.surface,
             self.rect
         )
+
 
     def set_action(self, action):
         self.action = action

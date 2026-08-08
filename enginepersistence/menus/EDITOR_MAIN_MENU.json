@@ -7,8 +7,8 @@
             "id": "main_menu_header1",
             "text": "DISTANT",
             "position": [
-                0.2,
-                0.1
+                0.8633333333333333,
+                0.07851851851851852
             ],
             "font_size": 100,
             "color": [
@@ -22,8 +22,8 @@
             "id": "main_menu_header2",
             "text": "REALMS",
             "position": [
-                0.5,
-                0.1
+                0.8583333333333333,
+                0.11555555555555555
             ],
             "font_size": 100,
             "color": [
@@ -37,8 +37,8 @@
             "id": "main_menu_header3",
             "text": "EDITOR",
             "position": [
-                0.8,
-                0.1
+                0.8566666666666667,
+                0.16444444444444445
             ],
             "font_size": 100,
             "color": [
@@ -54,7 +54,7 @@
             "font_size": 40,
             "position": [
                 0.1,
-                0.5
+                0.4
             ],
             "action": "new_project_form",
             "styles": {
@@ -65,8 +65,8 @@
                         40
                     ],
                     "border": [
-                        255,
-                        255,
+                        0,
+                        0,
                         255
                     ],
                     "border_width": 2,
@@ -81,7 +81,7 @@
                 "hover": {
                     "background": [
                         60,
-                        60,
+                        255,
                         60
                     ],
                     "border": [
@@ -92,9 +92,9 @@
                     "border_width": 3,
                     "border_radius": 8,
                     "text_color": [
-                        255,
-                        255,
-                        255
+                        128,
+                        0,
+                        0
                     ],
                     "padding": 5
                 },
@@ -167,7 +167,7 @@
             "font_size": 40,
             "position": [
                 0.1,
-                0.7
+                0.5
             ],
             "action": "load_project",
             "styles": {
@@ -178,9 +178,9 @@
                         40
                     ],
                     "border": [
+                        40,
                         255,
-                        255,
-                        255
+                        128
                     ],
                     "border_width": 2,
                     "border_radius": 8,
@@ -194,7 +194,7 @@
                 "hover": {
                     "background": [
                         60,
-                        60,
+                        255,
                         60
                     ],
                     "border": [
@@ -205,9 +205,9 @@
                     "border_width": 3,
                     "border_radius": 8,
                     "text_color": [
-                        255,
-                        255,
-                        255
+                        128,
+                        0,
+                        0
                     ],
                     "padding": 5
                 },
@@ -279,8 +279,8 @@
             "text": "Quit",
             "font_size": 40,
             "position": [
-                0.9,
-                0.5
+                0.1,
+                0.6
             ],
             "action": "quit",
             "styles": {
@@ -292,8 +292,8 @@
                     ],
                     "border": [
                         255,
-                        255,
-                        255
+                        0,
+                        0
                     ],
                     "border_width": 2,
                     "border_radius": 8,
@@ -306,21 +306,21 @@
                 },
                 "hover": {
                     "background": [
-                        60,
+                        255,
                         60,
                         60
                     ],
                     "border": [
-                        200,
-                        20,
-                        20
+                        255,
+                        255,
+                        255
                     ],
                     "border_width": 3,
                     "border_radius": 8,
                     "text_color": [
-                        255,
-                        255,
-                        255
+                        0,
+                        0,
+                        0
                     ],
                     "padding": 5
                 },
@@ -391,7 +391,7 @@
             "id": "version_label",
             "text": "Editor v0.0.3-alpha",
             "position": [
-                0.1,
+                0.9,
                 0.975
             ],
             "font_size": 30,

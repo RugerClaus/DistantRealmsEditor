@@ -3,6 +3,51 @@
     "name": "EDITOR_PROJECT_BROWSER",
     "elements": [
         {
+            "type": "header",
+            "id": "main_menu_header1",
+            "text": "DISTANT",
+            "position": [
+                0.8633333333333333,
+                0.07851851851851852
+            ],
+            "font_size": 100,
+            "color": [
+                220,
+                0,
+                224
+            ]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header2",
+            "text": "REALMS",
+            "position": [
+                0.8583333333333333,
+                0.11555555555555555
+            ],
+            "font_size": 100,
+            "color": [
+                106,
+                177,
+                255
+            ]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header3",
+            "text": "EDITOR",
+            "position": [
+                0.8566666666666667,
+                0.16444444444444445
+            ],
+            "font_size": 100,
+            "color": [
+                220,
+                0,
+                224
+            ]
+        },
+        {
             "id": "back_menu",
             "type": "button",
             "font": "default",
