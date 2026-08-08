@@ -1,0 +1,120 @@
+{
+    "type": "menu",
+    "name": "EDITOR_AUDIO_SETTINGS",
+    "elements": [
+        {
+            "id": "back_to_set",
+            "type": "button",
+            "font": "default",
+            "text": "Back",
+            "position": [
+                0.9,
+                0.9
+            ],
+            "font_size": 30,
+            "action": "open_settings",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        }
+    ]
+}

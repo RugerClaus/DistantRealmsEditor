@@ -7,6 +7,7 @@ class ActionRegistrar:
 
     def register(self):
         self.app_interface.actions.register("create_project",self.app_interface.app_object.util.create_project)
+
         self.app_interface.actions.register("create_new_button", lambda: self.app_interface.app_object.editor.add_element("button"))
         self.app_interface.actions.register("create_new_label", lambda: self.app_interface.app_object.editor.add_element("label"))
         self.app_interface.actions.register("create_new_header", lambda: self.app_interface.app_object.editor.add_element("header"))
@@ -26,4 +27,8 @@ class ActionRegistrar:
 
         self.app_interface.actions.register("new_project_form",lambda: self.app_interface.ui_controller.show_ui("newprojectform"))
         self.app_interface.actions.register("load_project", self.app_interface.app_object.initialize_project_browser)
+
+        self.app_interface.actions.register("open_settings", lambda: self.app_interface.ui_controller.show_ui("editor_settings_root"))
+        self.app_interface.actions.register("audio_settings", lambda: self.app_interface.ui_controller.show_ui("editor_audio_settings"))
+
         self.app_interface.actions.register("quit",self.system.quit)

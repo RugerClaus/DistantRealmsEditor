@@ -42,9 +42,11 @@ class EditorUtility:
             if project_type == "Menu":
                 self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
                 self.app_interface.ui_controller.clear()
+                self.app_interface.ui_controller.show_ui("editor_noprops")
             else:
                 self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
                 self.app_interface.ui_controller.clear()
+                self.app_interface.ui_controller.show_ui("editor_noprops")
 
         self.app_interface.app_object.editor.active_file = self.load_project_file(filename)
 
@@ -80,11 +82,9 @@ class EditorUtility:
         if project_type == "menu":
             self.app_interface.app_object.initialize_menu_editor()
             self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
-            self.app_interface.ui_controller.clear()
         elif project_type == "form":
             self.app_interface.app_object.initialize_form_editor()
             self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
-            self.app_interface.ui_controller.clear()
         else:
             log_event(
                 f"Unknown project type in file: {project_type}",

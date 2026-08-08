@@ -218,6 +218,22 @@
             "position": [0.336, 0.83],
             "dimensions": [0.03, 0.03],
             "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "font_size_label",
+            "text": "FontSize: ",
+            "position": [0.21, 0.86],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "font_size",
+            "field": "font_size",
+            "position": [0.3, 0.86],
+            "dimensions": [0.1, 0.03],
+            "font_size": 25
         }
     ]
 }

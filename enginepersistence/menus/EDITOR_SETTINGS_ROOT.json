@@ -1,129 +1,18 @@
 {
-    "type": "form",
-    "name": "NEWPROJECTFORM",
+    "type": "menu",
+    "name": "EDITOR_SETTINGS_ROOT",
     "elements": [
         {
-            "type": "header",
-            "id": "main_menu_header1",
-            "text": "DISTANT",
-            "position": [
-                0.8633333333333333,
-                0.07851851851851852
-            ],
-            "font_size": 100,
-            "color": [
-                220,
-                0,
-                224
-            ]
-        },
-        {
-            "type": "header",
-            "id": "main_menu_header2",
-            "text": "REALMS",
-            "position": [
-                0.8583333333333333,
-                0.11555555555555555
-            ],
-            "font_size": 100,
-            "color": [
-                106,
-                177,
-                255
-            ]
-        },
-        {
-            "type": "header",
-            "id": "main_menu_header3",
-            "text": "EDITOR",
-            "position": [
-                0.8566666666666667,
-                0.16444444444444445
-            ],
-            "font_size": 100,
-            "color": [
-                220,
-                0,
-                224
-            ]
-        },
-        {
-            "type": "label",
-            "id": "project_type_selector_label",
-            "text": "Project Type:",
-            "position": [
-                0.115,
-                0.25
-            ],
-            "color": [
-                0,
-                0,
-                0
-            ]
-        },
-        {
-            "type": "select",
-            "id": "project_type_selector",
-            "position": [
-                0.3045,
-                0.26
-            ],
-            "options": [
-                "Menu",
-                "Form",
-                "blah",
-                "This",
-                "Pass",
-                "Test",
-                "Jane"
-            ],
-            "field": "project_type",
-            "text": "",
-            "color": [
-                0,
-                0,
-                0
-            ]
-        },
-        {
-            "type": "label",
-            "id": "project_name_textbox_label",
-            "text": "Project Name:",
-            "position": [
-                0.1258,
-                0.1985
-            ],
-            "color": [
-                0,
-                0,
-                0
-            ]
-        },
-        {
-            "type": "textbox",
-            "id": "project_name_textbox",
-            "field": "name",
-            "position": [
-                0.3,
-                0.2
-            ],
-            "dimensions": [
-                0.2,
-                0.04
-            ],
-            "font_size": 25,
-            "max_chars": 30
-        },
-        {
+            "id": "audiosbutton",
             "type": "button",
-            "id": "create_project_button",
-            "text": "Create Project",
-            "font_size": 40,
+            "font": "default",
+            "text": "Audio Settings",
             "position": [
-                0.15,
-                0.8
+                0.5,
+                0.3
             ],
-            "action": "create_project",
+            "font_size": 30,
+            "action": "audio_settings",
             "styles": {
                 "idle": {
                     "background": [
@@ -228,14 +117,15 @@
             }
         },
         {
+            "id": "backtoset",
             "type": "button",
-            "id": "back_button",
+            "font": "default",
             "text": "Back",
-            "font_size": 40,
             "position": [
                 0.9,
-                0.8
+                0.9
             ],
+            "font_size": 30,
             "action": "main_menu",
             "styles": {
                 "idle": {
@@ -341,89 +231,19 @@
             }
         },
         {
-            "type": "label",
-            "id": "error_message",
-            "text": "",
+            "id": "new_header",
+            "type": "header",
+            "text": "Settings",
             "position": [
                 0.5,
-                0.8
-            ]
-        },
-        {
-            "id": "new_label",
-            "type": "label",
-            "text": "Project Name:",
-            "position": [
-                0.115,
-                0.2
+                0.1
             ],
-            "font_size": 30,
+            "font_size": 80,
             "color": [
                 255,
                 255,
                 255
-            ]
-        },
-        {
-            "id": "new_label",
-            "type": "label",
-            "text": "Project Type:",
-            "position": [
-                0.115,
-                0.245
-            ],
-            "font_size": 30,
-            "color": [
-                255,
-                255,
-                255
-            ]
-        },
-        {
-            "id": "new_header",
-            "type": "header",
-            "text": "new",
-            "position": [
-                0.105,
-                0.095
-            ],
-            "font_size": 60,
-            "color": [
-                0,
-                255,
-                255
-            ]
-        },
-        {
-            "id": "new_header",
-            "type": "header",
-            "text": "Create",
-            "position": [
-                0.1,
-                0.07
-            ],
-            "font_size": 60,
-            "color": [
-                255,
-                255,
-                50
-            ]
-        },
-        {
-            "id": "new_header",
-            "type": "header",
-            "text": ":",
-            "position": [
-                0.17170000000000002,
-                0.0859
-            ],
-            "font_size": 60,
-            "color": [
-                128,
-                255,
-                128
             ]
         }
-    ],
-    "error_element": "error_message"
+    ]
 }
