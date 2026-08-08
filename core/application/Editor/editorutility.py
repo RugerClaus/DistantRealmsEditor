@@ -155,6 +155,11 @@ class EditorUtility:
                 f"Loaded project file: {path.resolve()}",
                 "EditorUtility.load_project_file"
             )
+
+            browser = self.app_interface.app_object.ProjectBrowser
+
+            if browser:
+                self.app_interface.app_object.ProjectBrowser = None
     
             return data
 
@@ -175,3 +180,6 @@ class EditorUtility:
         )
 
         return True
+
+    def get_projects(self,type):
+        pass

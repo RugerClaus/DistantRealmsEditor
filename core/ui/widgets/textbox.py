@@ -5,7 +5,7 @@ from core.util.colors import red, white, black
 
 
 class TextBox(UIElement):
-    def __init__(self, system, id, position, dimensions=(0.1432,0.0926),font_size=30,is_active=False,text=None):
+    def __init__(self, system, id, position, dimensions=(0.1432,0.0926),font_size=30,is_active=False,text=None,char_limit=21):
         super().__init__(focusable=True, position=position)
 
         self.system = system
@@ -19,6 +19,7 @@ class TextBox(UIElement):
 
         self.text_width = 0.9091
         self.text_height = 0.5
+        self.limit = char_limit
 
         self.scale()
 
@@ -41,7 +42,7 @@ class TextBox(UIElement):
         self.background_color = black
 
     def set_text(self, text):
-        self.box = list(str(text)[:21])
+        self.box = list(str(text)[:self.limit])
 
     def handle_event(self, event):
         if event.type == self.system.input.video_resize_event():
@@ -119,7 +120,9 @@ class TextBox(UIElement):
         self.text_box.fill(white)
 
     def add_key_to_box(self, character):
-        if len(self.box) >= 21:
+        if not self.limit:
+            self.limit = 21
+        if len(self.box) >= self.limit:
             return
 
         self.box.append(character)

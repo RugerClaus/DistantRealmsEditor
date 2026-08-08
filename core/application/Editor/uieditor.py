@@ -415,6 +415,9 @@ class UIEditor:
             element.set_color(tuple(properties.pop("color")))
 
         if element.type == "button":
+
+            if "action" in properties:
+                element.data["action"] = properties.pop("action")
             for name, value in properties.items():
 
                 if name not in element.styles.get(style_name, {}):

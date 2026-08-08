@@ -87,8 +87,8 @@ class EditorTextBox(EditorWidget):
         ww = self.editor.canvas.get_width()
         wh = self.editor.canvas.get_height()
 
-        x = int(ww * self.x_ratio)
-        y = int(wh * self.y_ratio)
+        x = int(ww * self.position[0])
+        y = int(wh * self.position[1])
 
         width = int(
             ww * self.width

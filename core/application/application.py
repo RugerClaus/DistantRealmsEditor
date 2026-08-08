@@ -13,15 +13,21 @@ class Application:
         self.state = EditorStateManager()
         self.util = EditorUtility(app_interface)
         self.editor = None
+        self.ProjectBrowser = None
         self.navigation = Navigation(app_interface)
+        
         self.init()
 
     def handle_event(self,event,command):
         if self.state.is_state(EDITOR_STATE.NONE):
+            if self.ProjectBrowser:
+                self.ProjectBrowser.handle_event(event,command)
             return
         
         if self.editor:
             self.editor.handle_event(event,command)
+
+        
 
         if self.app_interface.system.control_state.is_state(DEVELOPER_MODE.ON):
 
@@ -44,6 +50,10 @@ class Application:
             )
             self.app_interface.system.window.fill((fade_color))
             self.clean_up_states()
+
+
+            if self.ProjectBrowser:
+                self.ProjectBrowser.update()
         else:
             if self.editor:
                 self.editor.update()
@@ -52,6 +62,9 @@ class Application:
         
         if self.editor:
             self.editor.draw()
+
+        if self.ProjectBrowser:
+            self.ProjectBrowser.draw()
 
     def resize(self):
         pass
@@ -69,6 +82,14 @@ class Application:
 
     def init(self):
         self.app_interface.ui_controller.show_ui("editor_main_menu")
+
+    def initialize_project_browser(self):
+        import importlib
+        from core.application.Editor import projectbrowser
+        importlib.reload(projectbrowser)
+        self.ProjectBrowser = projectbrowser.ProjectBrowser(self)
+        self.app_interface.ui_controller.clear()
+        self.app_interface.ui_controller.show_ui("editor_project_browser")
 
     def initialize_menu_editor(self):
         import importlib

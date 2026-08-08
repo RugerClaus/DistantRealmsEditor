@@ -166,8 +166,8 @@
             "text": "Load Project",
             "font_size": 40,
             "position": [
-                0.5,
-                0.5
+                0.1,
+                0.7
             ],
             "action": "load_project",
             "styles": {
