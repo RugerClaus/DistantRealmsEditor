@@ -41,7 +41,7 @@ copy_assets() {
   cp -r "$ROOT/environment" "$TARGET"
   cp -r "$ROOT/enginepersistence" "$TARGET"
 
-  cp "$ROOT/changelog.txt" "$TARGET"
+  cp "$ROOT/editorchangelog.txt" "$TARGET"
   cp "$ROOT/README.md" "$TARGET"
   cp "$ROOT/LICENSE" "$TARGET"
   cp "$ROOT/instructions.md" "$TARGET"
