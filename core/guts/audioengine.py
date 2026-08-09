@@ -273,8 +273,6 @@ class AudioEngine:
 
             if self.audio_available:
                 pygame.mixer.music.set_volume(self.volume)
-        if self.volume <= 0:
-            self.volume = 0
 
     def sfx_volume_up(self):
         if self.sfx_volume < 0.5:
