@@ -4,7 +4,9 @@ class Navigation:
         self.app_interface = app_interface
 
     def main_menu(self):
-        lambda: self.app_interface.app_object.editor.clean_up_states()
+        editor = self.app_interface.app_object.editor
+        if editor:
+            self.app_interface.app_object.editor.clean_up_states()
         browser = self.app_interface.app_object.ProjectBrowser
         if browser:
             self.app_interface.app_object.ProjectBrowser = None
