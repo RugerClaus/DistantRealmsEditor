@@ -96,6 +96,14 @@ class UIEditor:
                 "position": [0.5, 0.1],
                 "font_size": 60,
                 "color": [255, 255, 255]
+            },
+            "query": {
+                "id": "new_query",
+                "type": "query",
+                "text": "Query",
+                "position": [0.5,0.5],
+                "font_size": 20,
+                "color": [255,255,255]
             }
         }
 
@@ -132,7 +140,7 @@ class UIEditor:
         self.dragging = False
         self.drag_offset = None
 
-        self.app_interface.ui_controller.show_ui("menu_editor_noprops")
+        self.app_interface.ui_controller.show_ui("editor_noprops")
 
         self.dirty = True
         self.save()
@@ -297,6 +305,8 @@ class UIEditor:
             menu = "menu_editor_label_properties"
         elif element_type == "header":
             menu = "menu_editor_header_properties"
+        elif element_type == "query":
+            menu = "menu_editor_query_properties"
         else:
             menu = "menu_editor_noprops"
             return

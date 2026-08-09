@@ -38,6 +38,7 @@ class EditorQuery(EditorWidget):
     def scale(self):
         ww = self.editor.canvas.get_width()
         wh = self.editor.canvas.get_height()
+        self.font = FontEngine(self.font_size).font
 
         x = int(
             ww * self.position[0]

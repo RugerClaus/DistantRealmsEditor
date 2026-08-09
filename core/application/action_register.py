@@ -11,6 +11,7 @@ class ActionRegistrar:
         self.app_interface.actions.register("create_new_button", lambda: self.app_interface.app_object.editor.add_element("button"))
         self.app_interface.actions.register("create_new_label", lambda: self.app_interface.app_object.editor.add_element("label"))
         self.app_interface.actions.register("create_new_header", lambda: self.app_interface.app_object.editor.add_element("header"))
+        self.app_interface.actions.register("create_new_query", lambda: self.app_interface.app_object.editor.add_element("query"))
 
         #button editor:
         self.app_interface.actions.register("button_hover_style_mode", lambda: self.app_interface.app_object.editor.widgets.toggle_button_style_state())
