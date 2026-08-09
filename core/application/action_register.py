@@ -31,4 +31,10 @@ class ActionRegistrar:
         self.app_interface.actions.register("open_settings", lambda: self.app_interface.ui_controller.show_ui("editor_settings_root"))
         self.app_interface.actions.register("audio_settings", lambda: self.app_interface.ui_controller.show_ui("editor_audio_settings"))
 
+        self.app_interface.actions.register("mvolup", self.app_interface.system.sound.volume_up)
+        self.app_interface.actions.register("mvoldown", self.app_interface.system.sound.volume_down)
+
+        self.app_interface.actions.register("sfxvolup", self.app_interface.system.sound.sfx_volume_up)
+        self.app_interface.actions.register("sfxvoldown", self.app_interface.system.sound.sfx_volume_down)
+
         self.app_interface.actions.register("quit",self.system.quit)

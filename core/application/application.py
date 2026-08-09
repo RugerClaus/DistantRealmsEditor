@@ -54,10 +54,13 @@ class Application:
 
             if self.ProjectBrowser:
                 self.ProjectBrowser.update()
+
+            self.util.display_volume(self.app_interface.ui_controller.get_active_ui())
+
         else:
             if self.editor:
                 self.editor.update()
-        
+
     def draw(self):
         
         if self.editor:

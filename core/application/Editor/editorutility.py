@@ -185,3 +185,21 @@ class EditorUtility:
 
     def get_projects(self,type):
         pass
+
+    def display_volume(self,ui):
+        
+
+        if self.app_interface.ui_controller.active_name == "editor_audio_settings":
+
+            music_vol = float(self.app_interface.system.sound.volume)
+            normal_mvol = str(int(music_vol * 10))
+
+            sfx_vol = float(self.app_interface.system.sound.sfx_volume)
+            normal_sfxvol = str(int(sfx_vol * 10))
+
+            for child in ui.children:
+                if child.id == "music_volumeV":
+                    child.text = normal_mvol
+                
+                if child.id == "sfx_volumeV":
+                    child.text = normal_sfxvol

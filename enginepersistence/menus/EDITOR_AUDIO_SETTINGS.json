@@ -115,6 +115,522 @@
                     "padding": 5
                 }
             }
+        },
+        {
+            "id": "mvolumelabel",
+            "type": "label",
+            "text": "Music volume:",
+            "position": [
+                0.5,
+                0.3
+            ],
+            "font_size": 30,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "mvoldown",
+            "type": "button",
+            "font": "default",
+            "text": "-",
+            "position": [
+                0.4,
+                0.3
+            ],
+            "font_size": 30,
+            "action": "mvoldown",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "mvolup",
+            "type": "button",
+            "font": "default",
+            "text": "+",
+            "position": [
+                0.65,
+                0.3
+            ],
+            "font_size": 30,
+            "action": "mvolup",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "music_volumeV",
+            "type": "label",
+            "text": "1",
+            "position": [
+                0.6,
+                0.3
+            ],
+            "font_size": 30,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "sfxvoldown",
+            "type": "button",
+            "font": "default",
+            "text": "-",
+            "position": [
+                0.4,
+                0.4
+            ],
+            "font_size": 30,
+            "action": "sfxvoldown",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "sfxvollabel",
+            "type": "label",
+            "text": "SFX Volume:",
+            "position": [
+                0.5,
+                0.4
+            ],
+            "font_size": 30,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "sfx_volumeV",
+            "type": "label",
+            "text": "1",
+            "position": [
+                0.6,
+                0.4
+            ],
+            "font_size": 30,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "sfxvolup",
+            "type": "button",
+            "font": "default",
+            "text": "+",
+            "position": [
+                0.65,
+                0.4
+            ],
+            "font_size": 30,
+            "action": "sfxvolup",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
         }
     ]
 }
