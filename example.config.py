@@ -3,7 +3,7 @@ import platform
 config = {
     "TITLE": "Distant Realms Editor",
     "AUTHORS": ["RugerClaus"],
-    "VERSION": "0.0.3-alpha",
+    "VERSION": "0.1.0-alpha",
     "OS": platform.system(),
     "OSV": platform.version(),
     "OSR": platform.release(),

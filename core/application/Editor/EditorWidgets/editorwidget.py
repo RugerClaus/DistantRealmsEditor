@@ -9,6 +9,8 @@ class EditorWidget:
         self.type = data.get("type", "")
         self.font_size = data.get("font_size", "")
         self.color = tuple(data.get("color", ""))
+        if self.color == (0,0,0):
+            self.color = (255,255,255)
 
         self.position = tuple(
             data.get("position", [0.5, 0.5])

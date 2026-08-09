@@ -14,6 +14,8 @@ from core.application.Editor.EditorWidgets.editortextbox import EditorTextBox
 from core.state.ApplicationLayer.Editor.Button.Style.state import BUTTON_STYLE_STATE
 from core.state.ApplicationLayer.Editor.Button.Style.statemanager import ButtonStyleStateManager
 
+from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
+
 class UIEditor:
     def __init__(self, app_interface):
         self.app_interface = app_interface
@@ -41,7 +43,7 @@ class UIEditor:
             "image": EditorImage,
             "query": EditorQuery,
             "centertext": EditorCenterText,
-            "scrollabletext": EditorScrollableText,
+            "scrollable_text": EditorScrollableText,
             "select": EditorSelect
             }
         self.load_canvas()
@@ -104,6 +106,39 @@ class UIEditor:
                 "position": [0.5,0.5],
                 "font_size": 20,
                 "color": [255,255,255]
+            },
+            "scrollable_text": {
+                "id": "new_stxt",
+                "type": "scrollable_text",
+                "text": "",
+                "position": [0.5,0.5],
+                "color": [255,255,255],
+                "width": 0.4,
+                "height":0.4,
+                "align": "left",
+                "line_spacing": 0.01,
+                "font_size": 20
+            },
+            "textbox": {
+                "type": "textbox",
+                "id": "new_textbox",
+                "field": "default",
+                "position": [0.1, 0.83],
+                "dimensions": [0.1, 0.03],
+                "font_size": 25,
+                "max_chars": 21
+            },
+            "select": {
+                "type": "select",
+                "id": "new_select",
+                "options": ["Option 1", "Option 2", "Option 3"],
+                "selected_option": "Option 1",
+                "position": [0.5, 0.5],
+                "font_size": 30,
+                "width": 0.1,
+                "height": 0.05,
+                "padding": 10,
+                "field": "default"
             }
         }
 
@@ -140,7 +175,10 @@ class UIEditor:
         self.dragging = False
         self.drag_offset = None
 
-        self.app_interface.ui_controller.show_ui("editor_noprops")
+        if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+            self.app_interface.ui_controller.show_ui("editor_noprops")
+        elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+            self.app_interface.ui_controller.show_ui("form_editor_noprops")
 
         self.dirty = True
         self.save()
@@ -269,7 +307,7 @@ class UIEditor:
             "position",
             [0.5, 0.5]
         )
-        
+
         fields = {
             "x": str(round(x * 100, 2)),
             "y": str(round(y * 100, 2)),
@@ -278,12 +316,72 @@ class UIEditor:
             "text": self.selected_element.data.get("text", "")
         }
 
+        if self.selected_element.type == "scrollable_text":
+            fields["width"] = str(
+                self.selected_element.data.get("width", 0.8)
+            )
+            fields["height"] = str(
+                self.selected_element.data.get("height", 0.6)
+            )
+
+        
+        if self.selected_element.type == "select":
+            fields["width"] = str(
+                self.selected_element.data.get("width", 0.3)
+            )
+
+            fields["height"] = str(
+                self.selected_element.data.get("height", 0.06)
+            )
+
+            fields["field"] = self.selected_element.data.get(
+                "field",
+                "default"
+            )
+
+            fields["options"] = str(
+                self.selected_element.data.get(
+                    "options",
+                    ["Option 1", "Option 2", "Option 3"]
+                )
+            )
+
+            fields["selected_option"] = str(
+                self.selected_element.data.get(
+                    "selected_option",
+                    ""
+                )
+            )
+
+
+        if self.selected_element.type == "textbox":
+            w, h = self.selected_element.data.get(
+                "dimensions",
+                [0.5, 0.5]
+            )
+
+            fields["field"] = self.selected_element.data.get(
+                "field",
+                "default"
+            )
+
+            fields["max_chars"] = str(
+                self.selected_element.data.get(
+                    "max_chars",
+                    100
+                )
+            )
+
+            fields["width"] = str(w)
+            fields["height"] = str(h)
+
         if self.selected_element.type == "button":
             fields["action"] = self.selected_element.data.get("action", "")
 
         fields.update(
             self.widgets.populate_color_fields(self.selected_element)
         )
+
         for name, value in fields.items():
             field = self.app_interface.ui_controller.get_element(name)
             if field:
@@ -291,25 +389,53 @@ class UIEditor:
 
     def show_selected_properties(self):
         if self.selected_element is None:
-            self.app_interface.ui_controller.show_ui("menu_editor_noprops")
+            if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+                self.app_interface.ui_controller.show_ui("editor_noprops")
+            elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+                self.app_interface.ui_controller.show_ui("form_editor_noprops")
             return
 
         element_type = self.selected_element.data.get("type")
 
-        if element_type == "button":
-            if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
-                menu = "menu_editor_button_idle_properties"
-            elif self.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
-                menu = "menu_editor_button_hover_properties"
-        elif element_type == "label":
-            menu = "menu_editor_label_properties"
-        elif element_type == "header":
-            menu = "menu_editor_header_properties"
-        elif element_type == "query":
-            menu = "menu_editor_query_properties"
-        else:
-            menu = "menu_editor_noprops"
-            return
+        if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+            if element_type == "button":
+                if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
+                    menu = "menu_editor_button_idle_properties"
+                elif self.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
+                    menu = "menu_editor_button_hover_properties"
+            elif element_type == "label":
+                menu = "menu_editor_label_properties"
+            elif element_type == "header":
+                menu = "menu_editor_header_properties"
+            elif element_type == "query":
+                menu = "menu_editor_query_properties"
+            elif element_type == "scrollable_text":
+                menu = "menu_editor_stext_properties"
+            else:
+                menu = "editor_noprops"
+                return
+
+        elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+            if element_type == "button":
+                if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
+                    menu = "form_editor_button_idle_properties"
+                elif self.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
+                    menu = "form_editor_button_hover_properties"
+            elif element_type == "label":
+                menu = "form_editor_label_properties"
+            elif element_type == "header":
+                menu = "form_editor_header_properties"
+            elif element_type == "query":
+                menu = "form_editor_query_properties"
+            elif element_type == "scrollable_text":
+                menu = "form_editor_stext_properties"
+            elif element_type == "textbox":
+                menu = "form_editor_input_properties"
+            elif element_type == "select":
+                menu = "form_editor_select_properties"
+            else:
+                menu = "form_editor_noprops"
+                return
 
         self.app_interface.ui_controller.show_ui(menu)
 
@@ -349,7 +475,10 @@ class UIEditor:
 
                         break
                 else:
-                    self.app_interface.ui_controller.show_ui("editor_noprops")
+                    if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+                        self.app_interface.ui_controller.show_ui("editor_noprops")
+                    elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+                        self.app_interface.ui_controller.show_ui("form_editor_noprops")
                     self.selected_element = None
                     self.dragging = False
 
@@ -392,7 +521,7 @@ class UIEditor:
             return
 
         style_name = self.button_style_state.state.name.lower()
- 
+
         properties.update(
             self.widgets.collect_color_properties(
                 element,
@@ -416,27 +545,42 @@ class UIEditor:
             element.set_id(str(properties.pop("id")))
 
         if "font_size" in properties:
-            element.set_font_size(int(properties.pop("font_size")))
+            element.set_font_size(
+                int(properties.pop("font_size"))
+            )
 
         if "text" in properties:
-            element.set_text(str(properties.pop("text")))
+            element.set_text(
+                str(properties.pop("text"))
+            )
 
         if "color" in properties and hasattr(element, "set_color"):
-            element.set_color(tuple(properties.pop("color")))
+            element.set_color(
+                tuple(properties.pop("color"))
+            )
 
         if element.type == "button":
 
             if "action" in properties:
                 element.data["action"] = properties.pop("action")
+
             for name, value in properties.items():
 
                 if name not in element.styles.get(style_name, {}):
                     continue
 
-                if name in ("background", "border", "text_color"):
+                if name in (
+                    "background",
+                    "border",
+                    "text_color"
+                ):
                     value = tuple(value)
 
-                elif name in ("border_width", "border_radius", "padding"):
+                elif name in (
+                    "border_width",
+                    "border_radius",
+                    "padding"
+                ):
                     value = int(value)
 
                 element.set_style(
@@ -445,9 +589,88 @@ class UIEditor:
                     value
                 )
 
+        elif element.type == "textbox":
+
+            if "width" in properties or "height" in properties:
+                width, height = element.data.get(
+                    "dimensions",
+                    [0.5, 0.5]
+                )
+
+                if "width" in properties:
+                    width = float(
+                        properties.pop("width")
+                    )
+
+                if "height" in properties:
+                    height = float(
+                        properties.pop("height")
+                    )
+
+                element.set_dimensions(
+                    (width, height)
+                )
+
+            if "field" in properties:
+                element.set_field(
+                    properties.pop("field")
+                )
+            
+            if "max_chars" in properties:
+                element.set_max_chars(
+                    properties.pop("max_chars")
+                )
+
+        elif element.type == "select":
+
+            if "width" in properties:
+                element.set_width(
+                    float(properties.pop("width"))
+                )
+
+            if "height" in properties:
+                element.set_height(
+                    float(properties.pop("height"))
+                )
+
+            if "padding" in properties:
+                element.set_padding(
+                    int(properties.pop("padding"))
+                )
+
+            if "options" in properties:
+                options = properties.pop("options")
+
+                # The form field contains the Python-style
+                # list as text, so convert it back into a list.
+                if isinstance(options, str):
+                    try:
+                        options = ast.literal_eval(options)
+                    except (ValueError, SyntaxError):
+                        options = [
+                            option.strip()
+                            for option in options.split(",")
+                            if option.strip()
+                        ]
+
+                if not isinstance(options, list):
+                    options = [str(options)]
+
+                element.set_options(options)
+
+            if "selected_option" in properties:
+                element.set_selected_option(
+                    properties.pop("selected_option")
+                )
+
         else:
+
             for name, value in properties.items():
-                setter = getattr(element, f"set_{name}", None)
+                setter = getattr(
+                    element,
+                    f"set_{name}",
+                    None
+                )
 
                 if setter:
                     setter(value)

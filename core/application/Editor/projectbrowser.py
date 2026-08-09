@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from systemlogging import log_warning
 
+from core.util.colors import red
+
 from core.ui.widgets.button import Button
 
 
@@ -15,6 +17,7 @@ class ProjectBrowser:
 
         self.files = []
         self.buttons = []
+        self.delete_buttons = []
 
         self.scroll_offset = 0
         self.row_height = 70
@@ -41,14 +44,17 @@ class ProjectBrowser:
         wh = self.dr.system.window.get_height()
 
         self.viewport_rect = self.dr.system.window.Rect(
-            int(ww * 0.35), int(wh * 0.2),
-            int(ww * 0.35), int(wh * 0.6)
+            int(ww * 0.35),
+            int(wh * 0.2),
+            int(ww * 0.5),
+            int(wh * 0.6)
         )
 
         self.viewport = self.dr.system.window.make_surface(
-            self.viewport_rect.width, self.viewport_rect.height,True
+            self.viewport_rect.width,
+            self.viewport_rect.height,
+            True
         )
-
 
     def get_project_dirs(self):
         dirs = [
@@ -85,8 +91,6 @@ class ProjectBrowser:
                     "type": project_type
                 })
 
-
-
     def create_buttons(self):
         for index, project in enumerate(self.files):
 
@@ -94,26 +98,75 @@ class ProjectBrowser:
                 self.dr.system,
                 f"project_{index}",
                 project["name"],
-                (0.5,0.5),
-                font_size=30,
+                (0.5, 0.5),
+                font_size=20,
                 action=lambda p=project: self.application.util.load_project(
-                    p["name"], p["type"]
+                    p["name"],
+                    p["type"]
                 )
             )
 
-            self.buttons.append(button)
+            delete_button = Button(
+                self.dr.system,
+                f"delete_project_{index}",
+                "DELETE",
+                (0.5, 0.5),
+                font_size=20,
+                action=lambda p=project: self.delete_project(p["name"]),
+                styles={
+                    "idle": {
+                        "text_color": red
+                    }
+                }
+            )
 
+            self.buttons.append(button)
+            self.delete_buttons.append(delete_button)
+
+        # Always position newly-created buttons inside the viewport.
         self.update_button_positions()
 
+
+    def delete_project(self, name):
+        self.application.util.delete_project(name)
+        self.refresh()
+
+
+    def refresh(self):
+        # Preserve the current scroll position.
+        old_scroll_offset = self.scroll_offset
+
+        # Rebuild project data.
+        self.files.clear()
+        self.buttons.clear()
+        self.delete_buttons.clear()
+
+        self.get_project_dirs()
+        self.create_buttons()
+
+        # Restore the previous scroll position, but don't allow
+        # it to exceed the new content's maximum scroll.
+        self.scroll_offset = max(
+            0,
+            min(
+                old_scroll_offset,
+                self.max_scroll()
+            )
+        )
+
+        # Reposition using the restored scroll position.
+        self.update_button_positions()
 
     def update_button_positions(self):
         if not self.buttons:
             return
 
-        x = self.viewport.get_width() // 2
+        left_padding = 20
+        button_gap = 10
         top_padding = self.buttons[0].surface.get_height() // 2
 
         for index, button in enumerate(self.buttons):
+
             y = (
                 top_padding
                 + index * self.row_height
@@ -121,16 +174,24 @@ class ProjectBrowser:
             )
 
             button.rect = button.surface.get_rect(
-                center=(x, y)
+                midleft=(left_padding, y)
             )
 
+            delete_button = self.delete_buttons[index]
+
+            delete_button.rect = delete_button.surface.get_rect(
+                midleft=(
+                    button.rect.right + button_gap,
+                    y
+                )
+            )
 
     def max_scroll(self):
         if not self.buttons:
             return 0
 
         button_height = self.buttons[0].surface.get_height()
-        top_padding = button_height
+        top_padding = button_height // 2
 
         content_height = (
             top_padding
@@ -153,17 +214,22 @@ class ProjectBrowser:
 
             self.scroll_offset = max(
                 0,
-                min(self.max_scroll(), self.scroll_offset)
+                min(
+                    self.max_scroll(),
+                    self.scroll_offset
+                )
             )
 
             self.update_button_positions()
 
-
-        if event.type == self.dr.system.input.mouse_button_down() and event.button == 1:
+        if (
+            event.type == self.dr.system.input.mouse_button_down()
+            and event.button == 1
+        ):
 
             mx, my = self.dr.system.input.get_mouse_pos()
 
-            if self.viewport_rect.collidepoint(mx,my):
+            if self.viewport_rect.collidepoint(mx, my):
 
                 local_mouse = (
                     mx - self.viewport_rect.x,
@@ -171,14 +237,23 @@ class ProjectBrowser:
                 )
 
                 for button in self.buttons:
-                    if self.button_visible(button) and button.is_clicked(local_mouse, True):
+                    if (
+                        self.button_visible(button)
+                        and button.is_clicked(local_mouse, True)
+                    ):
                         break
 
+                for button in self.delete_buttons:
+                    if (
+                        self.button_visible(button)
+                        and button.is_clicked(local_mouse, True)
+                    ):
+                        break
 
     def update(self):
         mx, my = self.dr.system.input.get_mouse_pos()
 
-        if self.viewport_rect.collidepoint(mx,my):
+        if self.viewport_rect.collidepoint(mx, my):
 
             local_mouse = (
                 mx - self.viewport_rect.x,
@@ -189,21 +264,29 @@ class ProjectBrowser:
                 if self.button_visible(button):
                     button.update(local_mouse)
 
+            for button in self.delete_buttons:
+                if self.button_visible(button):
+                    button.update(local_mouse)
 
     def draw(self):
-        self.viewport.fill((0,0,0,0))
+        self.viewport.fill((0, 0, 0, 0))
 
         for button in self.buttons:
             if self.button_visible(button):
                 button.draw(self.viewport)
 
-        self.dr.system.window.blit(self.viewport, self.viewport_rect)
+        for button in self.delete_buttons:
+            if self.button_visible(button):
+                button.draw(self.viewport)
+
+        self.dr.system.window.blit(
+            self.viewport,
+            self.viewport_rect
+        )
 
         self.draw_scrollbar()
 
-
     def draw_scrollbar(self):
-
         if self.max_scroll() <= 0:
             return
 
@@ -218,18 +301,31 @@ class ProjectBrowser:
 
         self.dr.system.window.draw_rect(
             self.dr.system.window,
-            (80,80,80),
+            (80, 80, 80),
             track
         )
 
-        ratio = self.viewport_rect.height / (len(self.buttons) * self.row_height)
+        ratio = (
+            self.viewport_rect.height
+            / (len(self.buttons) * self.row_height)
+        )
 
-        thumb_height = max(30, int(self.viewport_rect.height * ratio))
+        thumb_height = max(
+            30,
+            int(self.viewport_rect.height * ratio)
+        )
 
-        scroll_ratio = self.scroll_offset / self.max_scroll()
+        scroll_ratio = (
+            self.scroll_offset
+            / self.max_scroll()
+        )
 
-        thumb_y = self.viewport_rect.top + int(
-            (self.viewport_rect.height - thumb_height) * scroll_ratio
+        thumb_y = (
+            self.viewport_rect.top
+            + int(
+                (self.viewport_rect.height - thumb_height)
+                * scroll_ratio
+            )
         )
 
         thumb = self.dr.system.window.Rect(
@@ -241,6 +337,7 @@ class ProjectBrowser:
 
         self.dr.system.window.draw_rect(
             self.dr.system.window,
-            (200,200,200),
+            (200, 200, 200),
             thumb
         )
+

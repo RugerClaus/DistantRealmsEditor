@@ -10,8 +10,12 @@ class EditorTextBox(EditorWidget):
 
         self.font_size = data.get("font_size", 30)
 
-        self.text = str(
-            data.get("text", "")
+        self.field = str(
+            data.get("field", "default")
+        )
+
+        self.max_chars = int(
+            data.get("max_chars", 100)
         )
 
         self.width, self.height = data.get(
@@ -39,13 +43,19 @@ class EditorTextBox(EditorWidget):
 
         self.scale()
 
+    def set_max_chars(self, max_chars):
+        self.max_chars = max(
+            1,
+            int(max_chars)
+        )
 
-    def set_text(self, text):
-        self.text = str(text)[:21]
-        self.data["text"] = self.text
+        self.data["max_chars"] = self.max_chars
+
+    def set_field(self, field):
+        self.field = str(field)
+        self.data["field"] = self.field
 
         self.scale()
-
 
     def set_font_size(self, size):
         self.font_size = int(size)
@@ -57,14 +67,12 @@ class EditorTextBox(EditorWidget):
 
         self.scale()
 
-
     def set_dimensions(self, dimensions):
         self.width, self.height = dimensions
 
         self.data["dimensions"] = list(dimensions)
 
         self.scale()
-
 
     def set_background_color(self, color):
         self.background_color = tuple(color)
@@ -73,14 +81,12 @@ class EditorTextBox(EditorWidget):
 
         self.scale()
 
-
     def set_text_color(self, color):
         self.text_color = tuple(color)
 
         self.data["text_color"] = list(color)
 
         self.scale()
-
 
     def scale(self):
 
@@ -90,13 +96,8 @@ class EditorTextBox(EditorWidget):
         x = int(ww * self.position[0])
         y = int(wh * self.position[1])
 
-        width = int(
-            ww * self.width
-        )
-
-        height = int(
-            wh * self.height
-        )
+        width = int(ww * self.width)
+        height = int(wh * self.height)
 
         self.bounding_box = self.system.window.make_surface(
             width,
@@ -128,6 +129,7 @@ class EditorTextBox(EditorWidget):
             center=self.bounding_box_rect.center
         )
 
+        self.rect = self.bounding_box_rect
 
     def draw(self):
 
@@ -154,19 +156,4 @@ class EditorTextBox(EditorWidget):
         self.system.window.blit(
             self.text_box,
             self.text_box_rect
-        )
-
-        surf = self.font.render(
-            self.text,
-            False,
-            self.text_color
-        )
-
-        rect = surf.get_rect(
-            center=self.text_box_rect.center
-        )
-
-        self.system.window.blit(
-            surf,
-            rect
         )

@@ -514,6 +514,25 @@
                     "padding": 5
                 }
             }
+        },
+        {
+            "id": "new_stxt",
+            "type": "scrollable_text",
+            "text": "changelog.txt",
+            "position": [
+                0.6967,
+                0.3185
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "width": 0.6,
+            "height": 0.2,
+            "align": "left",
+            "line_spacing": 0.01,
+            "font_size": 20
         }
     ]
 }

@@ -12,6 +12,9 @@ class ActionRegistrar:
         self.app_interface.actions.register("create_new_label", lambda: self.app_interface.app_object.editor.add_element("label"))
         self.app_interface.actions.register("create_new_header", lambda: self.app_interface.app_object.editor.add_element("header"))
         self.app_interface.actions.register("create_new_query", lambda: self.app_interface.app_object.editor.add_element("query"))
+        self.app_interface.actions.register("create_new_stxt", lambda: self.app_interface.app_object.editor.add_element("scrollable_text"))
+        self.app_interface.actions.register("new_input_box", lambda: self.app_interface.app_object.editor.add_element("textbox"))
+        self.app_interface.actions.register("create_new_select_box", lambda: self.app_interface.app_object.editor.add_element("select"))
 
         #button editor:
         self.app_interface.actions.register("button_hover_style_mode", lambda: self.app_interface.app_object.editor.widgets.toggle_button_style_state())

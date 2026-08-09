@@ -46,7 +46,7 @@ class EditorUtility:
             else:
                 self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
                 self.app_interface.ui_controller.clear()
-                self.app_interface.ui_controller.show_ui("editor_noprops")
+                self.app_interface.ui_controller.show_ui("form_editor_noprops")
 
         self.app_interface.app_object.editor.active_file = self.load_project_file(filename)
 
@@ -161,7 +161,10 @@ class EditorUtility:
             if browser:
                 self.app_interface.app_object.ProjectBrowser = None
 
-            self.app_interface.ui_controller.show_ui("editor_noprops")
+            if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+                self.app_interface.ui_controller.show_ui("editor_noprops")
+            elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+                self.app_interface.ui_controller.show_ui("form_editor_noprops")
     
             return data
 
@@ -203,3 +206,62 @@ class EditorUtility:
                 
                 if child.id == "sfx_volumeV":
                     child.text = normal_sfxvol
+
+    def delete_project(self, name):
+        project_name = str(name).strip()
+
+        if not project_name:
+            log_event(
+                "Cannot delete project: empty name",
+                "EditorUtility.delete_project"
+            )
+            return False
+
+        persistence = self.app_interface.system.persistence
+
+        directories = [
+            persistence.workspace_forms,
+            persistence.workspace_menus
+        ]
+
+        deleted = False
+
+        for directory in directories:
+            directory = directory
+
+            filename = directory / f"{project_name}.json"
+
+            if not filename.exists():
+                continue
+
+            try:
+                filename.unlink()
+
+                log_event(
+                    f"Deleted project: {filename.resolve()}",
+                    "EditorUtility.delete_project"
+                )
+
+                deleted = True
+                break
+
+            except OSError as e:
+                log_event(
+                    f"Failed to delete project {filename}: {e}",
+                    "EditorUtility.delete_project"
+                )
+                return False
+
+        if not deleted:
+            log_event(
+                f"Project not found: {project_name}",
+                "EditorUtility.delete_project"
+            )
+            return False
+
+        browser = self.app_interface.app_object.ProjectBrowser
+
+        if browser is not None:
+            browser.refresh()
+
+        return True

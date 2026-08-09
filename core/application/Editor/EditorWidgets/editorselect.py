@@ -4,44 +4,27 @@ from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
 class EditorSelect(EditorWidget):
+
     def __init__(self, editor, data):
         super().__init__(editor, data)
 
-        self.options = data.get(
-            "options",
-            []
-        )
+        self.options = data.get("options", [])
 
         self.selected_option = data.get(
             "selected_option",
             self.options[0] if self.options else None
         )
 
-        self.font_size = data.get(
-            "font_size",
-            30
-        )
+        self.font_size = data.get("font_size", 30)
 
-        self.width = data.get(
-            "width",
-            250
-        )
+        # Normalized dimensions relative to the editor canvas.
+        self.width = data.get("width", 0.3)
+        self.height = data.get("height", 0.06)
 
-        self.height = data.get(
-            "height",
-            50
-        )
-
-        self.padding = data.get(
-            "padding",
-            10
-        )
+        self.padding = data.get("padding", 10)
 
         self.background_color = tuple(
-            data.get(
-                "background_color",
-                white
-            )
+            data.get("background_color", white)
         )
 
         self.font = FontEngine(
@@ -56,6 +39,7 @@ class EditorSelect(EditorWidget):
 
         if self.options and self.selected_option not in self.options:
             self.selected_option = self.options[0]
+            self.data["selected_option"] = self.selected_option
 
         self.scale()
 
@@ -76,13 +60,13 @@ class EditorSelect(EditorWidget):
         self.scale()
 
     def set_width(self, width):
-        self.width = int(width)
+        self.width = float(width)
         self.data["width"] = self.width
 
         self.scale()
 
     def set_height(self, height):
-        self.height = int(height)
+        self.height = float(height)
         self.data["height"] = self.height
 
         self.scale()
@@ -94,22 +78,34 @@ class EditorSelect(EditorWidget):
         self.scale()
 
     def scale(self):
+        canvas_width = self.editor.canvas.get_width()
+        canvas_height = self.editor.canvas.get_height()
+
+        self.font = FontEngine(
+            self.font_size
+        ).font
+
+        width = max(
+            1,
+            int(canvas_width * self.width)
+        )
+
+        height = max(
+            1,
+            int(canvas_height * self.height)
+        )
 
         x = int(
-            self.editor.canvas.get_width()
-            *
-            self.position[0]
+            canvas_width * self.position[0]
         )
 
         y = int(
-            self.editor.canvas.get_height()
-            *
-            self.position[1]
+            canvas_height * self.position[1]
         )
 
         self.surface = self.system.window.make_surface(
-            self.width,
-            self.height,
+            width,
+            height,
             True
         )
 
@@ -118,11 +114,14 @@ class EditorSelect(EditorWidget):
         )
 
     def draw(self):
+        if self.surface is None or self.rect is None:
+            return
 
         self.surface.fill(
             self.background_color
         )
 
+        # Select box border
         self.system.window.draw_rect(
             self.surface,
             black,
@@ -130,8 +129,8 @@ class EditorSelect(EditorWidget):
             2
         )
 
+        # Selected option
         if self.selected_option is not None:
-
             surf = self.font.render(
                 str(self.selected_option),
                 False,
@@ -150,9 +149,9 @@ class EditorSelect(EditorWidget):
                 text_rect
             )
 
-        # fake dropdown arrow for editor preview
-        arrow_x = self.width - 20
-        arrow_y = self.height // 2
+        # Dropdown arrow
+        arrow_x = self.surface.get_width() - 20
+        arrow_y = self.surface.get_height() // 2
 
         self.system.window.draw_polygon(
             self.surface,

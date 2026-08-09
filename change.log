@@ -23,3 +23,12 @@ Development version Alpha 0.0.2 - 2026-08-07
 - Removed Pause states. Generalized app navigation in editor's options section
 - Can save using CTRL+S
 - Editor can now edit its own main menu file
+
+Development version Alpha 0.0.3 - 2026-08-09
+-----------------------------------------------
+- Added full project browser that automatically loads whatever you select into the editor
+- Forms can be edited now
+- Editor can now fully edit its own UI visually
+- Added ScrollableText, Query, and Input widgets
+- Main menu now displays changelog
+- Editor is fully functional according to its design

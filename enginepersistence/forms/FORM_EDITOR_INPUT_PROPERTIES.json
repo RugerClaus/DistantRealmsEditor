@@ -1,6 +1,6 @@
 {
     "type": "form",
-    "name": "EDITOR_NOPROPS",
+    "name": "FORM_EDITOR_INPUT_PROPERTIES",
     "elements": [
         {
             "type": "button",
@@ -570,6 +570,234 @@
             }
         },
         {
+            "id": "new_tbox_button",
+            "type": "button",
+            "font": "default",
+            "text": "Input",
+            "position": [
+                0.93,
+                0.3
+            ],
+            "font_size": 30,
+            "action": "new_input_box",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "create_select_box_button",
+            "type": "button",
+            "font": "default",
+            "text": "Select",
+            "position": [
+                0.85,
+                0.4
+            ],
+            "font_size": 30,
+            "action": "create_new_select_box",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
             "type": "label",
             "id": "widgets_label",
             "text": "Widgets",
@@ -824,6 +1052,313 @@
                     "padding": 5
                 }
             }
+        },
+        {
+            "type": "button",
+            "id": "update_widget_properties",
+            "text": "Save",
+            "font_size": 25,
+            "position": [
+                0.6,
+                0.85
+            ],
+            "action": "update_widget_properties",
+            "styles": {
+                "idle": {
+                    "background": [
+                        0,
+                        220,
+                        0
+                    ],
+                    "border": [
+                        128,
+                        128,
+                        128
+                    ]
+                },
+                "hover": {
+                    "background": [
+                        0,
+                        200,
+                        30
+                    ],
+                    "border": [
+                        128,
+                        180,
+                        128
+                    ]
+                }
+            }
+        },
+        {
+            "type": "button",
+            "id": "delete_element",
+            "text": "Delete",
+            "font_size": 25,
+            "position": [
+                0.6,
+                0.8
+            ],
+            "action": "delete_selected_element",
+            "styles": {
+                "idle": {
+                    "background": [
+                        244,
+                        0,
+                        0
+                    ],
+                    "border": [
+                        128,
+                        128,
+                        128
+                    ]
+                },
+                "hover": {
+                    "background": [
+                        200,
+                        0,
+                        30
+                    ],
+                    "border": [
+                        128,
+                        180,
+                        128
+                    ]
+                }
+            }
+        },
+        {
+            "type": "label",
+            "id": "button_text_label",
+            "text": "Field:",
+            "position": [
+                0.03,
+                0.83
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "field",
+            "field": "field",
+            "position": [
+                0.125,
+                0.83
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "x_label",
+            "text": "X: ",
+            "position": [
+                0.04,
+                0.86
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "x",
+            "field": "x",
+            "position": [
+                0.1,
+                0.86
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "y_label",
+            "text": "Y: ",
+            "position": [
+                0.04,
+                0.89
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "y",
+            "field": "y",
+            "position": [
+                0.1,
+                0.89
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "id_label",
+            "text": "ID: ",
+            "position": [
+                0.04,
+                0.92
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "id",
+            "field": "id",
+            "position": [
+                0.1,
+                0.92
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "width_label",
+            "text": "Width: ",
+            "position": [
+                0.03,
+                0.95
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "width",
+            "field": "width",
+            "position": [
+                0.1,
+                0.95
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "height_label",
+            "text": "Height:",
+            "position": [
+                0.19,
+                0.95
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "height",
+            "field": "height",
+            "position": [
+                0.265,
+                0.95
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "font_size_label",
+            "text": "FontSize:",
+            "position": [
+                0.25,
+                0.83
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "font_size",
+            "field": "font_size",
+            "position": [
+                0.33,
+                0.83
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25
+        },
+        {
+            "type": "textbox",
+            "id": "max_chars",
+            "field": "max_chars",
+            "position": [
+                0.33,
+                0.86
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21
+        },
+        {
+            "id": "new_label",
+            "type": "label",
+            "text": "MaxChars:",
+            "position": [
+                0.245,
+                0.86
+            ],
+            "font_size": 20,
+            "color": [
+                0,
+                0,
+                0
+            ]
         }
     ]
 }

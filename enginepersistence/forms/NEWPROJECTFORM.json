@@ -63,19 +63,18 @@
         },
         {
             "type": "select",
-            "id": "project_type_selector",
+            "id": "project_type_box",
+            "font_size": 25,
             "position": [
-                0.3045,
-                0.26
+                0.25,
+                0.255
             ],
             "options": [
                 "Menu",
                 "Form",
-                "blah",
-                "This",
-                "Pass",
-                "Test",
-                "Jane"
+                "form2",
+                "form3",
+                "form4"
             ],
             "field": "project_type",
             "text": "",
@@ -83,7 +82,10 @@
                 0,
                 0,
                 0
-            ]
+            ],
+            "width": 0.1,
+            "height": 0.05,
+            "selected_option": "Menu"
         },
         {
             "type": "label",

@@ -1,6 +1,6 @@
 {
     "type": "form",
-    "name": "MENU_EDITOR_BUTTON_IDLE_PROPERTIES",
+    "name": "MENU_EDITOR_STEXT_PROPERTIES",
     "elements": [
         {
             "type": "button",
@@ -289,14 +289,6 @@
         },
         {
             "type": "button",
-            "id": "hover_style_mode_button",
-            "text": "Hover Styles",
-            "font_size": 25,
-            "position": [0.6, 0.9],
-            "action": "button_hover_style_mode"
-        },
-        {
-            "type": "button",
             "id": "update_widget_properties",
             "text": "Save",
             "font_size": 25,
@@ -347,8 +339,8 @@
             "type": "textbox",
             "id": "text",
             "field": "text",
-            "position": [0.1, 0.83],
-            "dimensions": [0.1, 0.03],
+            "position": [0.125, 0.83],
+            "dimensions": [0.15, 0.03],
             "font_size": 25
         },
         {
@@ -401,17 +393,33 @@
         },
         {
             "type": "label",
-            "id": "action_label",
-            "text": "Action: ",
+            "id": "width_label",
+            "text": "Width: ",
             "position": [0.03, 0.95],
             "font_size": 25,
             "color": [0,0,0]
         },
         {
             "type": "textbox",
-            "id": "action",
-            "field": "action",
+            "id": "width",
+            "field": "width",
             "position": [0.1, 0.95],
+            "dimensions": [0.1, 0.03],
+            "font_size": 25
+        },
+        {
+            "type": "label",
+            "id": "height_label",
+            "text": "Height:",
+            "position": [0.19, 0.95],
+            "font_size": 25,
+            "color": [0,0,0]
+        },
+        {
+            "type": "textbox",
+            "id": "height",
+            "field": "height",
+            "position": [0.265, 0.95],
             "dimensions": [0.1, 0.03],
             "font_size": 25
         },
@@ -419,7 +427,7 @@
             "type": "label",
             "id": "r_label",
             "text": "R",
-            "position": [0.26, 0.8],
+            "position": [0.295, 0.8],
             "font_size": 25,
             "color": [0,0,0]
         },
@@ -427,7 +435,7 @@
             "type": "label",
             "id": "g_label",
             "text": "G",
-            "position": [0.3, 0.8],
+            "position": [0.335, 0.8],
             "font_size": 25,
             "color": [0,0,0]
         },
@@ -435,159 +443,47 @@
             "type": "label",
             "id": "b_label",
             "text": "B",
-            "position": [0.34, 0.8],
+            "position": [0.375, 0.8],
             "font_size": 25,
             "color": [0,0,0]
-        },
-        {
-            "type": "label",
-            "id": "background_color_label",
-            "text": "ButtonColor:",
-            "position": [0.205, 0.83],
-            "font_size": 25,
-            "color": [0,0,0]
-        },
-        {
-            "type": "textbox",
-            "id": "background_r",
-            "field": "background_r",
-            "position": [0.265, 0.83],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "textbox",
-            "id": "background_g",
-            "field": "background_g",
-            "position": [0.3, 0.83],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "textbox",
-            "id": "background_b",
-            "field": "background_b",
-            "position": [0.336, 0.83],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "label",
-            "id": "border_color_label",
-            "text": "BorderColor:",
-            "position": [0.205, 0.86],
-            "font_size": 25,
-            "color": [0,0,0]
-        },
-        {
-            "type": "textbox",
-            "id": "border_r",
-            "field": "border_r",
-            "position": [0.265, 0.86],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "textbox",
-            "id": "border_g",
-            "field": "border_g",
-            "position": [0.3, 0.86],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "textbox",
-            "id": "border_b",
-            "field": "border_b",
-            "position": [0.336, 0.86],
-            "dimensions": [0.03, 0.03],
-            "font_size": 25
         },
         {
             "type": "label",
             "id": "text_color_label",
             "text": "TextColor:",
-            "position": [0.205, 0.89],
+            "position": [0.24, 0.83],
             "font_size": 25,
             "color": [0,0,0]
         },
         {
             "type": "textbox",
-            "id": "text_color_r",
-            "field": "text_color_r",
-            "position": [0.265, 0.89],
+            "id": "color_r",
+            "field": "color_r",
+            "position": [0.295, 0.83],
             "dimensions": [0.03, 0.03],
             "font_size": 25
         },
         {
             "type": "textbox",
-            "id": "text_color_g",
-            "field": "text_color_g",
-            "position": [0.3, 0.89],
+            "id": "color_g",
+            "field": "color_g",
+            "position": [0.335, 0.83],
             "dimensions": [0.03, 0.03],
             "font_size": 25
         },
         {
             "type": "textbox",
-            "id": "text_color_b",
-            "field": "text_color_b",
-            "position": [0.336, 0.89],
+            "id": "color_b",
+            "field": "color_b",
+            "position": [0.375, 0.83],
             "dimensions": [0.03, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "label",
-            "id": "border_width_label",
-            "text": "BorderWidth: ",
-            "position": [0.205, 0.92],
-            "font_size": 25,
-            "color": [0,0,0]
-        },
-        {
-            "type": "textbox",
-            "id": "border_width",
-            "field": "border_width",
-            "position": [0.3, 0.92],
-            "dimensions": [0.1, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "label",
-            "id": "border_radius_label",
-            "text": "BorderRadius: ",
-            "position": [0.205, 0.95],
-            "font_size": 25,
-            "color": [0,0,0]
-        },
-        {
-            "type": "textbox",
-            "id": "border_radius",
-            "field": "border_radius",
-            "position": [0.3, 0.95],
-            "dimensions": [0.1, 0.03],
-            "font_size": 25
-        },
-        {
-            "type": "label",
-            "id": "padding_label",
-            "text": "Padding: ",
-            "position": [0.4, 0.83],
-            "font_size": 25,
-            "color": [0,0,0]
-        },
-        {
-            "type": "textbox",
-            "id": "padding",
-            "field": "padding",
-            "position": [0.48, 0.83],
-            "dimensions": [0.1, 0.03],
             "font_size": 25
         },
         {
             "type": "label",
             "id": "font_size_label",
             "text": "FontSize: ",
-            "position": [0.4, 0.86],
+            "position": [0.24, 0.86],
             "font_size": 25,
             "color": [0,0,0]
         },
@@ -595,7 +491,7 @@
             "type": "textbox",
             "id": "font_size",
             "field": "font_size",
-            "position": [0.48, 0.86],
+            "position": [0.33, 0.86],
             "dimensions": [0.1, 0.03],
             "font_size": 25
         }

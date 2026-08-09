@@ -108,4 +108,4 @@ class Application:
         importlib.reload(formeditor)
         self.editor = formeditor.FormEditor(self.app_interface)
         self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("editor_noprops")
+        self.app_interface.ui_controller.show_ui("form_editor_noprops")

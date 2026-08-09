@@ -1,4 +1,1 @@
-Development version Alpha 0.0.3 - 2026-08-XX
-- Added full project browser that automatically loads whatever you select into the editor
-- Forms can be edited now
-- Editor can now fully edit its own UI visually
+Development version Alpha 0.1.0 - 2026-08-09
