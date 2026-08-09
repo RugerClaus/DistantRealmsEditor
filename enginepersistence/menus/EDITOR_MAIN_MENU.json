@@ -518,7 +518,7 @@
         {
             "id": "new_stxt",
             "type": "scrollable_text",
-            "text": "changelog.txt",
+            "text": "editorchangelog.txt",
             "position": [
                 0.6967,
                 0.3185

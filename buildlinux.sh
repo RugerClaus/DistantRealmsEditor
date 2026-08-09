@@ -7,12 +7,26 @@ UPDATER_MAIN="updater.py"
 UPDATER_NAME="updater"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 DIST_ROOT="$ROOT/executable"
 WORK_ROOT="$ROOT/build"
 SPEC_ROOT="$ROOT/specs"
 
-function copy_assets() {
-  TARGET="$1"
+cleanup() {
+  echo "Cleaning temporary build artifacts..."
+
+  rm -rf "$WORK_ROOT"
+  rm -rf "$SPEC_ROOT"
+  rm -rf "$DIST_ROOT/linux_tmp"
+  rm -rf "$DIST_ROOT/updater_tmp"
+
+  echo "Cleanup complete."
+}
+
+trap cleanup EXIT
+
+copy_assets() {
+  local TARGET="$1"
 
   echo "ROOT=$ROOT"
   echo "TARGET=$TARGET"
@@ -20,29 +34,32 @@ function copy_assets() {
   echo "Engine persistence source:"
   find "$ROOT/enginepersistence" -type f
 
+  echo "Copying assets..."
+
   cp -r "$ROOT/assets" "$TARGET"
   cp -r "$ROOT/saves" "$TARGET"
   cp -r "$ROOT/environment" "$TARGET"
   cp -r "$ROOT/enginepersistence" "$TARGET"
-  
+
   cp "$ROOT/changelog.txt" "$TARGET"
   cp "$ROOT/README.md" "$TARGET"
   cp "$ROOT/LICENSE" "$TARGET"
   cp "$ROOT/instructions.md" "$TARGET"
 
-  echo "making logs/ directory"
-  mkdir "$TARGET/logs"
-  echo "logs/ directory added"
+  echo "Creating logs/ directory..."
+  mkdir -p "$TARGET/logs"
 
-  echo "Setting build environment to production mode..." 
+  echo "Setting build environment to production mode..."
+  mkdir -p "$TARGET/environment"
   echo "false" > "$TARGET/environment/dev"
 }
 
-function cleanup_internal() {
-  INTERNAL_DIR="$1/_internal"
+cleanup_internal() {
+  local INTERNAL_DIR="$1/_internal"
 
   if [ -d "$INTERNAL_DIR" ]; then
     echo "Cleaning up _internal directory..."
+
     rm -rf "$INTERNAL_DIR/assets"
     rm -rf "$INTERNAL_DIR/logs"
     rm -rf "$INTERNAL_DIR/saves"
@@ -50,15 +67,24 @@ function cleanup_internal() {
   fi
 }
 
-function build_main() {
+build_main() {
+  echo "========================================"
   echo "Building Linux game executable..."
+  echo "========================================"
 
-  TMP_DIST="$DIST_ROOT/linux_tmp"
-  FINAL_DIST="$DIST_ROOT/linux"
+  local TMP_DIST="$DIST_ROOT/linux_tmp"
+  local FINAL_DIST="$DIST_ROOT/DR_Editor_Linux"
+
+  rm -rf "$TMP_DIST"
+  rm -rf "$FINAL_DIST"
+
+  mkdir -p "$TMP_DIST"
+  mkdir -p "$WORK_ROOT/linux"
+  mkdir -p "$SPEC_ROOT/linux"
 
   pyinstaller "$ROOT/$MAIN" \
     --onedir \
-    --icon="assets/images/build/linux.png" \
+    --icon="$ROOT/assets/images/build/linux.png" \
     --noconsole \
     --windowed \
     --clean \
@@ -72,20 +98,32 @@ function build_main() {
     --specpath "$SPEC_ROOT/linux" \
     --debug all
 
-  rm -rf "$FINAL_DIST"
   mkdir -p "$FINAL_DIST"
+
   mv "$TMP_DIST/$APP_NAME"/* "$FINAL_DIST"/
+
   rm -rf "$TMP_DIST"
 
   copy_assets "$FINAL_DIST"
   cleanup_internal "$FINAL_DIST"
+
+  echo "Main editor build complete."
 }
 
-function build_updater() {
+build_updater() {
+  echo "========================================"
   echo "Building Linux updater executable..."
+  echo "========================================"
 
-  TMP_DIST="$DIST_ROOT/updater_tmp"
-  FINAL_DIST="$DIST_ROOT/linux"
+  local TMP_DIST="$DIST_ROOT/updater_tmp"
+  local FINAL_DIST="$DIST_ROOT/linux"
+
+  rm -rf "$TMP_DIST"
+
+  mkdir -p "$TMP_DIST"
+  mkdir -p "$FINAL_DIST"
+  mkdir -p "$WORK_ROOT/updater"
+  mkdir -p "$SPEC_ROOT/updater"
 
   pyinstaller "$ROOT/$UPDATER_MAIN" \
     --onefile \
@@ -99,14 +137,26 @@ function build_updater() {
   mv "$TMP_DIST/$UPDATER_NAME" "$FINAL_DIST/$UPDATER_NAME"
 
   rm -rf "$TMP_DIST"
+
+  echo "Updater build complete."
 }
 
-build_main
-
-build_updater
+echo "========================================"
+echo "Distant Realms Editor Linux Build"
+echo "========================================"
 
 rm -rf "$WORK_ROOT"
 rm -rf "$SPEC_ROOT"
 
-echo "Build completed."
-rm -rf "$DIST_ROOT/_internal/assets"
+mkdir -p "$DIST_ROOT"
+
+build_main
+build_updater
+
+echo
+echo "========================================"
+echo "Build completed successfully."
+echo "========================================"
+echo "Output:"
+echo "  $DIST_ROOT/DR_Editor_Linux"
+echo "  $DIST_ROOT/linux/updater"
