@@ -17,7 +17,7 @@ cleanup() {
 
   rm -rf "$WORK_ROOT"
   rm -rf "$SPEC_ROOT"
-  rm -rf "$DIST_ROOT/linux_tmp"
+  rm -rf "$DIST_ROOT/DR_Editor_Linux_tmp"
   rm -rf "$DIST_ROOT/updater_tmp"
 
   echo "Cleanup complete."
@@ -72,15 +72,15 @@ build_main() {
   echo "Building Linux game executable..."
   echo "========================================"
 
-  local TMP_DIST="$DIST_ROOT/linux_tmp"
+  local TMP_DIST="$DIST_ROOT/DR_Editor_Linux_tmp"
   local FINAL_DIST="$DIST_ROOT/DR_Editor_Linux"
 
   rm -rf "$TMP_DIST"
   rm -rf "$FINAL_DIST"
 
   mkdir -p "$TMP_DIST"
-  mkdir -p "$WORK_ROOT/linux"
-  mkdir -p "$SPEC_ROOT/linux"
+  mkdir -p "$WORK_ROOT/DR_Editor_Linux"
+  mkdir -p "$SPEC_ROOT/DR_Editor_Linux"
 
   pyinstaller "$ROOT/$MAIN" \
     --onedir \
@@ -94,8 +94,8 @@ build_main() {
     --add-data "$ROOT/saves:saves" \
     --add-data "$ROOT/environment:environment" \
     --distpath "$TMP_DIST" \
-    --workpath "$WORK_ROOT/linux" \
-    --specpath "$SPEC_ROOT/linux" \
+    --workpath "$WORK_ROOT/DR_Editor_Linux" \
+    --specpath "$SPEC_ROOT/DR_Editor_Linux" \
     --debug all
 
   mkdir -p "$FINAL_DIST"
@@ -116,7 +116,7 @@ build_updater() {
   echo "========================================"
 
   local TMP_DIST="$DIST_ROOT/updater_tmp"
-  local FINAL_DIST="$DIST_ROOT/linux"
+  local FINAL_DIST="$DIST_ROOT/DR_Editor_Linux"
 
   rm -rf "$TMP_DIST"
 
@@ -159,4 +159,4 @@ echo "Build completed successfully."
 echo "========================================"
 echo "Output:"
 echo "  $DIST_ROOT/DR_Editor_Linux"
-echo "  $DIST_ROOT/linux/updater"
+echo "  $DIST_ROOT/DR_Editor_Linux/updater"
