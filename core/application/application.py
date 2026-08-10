@@ -73,6 +73,7 @@ class Application:
         pass
 
     def clean_up_states(self):
+        self.app_interface.system.app_inspector.clear()
         self.app_interface.system.clean_up_states([self.state.state])
 
     def register_debug_telemetry(self):
