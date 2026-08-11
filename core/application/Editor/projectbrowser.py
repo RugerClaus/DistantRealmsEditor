@@ -10,7 +10,6 @@ from core.ui.widgets.button import Button
 class ProjectBrowser:
 
     def __init__(self, application):
-        log_warning("ProjectBrowser: BEGIN")
 
         self.application = application
         self.dr = application.app_interface
@@ -23,21 +22,14 @@ class ProjectBrowser:
         self.row_height = 70
         self.scroll_speed = 40
 
-        log_warning("ProjectBrowser: before create_viewport")
         self.create_viewport()
-        log_warning("ProjectBrowser: after create_viewport")
 
-        log_warning("ProjectBrowser: before get_project_dirs")
         self.get_project_dirs()
-        log_warning("ProjectBrowser: after get_project_dirs")
 
         log_warning(f"ProjectBrowser: files = {self.files}")
 
-        log_warning("ProjectBrowser: before create_buttons")
         self.create_buttons()
-        log_warning("ProjectBrowser: after create_buttons")
 
-        log_warning("ProjectBrowser: COMPLETE")
 
     def create_viewport(self):
         ww = self.dr.system.window.get_width()
@@ -123,7 +115,6 @@ class ProjectBrowser:
             self.buttons.append(button)
             self.delete_buttons.append(delete_button)
 
-        # Always position newly-created buttons inside the viewport.
         self.update_button_positions()
 
 
@@ -133,10 +124,8 @@ class ProjectBrowser:
 
 
     def refresh(self):
-        # Preserve the current scroll position.
         old_scroll_offset = self.scroll_offset
 
-        # Rebuild project data.
         self.files.clear()
         self.buttons.clear()
         self.delete_buttons.clear()
@@ -144,8 +133,6 @@ class ProjectBrowser:
         self.get_project_dirs()
         self.create_buttons()
 
-        # Restore the previous scroll position, but don't allow
-        # it to exceed the new content's maximum scroll.
         self.scroll_offset = max(
             0,
             min(
@@ -153,8 +140,7 @@ class ProjectBrowser:
                 self.max_scroll()
             )
         )
-
-        # Reposition using the restored scroll position.
+        
         self.update_button_positions()
 
     def update_button_positions(self):
