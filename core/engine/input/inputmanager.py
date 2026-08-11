@@ -1,7 +1,7 @@
 import pygame
-from core.guts.input.controls import Controls
-from core.guts.input.CommandModule import CommandModule
-from core.guts.input.keys import Keys
+from core.engine.input.controls import Controls
+from core.engine.input.CommandModule import CommandModule
+from core.engine.input.keys import Keys
 from core.ui.font import FontEngine
 
 
