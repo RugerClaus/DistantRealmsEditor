@@ -66,7 +66,9 @@ class AppInterface:
         self.ui_controller.handle_event(event)
         
         if event.type == self.system.input.video_resize_event():
-            self.app_object.resize()
+
+            if self.app_object:
+                self.app_object.scale()
             self.ui_controller.scale()
 
         if self.system.control_state.is_state(DEVELOPER_MODE.ON):
@@ -86,9 +88,8 @@ class AppInterface:
         self.ui_controller.draw()
 
     # below is for saving in the engine's built in save format
-    def save_application_data(self):
+    def save_application_data(self,data={}):
         self.system.save_telemetry = ""
-        data = {}
         self.system.persistence.save.write_save(data)
         print("Saved Data!")
 

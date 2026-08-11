@@ -69,7 +69,7 @@ class Application:
         if self.ProjectBrowser:
             self.ProjectBrowser.draw()
 
-    def resize(self):
+    def scale(self):
         pass
 
     def clean_up_states(self):
