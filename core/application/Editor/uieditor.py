@@ -17,9 +17,9 @@ from core.state.ApplicationLayer.Editor.Button.Style.statemanager import ButtonS
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 
 class UIEditor:
-    def __init__(self, app_interface):
-        self.app_interface = app_interface
-        system = app_interface.system
+    def __init__(self, distant_realms):
+        self.distant_realms = distant_realms
+        system = distant_realms.system
 
         system.input.CommandModule.sequences["save_project"] = [system.input.keys.l_ctrl_key(),system.input.keys.s_key()]
         system.input.CommandModule.sequences["delete_element"] = [system.input.keys.delete_key()]
@@ -175,10 +175,10 @@ class UIEditor:
         self.dragging = False
         self.drag_offset = None
 
-        if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
-            self.app_interface.ui_controller.show_ui("editor_noprops")
-        elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
-            self.app_interface.ui_controller.show_ui("form_editor_noprops")
+        if self.distant_realms.application.state.is_state(EDITOR_STATE.MENU):
+            self.distant_realms.ui_controller.show_ui("editor_noprops")
+        elif self.distant_realms.application.state.is_state(EDITOR_STATE.FORM):
+            self.distant_realms.ui_controller.show_ui("form_editor_noprops")
 
         self.dirty = True
         self.save()
@@ -188,8 +188,8 @@ class UIEditor:
         self.palette_y = 0.0
         self.palette_w = 0.25
         self.palette_h = 0.5
-        ww = self.app_interface.system.window.get_width()
-        wh = self.app_interface.system.window.get_height()
+        ww = self.distant_realms.system.window.get_width()
+        wh = self.distant_realms.system.window.get_height()
 
         x = int(ww * self.palette_x)
         y = int(wh * self.palette_y)
@@ -197,7 +197,7 @@ class UIEditor:
         width = int(ww * self.palette_w)
         height = int(wh * self.palette_h)
 
-        self.widget_palette = self.app_interface.system.window.make_surface(
+        self.widget_palette = self.distant_realms.system.window.make_surface(
             width,
             height
         )
@@ -215,8 +215,8 @@ class UIEditor:
             self.palette_y = 0.5
             self.palette_w = 0.25
             self.palette_h = 0.5
-            ww = self.app_interface.system.window.get_width()
-            wh = self.app_interface.system.window.get_height()
+            ww = self.distant_realms.system.window.get_width()
+            wh = self.distant_realms.system.window.get_height()
     
             x = int(ww * self.palette_x)
             y = int(wh * self.palette_y)
@@ -224,7 +224,7 @@ class UIEditor:
             width = int(ww * self.palette_w)
             height = int(wh * self.palette_h)
     
-            self.options = self.app_interface.system.window.make_surface(
+            self.options = self.distant_realms.system.window.make_surface(
                 width,
                 height
             )
@@ -236,8 +236,8 @@ class UIEditor:
         self.canvas_y = 0.0
         self.canvas_w = 0.75
         self.canvas_h = 9/16
-        ww = self.app_interface.system.window.get_width()
-        wh = self.app_interface.system.window.get_height()
+        ww = self.distant_realms.system.window.get_width()
+        wh = self.distant_realms.system.window.get_height()
 
         x = int(ww * self.canvas_x)
         y = int(wh * self.canvas_y)
@@ -245,7 +245,7 @@ class UIEditor:
         width = int(ww * self.canvas_w)
         height = int(width * self.canvas_h)
 
-        self.canvas = self.app_interface.system.window.make_surface(
+        self.canvas = self.distant_realms.system.window.make_surface(
             width,
             height
         )
@@ -264,7 +264,7 @@ class UIEditor:
         if self.active_file is None or self.active_filename is None:
             return
 
-        self.app_interface.application.util.save_project_file(
+        self.distant_realms.application.util.save_project_file(
             self.active_filename,
             self.active_file
         )
@@ -280,7 +280,7 @@ class UIEditor:
         if abs(x_ratio - 0.5) <= 0.005:
             x = self.canvas_rect.centerx
 
-            self.app_interface.system.window.draw_line(
+            self.distant_realms.system.window.draw_line(
                 self.canvas,
                 (x, self.canvas_rect.top),
                 (x, self.canvas_rect.bottom),
@@ -291,7 +291,7 @@ class UIEditor:
         if abs(y_ratio - 0.5) <= 0.005:
             y = self.canvas_rect.centery
 
-            self.app_interface.system.window.draw_line(
+            self.distant_realms.system.window.draw_line(
                 self.canvas,
                 (0, y),
                 (self.canvas.get_width(), y),
@@ -383,21 +383,21 @@ class UIEditor:
         )
 
         for name, value in fields.items():
-            field = self.app_interface.ui_controller.get_element(name)
+            field = self.distant_realms.ui_controller.get_element(name)
             if field:
                 field.set_text(value)
 
     def show_selected_properties(self):
         if self.selected_element is None:
-            if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
-                self.app_interface.ui_controller.show_ui("editor_noprops")
-            elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
-                self.app_interface.ui_controller.show_ui("form_editor_noprops")
+            if self.distant_realms.application.state.is_state(EDITOR_STATE.MENU):
+                self.distant_realms.ui_controller.show_ui("editor_noprops")
+            elif self.distant_realms.application.state.is_state(EDITOR_STATE.FORM):
+                self.distant_realms.ui_controller.show_ui("form_editor_noprops")
             return
 
         element_type = self.selected_element.data.get("type")
 
-        if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
+        if self.distant_realms.application.state.is_state(EDITOR_STATE.MENU):
             if element_type == "button":
                 if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
                     menu = "menu_editor_button_idle_properties"
@@ -415,7 +415,7 @@ class UIEditor:
                 menu = "editor_noprops"
                 return
 
-        elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
+        elif self.distant_realms.application.state.is_state(EDITOR_STATE.FORM):
             if element_type == "button":
                 if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
                     menu = "form_editor_button_idle_properties"
@@ -437,25 +437,25 @@ class UIEditor:
                 menu = "form_editor_noprops"
                 return
 
-        self.app_interface.ui_controller.show_ui(menu)
+        self.distant_realms.ui_controller.show_ui(menu)
 
         self.update_fields()
 
     def handle_event(self, event,command):
 
         if command == "save_project":
-            self.update_widget_properties(self.app_interface.ui_controller.get_active_ui().submit())
+            self.update_widget_properties(self.distant_realms.ui_controller.get_active_ui().submit())
             self.save()
         elif command == "delete_element":
             self.delete_selected_element()
 
-        if event.type == self.app_interface.system.input.video_resize_event():
+        if event.type == self.distant_realms.system.input.video_resize_event():
             self.load_canvas()
             self.load_widget_palette()
             self.load_options()
             return
 
-        if event.type == self.app_interface.system.input.mouse_button_down():
+        if event.type == self.distant_realms.system.input.mouse_button_down():
             if event.button == 1:
                 if not self.canvas_rect.collidepoint(event.pos):
                     return
@@ -475,19 +475,19 @@ class UIEditor:
 
                         break
                 else:
-                    if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
-                        self.app_interface.ui_controller.show_ui("editor_noprops")
-                    elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
-                        self.app_interface.ui_controller.show_ui("form_editor_noprops")
+                    if self.distant_realms.application.state.is_state(EDITOR_STATE.MENU):
+                        self.distant_realms.ui_controller.show_ui("editor_noprops")
+                    elif self.distant_realms.application.state.is_state(EDITOR_STATE.FORM):
+                        self.distant_realms.ui_controller.show_ui("form_editor_noprops")
                     self.selected_element = None
                     self.dragging = False
 
-        elif event.type == self.app_interface.system.input.mouse_button_up():
+        elif event.type == self.distant_realms.system.input.mouse_button_up():
             if event.button == 1:
                 self.dragging = False
                 self.drag_offset = None
 
-        elif event.type == self.app_interface.system.input.mouse_motion():
+        elif event.type == self.distant_realms.system.input.mouse_motion():
             if self.dragging and self.selected_element:
                 self.drag_element(event.pos)
 
@@ -681,23 +681,23 @@ class UIEditor:
         pass
 
     def draw(self):
-        self.app_interface.system.window.fill((white))
+        self.distant_realms.system.window.fill((white))
         if self.canvas:
             self.canvas.fill((black))
             self.draw_alignment_guides()
-            self.app_interface.system.window.blit(self.canvas,self.canvas_rect)
+            self.distant_realms.system.window.blit(self.canvas,self.canvas_rect)
             for element in self.canvas_elements:
                 element.draw()
             
 
         if self.widget_palette:
             self.widget_palette.fill((beige))
-            self.app_interface.system.window.blit(self.widget_palette,self.widget_palette_rect)
+            self.distant_realms.system.window.blit(self.widget_palette,self.widget_palette_rect)
 
         if self.options:
             self.options.fill((light_gray))
-            self.app_interface.system.window.blit(self.options,self.options_rect)
+            self.distant_realms.system.window.blit(self.options,self.options_rect)
 
         
     def clean_up_states(self):
-        self.app_interface.system.clean_up_states([self.button_style_state.state])
+        self.distant_realms.system.clean_up_states([self.button_style_state.state])

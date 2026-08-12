@@ -8,13 +8,13 @@ from core.application.Editor.editorutility import EditorUtility
 from core.application.Editor.navigation import Navigation
 
 class Application:
-    def __init__(self,app_interface):
-        self.app_interface = app_interface
+    def __init__(self,distant_realms):
+        self.distant_realms = distant_realms
         self.state = EditorStateManager()
-        self.util = EditorUtility(app_interface)
+        self.util = EditorUtility(distant_realms)
         self.editor = None
         self.ProjectBrowser = None
-        self.navigation = Navigation(app_interface)
+        self.navigation = Navigation(distant_realms)
         
         self.init()
 
@@ -29,7 +29,7 @@ class Application:
 
         
 
-        if self.app_interface.system.control_state.is_state(DEVELOPER_MODE.ON):
+        if self.distant_realms.system.control_state.is_state(DEVELOPER_MODE.ON):
 
             if command == "reload_menu_editor":
                 self.initialize_menu_editor()
@@ -42,20 +42,20 @@ class Application:
         
         if self.state.is_state(EDITOR_STATE.NONE):
 
-            pulse = sine(self.app_interface.system.time.get_current_time())
+            pulse = sine(self.distant_realms.system.time.get_current_time())
             fade_color = (
                 int(50 * pulse), 
                 int(50 * pulse), 
                 int(50 * pulse)
             )
-            self.app_interface.system.window.fill((fade_color))
+            self.distant_realms.system.window.fill((fade_color))
             self.clean_up_states()
 
 
             if self.ProjectBrowser:
                 self.ProjectBrowser.update()
 
-            self.util.display_volume(self.app_interface.ui_controller.get_active_ui())
+            self.util.display_volume(self.distant_realms.ui_controller.get_active_ui())
 
         else:
             if self.editor:
@@ -73,8 +73,8 @@ class Application:
         pass
 
     def clean_up_states(self):
-        self.app_interface.system.app_inspector.clear()
-        self.app_interface.system.clean_up_states([self.state.state])
+        self.distant_realms.system.app_inspector.clear()
+        self.distant_realms.system.clean_up_states([self.state.state])
 
     def register_debug_telemetry(self):
         # exmaple:
@@ -85,28 +85,28 @@ class Application:
         pass
 
     def init(self):
-        self.app_interface.ui_controller.show_ui("editor_main_menu")
+        self.distant_realms.ui_controller.show_ui("editor_main_menu")
 
     def initialize_project_browser(self):
         import importlib
         from core.application.Editor import projectbrowser
         importlib.reload(projectbrowser)
         self.ProjectBrowser = projectbrowser.ProjectBrowser(self)
-        self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("editor_project_browser")
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("editor_project_browser")
 
     def initialize_menu_editor(self):
         import importlib
         from core.application.Editor.Menu import menueditor
         importlib.reload(menueditor)
-        self.editor = menueditor.MenuEditor(self.app_interface)
-        self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("editor_noprops")
+        self.editor = menueditor.MenuEditor(self.distant_realms)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("editor_noprops")
 
     def initialize_form_editor(self):
         import importlib
         from core.application.Editor.Form import formeditor
         importlib.reload(formeditor)
-        self.editor = formeditor.FormEditor(self.app_interface)
-        self.app_interface.ui_controller.clear()
-        self.app_interface.ui_controller.show_ui("form_editor_noprops")
+        self.editor = formeditor.FormEditor(self.distant_realms)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("form_editor_noprops")

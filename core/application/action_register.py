@@ -1,44 +1,44 @@
 from systemlogging import log_event
 
 class ActionRegistrar:
-    def __init__(self, app_interface):
-        self.app_interface = app_interface
-        self.system = app_interface.system
+    def __init__(self, distant_realms):
+        self.distant_realms = distant_realms
+        self.system = distant_realms.system
 
     def register(self):
-        self.app_interface.actions.register("create_project",self.app_interface.application.util.create_project)
+        self.distant_realms.actions.register("create_project",self.distant_realms.application.util.create_project)
 
-        self.app_interface.actions.register("create_new_button", lambda: self.app_interface.application.editor.add_element("button"))
-        self.app_interface.actions.register("create_new_label", lambda: self.app_interface.application.editor.add_element("label"))
-        self.app_interface.actions.register("create_new_header", lambda: self.app_interface.application.editor.add_element("header"))
-        self.app_interface.actions.register("create_new_query", lambda: self.app_interface.application.editor.add_element("query"))
-        self.app_interface.actions.register("create_new_stxt", lambda: self.app_interface.application.editor.add_element("scrollable_text"))
-        self.app_interface.actions.register("new_input_box", lambda: self.app_interface.application.editor.add_element("textbox"))
-        self.app_interface.actions.register("create_new_select_box", lambda: self.app_interface.application.editor.add_element("select"))
+        self.distant_realms.actions.register("create_new_button", lambda: self.distant_realms.application.editor.add_element("button"))
+        self.distant_realms.actions.register("create_new_label", lambda: self.distant_realms.application.editor.add_element("label"))
+        self.distant_realms.actions.register("create_new_header", lambda: self.distant_realms.application.editor.add_element("header"))
+        self.distant_realms.actions.register("create_new_query", lambda: self.distant_realms.application.editor.add_element("query"))
+        self.distant_realms.actions.register("create_new_stxt", lambda: self.distant_realms.application.editor.add_element("scrollable_text"))
+        self.distant_realms.actions.register("new_input_box", lambda: self.distant_realms.application.editor.add_element("textbox"))
+        self.distant_realms.actions.register("create_new_select_box", lambda: self.distant_realms.application.editor.add_element("select"))
 
         #button editor:
-        self.app_interface.actions.register("button_hover_style_mode", lambda: self.app_interface.application.editor.widgets.toggle_button_style_state())
-        self.app_interface.actions.register("button_idle_style_mode", lambda: self.app_interface.application.editor.widgets.toggle_button_style_state())
+        self.distant_realms.actions.register("button_hover_style_mode", lambda: self.distant_realms.application.editor.widgets.toggle_button_style_state())
+        self.distant_realms.actions.register("button_idle_style_mode", lambda: self.distant_realms.application.editor.widgets.toggle_button_style_state())
 
-        self.app_interface.actions.register(
+        self.distant_realms.actions.register(
             "update_widget_properties",
-            lambda: self.app_interface.application.editor.update_widget_properties(
-                self.app_interface.ui_controller.get_active_ui().submit()
+            lambda: self.distant_realms.application.editor.update_widget_properties(
+                self.distant_realms.ui_controller.get_active_ui().submit()
             )
         )
-        self.app_interface.actions.register("delete_selected_element", lambda: self.app_interface.application.editor.delete_selected_element())
-        self.app_interface.actions.register("main_menu", self.app_interface.application.navigation.main_menu)
+        self.distant_realms.actions.register("delete_selected_element", lambda: self.distant_realms.application.editor.delete_selected_element())
+        self.distant_realms.actions.register("main_menu", self.distant_realms.application.navigation.main_menu)
 
-        self.app_interface.actions.register("new_project_form",lambda: self.app_interface.ui_controller.show_ui("newprojectform"))
-        self.app_interface.actions.register("load_project", self.app_interface.application.initialize_project_browser)
+        self.distant_realms.actions.register("new_project_form",lambda: self.distant_realms.ui_controller.show_ui("newprojectform"))
+        self.distant_realms.actions.register("load_project", self.distant_realms.application.initialize_project_browser)
 
-        self.app_interface.actions.register("open_settings", lambda: self.app_interface.ui_controller.show_ui("editor_settings_root"))
-        self.app_interface.actions.register("audio_settings", lambda: self.app_interface.ui_controller.show_ui("editor_audio_settings"))
+        self.distant_realms.actions.register("open_settings", lambda: self.distant_realms.ui_controller.show_ui("editor_settings_root"))
+        self.distant_realms.actions.register("audio_settings", lambda: self.distant_realms.ui_controller.show_ui("editor_audio_settings"))
 
-        self.app_interface.actions.register("mvolup", self.app_interface.system.sound.volume_up)
-        self.app_interface.actions.register("mvoldown", self.app_interface.system.sound.volume_down)
+        self.distant_realms.actions.register("mvolup", self.distant_realms.system.sound.volume_up)
+        self.distant_realms.actions.register("mvoldown", self.distant_realms.system.sound.volume_down)
 
-        self.app_interface.actions.register("sfxvolup", self.app_interface.system.sound.sfx_volume_up)
-        self.app_interface.actions.register("sfxvoldown", self.app_interface.system.sound.sfx_volume_down)
+        self.distant_realms.actions.register("sfxvolup", self.distant_realms.system.sound.sfx_volume_up)
+        self.distant_realms.actions.register("sfxvoldown", self.distant_realms.system.sound.sfx_volume_down)
 
-        self.app_interface.actions.register("quit",self.system.quit)
+        self.distant_realms.actions.register("quit",self.system.quit)

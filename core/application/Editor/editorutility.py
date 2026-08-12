@@ -5,8 +5,8 @@ from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 
 
 class EditorUtility:
-    def __init__(self, app_interface):
-        self.app_interface = app_interface
+    def __init__(self, distant_realms):
+        self.distant_realms = distant_realms
 
     def create_project_file(self, data):
         project_name = data["name"].strip().upper()
@@ -14,7 +14,7 @@ class EditorUtility:
 
         log_event(f"Creating project: {project_name}, of type: {project_type}" , "EditorUtility.create_project_file")
 
-        persistence = self.app_interface.system.persistence
+        persistence = self.distant_realms.system.persistence
 
         if project_type == "Menu":
             directory = persistence.workspace_menus
@@ -38,20 +38,20 @@ class EditorUtility:
 
         log_event(f"Created: {filename.resolve()}", "EditorUtility.create_project_file")
 
-        if self.app_interface.application:
+        if self.distant_realms.application:
             if project_type == "Menu":
-                self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
-                self.app_interface.ui_controller.clear()
-                self.app_interface.ui_controller.show_ui("editor_noprops")
+                self.distant_realms.application.state.set_state(EDITOR_STATE.MENU)
+                self.distant_realms.ui_controller.clear()
+                self.distant_realms.ui_controller.show_ui("editor_noprops")
             else:
-                self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
-                self.app_interface.ui_controller.clear()
-                self.app_interface.ui_controller.show_ui("form_editor_noprops")
+                self.distant_realms.application.state.set_state(EDITOR_STATE.FORM)
+                self.distant_realms.ui_controller.clear()
+                self.distant_realms.ui_controller.show_ui("form_editor_noprops")
 
-        self.app_interface.application.editor.active_file = self.load_project_file(filename)
+        self.distant_realms.application.editor.active_file = self.load_project_file(filename)
 
     def create_project(self):
-        form = self.app_interface.ui_controller.get_active_ui()
+        form = self.distant_realms.ui_controller.get_active_ui()
 
         data = {
             "name": form.get_field("name").get_return_string(),
@@ -80,11 +80,11 @@ class EditorUtility:
         project_type = data.get("type")
 
         if project_type == "menu":
-            self.app_interface.application.initialize_menu_editor()
-            self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
+            self.distant_realms.application.initialize_menu_editor()
+            self.distant_realms.application.state.set_state(EDITOR_STATE.MENU)
         elif project_type == "form":
-            self.app_interface.application.initialize_form_editor()
-            self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
+            self.distant_realms.application.initialize_form_editor()
+            self.distant_realms.application.state.set_state(EDITOR_STATE.FORM)
         else:
             log_event(
                 f"Unknown project type in file: {project_type}",
@@ -92,7 +92,7 @@ class EditorUtility:
             )
             return False
 
-        editor = self.app_interface.application.editor
+        editor = self.distant_realms.application.editor
 
         editor.active_filename = filename
         editor.active_file = data
@@ -105,7 +105,7 @@ class EditorUtility:
         return data
 
     def load_project(self, filename, project_type="menu"):
-            persistence = self.app_interface.system.persistence
+            persistence = self.distant_realms.system.persistence
     
             if project_type == "menu":
                 path = persistence.get_menu(filename)
@@ -131,13 +131,13 @@ class EditorUtility:
             file_type = data.get("type")
     
             if file_type == "menu":
-                self.app_interface.application.initialize_menu_editor()
-                self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
-                self.app_interface.ui_controller.clear()
+                self.distant_realms.application.initialize_menu_editor()
+                self.distant_realms.application.state.set_state(EDITOR_STATE.MENU)
+                self.distant_realms.ui_controller.clear()
             elif file_type == "form":
-                self.app_interface.application.initialize_form_editor()
-                self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
-                self.app_interface.ui_controller.clear()
+                self.distant_realms.application.initialize_form_editor()
+                self.distant_realms.application.state.set_state(EDITOR_STATE.FORM)
+                self.distant_realms.ui_controller.clear()
             else:
                 log_event(
                     f"Unknown project type in file: {file_type}",
@@ -145,7 +145,7 @@ class EditorUtility:
                 )
                 return False
     
-            editor = self.app_interface.application.editor
+            editor = self.distant_realms.application.editor
     
             editor.active_filename = path
             editor.active_file = data
@@ -156,15 +156,15 @@ class EditorUtility:
                 "EditorUtility.load_project_file"
             )
 
-            browser = self.app_interface.application.ProjectBrowser
+            browser = self.distant_realms.application.ProjectBrowser
 
             if browser:
-                self.app_interface.application.ProjectBrowser = None
+                self.distant_realms.application.ProjectBrowser = None
 
-            if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
-                self.app_interface.ui_controller.show_ui("editor_noprops")
-            elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
-                self.app_interface.ui_controller.show_ui("form_editor_noprops")
+            if self.distant_realms.application.state.is_state(EDITOR_STATE.MENU):
+                self.distant_realms.ui_controller.show_ui("editor_noprops")
+            elif self.distant_realms.application.state.is_state(EDITOR_STATE.FORM):
+                self.distant_realms.ui_controller.show_ui("form_editor_noprops")
     
             return data
 
@@ -192,12 +192,12 @@ class EditorUtility:
     def display_volume(self,ui):
         
 
-        if self.app_interface.ui_controller.active_name == "editor_audio_settings":
+        if self.distant_realms.ui_controller.active_name == "editor_audio_settings":
 
-            music_vol = float(self.app_interface.system.sound.volume)
+            music_vol = float(self.distant_realms.system.sound.volume)
             normal_mvol = str(int(music_vol * 10))
 
-            sfx_vol = float(self.app_interface.system.sound.sfx_volume)
+            sfx_vol = float(self.distant_realms.system.sound.sfx_volume)
             normal_sfxvol = str(int(sfx_vol * 10))
 
             for child in ui.children:
@@ -217,7 +217,7 @@ class EditorUtility:
             )
             return False
 
-        persistence = self.app_interface.system.persistence
+        persistence = self.distant_realms.system.persistence
 
         directories = [
             persistence.workspace_forms,
@@ -259,7 +259,7 @@ class EditorUtility:
             )
             return False
 
-        browser = self.app_interface.application.ProjectBrowser
+        browser = self.distant_realms.application.ProjectBrowser
 
         if browser is not None:
             browser.refresh()

@@ -1,7 +1,7 @@
 class EditorWidget:
     def __init__(self, editor, data):
         self.editor = editor
-        self.system = editor.app_interface.system
+        self.system = editor.distant_realms.system
 
         self.data = data
 

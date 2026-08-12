@@ -15,11 +15,11 @@ class WidgetUtility:
     def toggle_button_style_state(self):
         if self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
             self.editor.button_style_state.set_state(BUTTON_STYLE_STATE.HOVER)
-            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_hover_properties")
+            self.editor.distant_realms.ui_controller.show_ui("menu_editor_button_hover_properties")
             self.editor.update_fields()
         elif self.editor.button_style_state.is_state(BUTTON_STYLE_STATE.HOVER):
             self.editor.button_style_state.set_state(BUTTON_STYLE_STATE.IDLE)
-            self.editor.app_interface.ui_controller.show_ui("menu_editor_button_idle_properties")
+            self.editor.distant_realms.ui_controller.show_ui("menu_editor_button_idle_properties")
             self.editor.update_fields()
         self.editor.refresh_selected_element()
         self.editor.show_selected_properties()

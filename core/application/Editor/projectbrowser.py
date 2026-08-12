@@ -12,7 +12,7 @@ class ProjectBrowser:
     def __init__(self, application):
 
         self.application = application
-        self.dr = application.app_interface
+        self.dr = application.distant_realms
 
         self.files = []
         self.buttons = []
