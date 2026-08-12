@@ -175,9 +175,9 @@ class UIEditor:
         self.dragging = False
         self.drag_offset = None
 
-        if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+        if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
             self.app_interface.ui_controller.show_ui("editor_noprops")
-        elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+        elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
             self.app_interface.ui_controller.show_ui("form_editor_noprops")
 
         self.dirty = True
@@ -264,7 +264,7 @@ class UIEditor:
         if self.active_file is None or self.active_filename is None:
             return
 
-        self.app_interface.app_object.util.save_project_file(
+        self.app_interface.application.util.save_project_file(
             self.active_filename,
             self.active_file
         )
@@ -389,15 +389,15 @@ class UIEditor:
 
     def show_selected_properties(self):
         if self.selected_element is None:
-            if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+            if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
                 self.app_interface.ui_controller.show_ui("editor_noprops")
-            elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+            elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
                 self.app_interface.ui_controller.show_ui("form_editor_noprops")
             return
 
         element_type = self.selected_element.data.get("type")
 
-        if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+        if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
             if element_type == "button":
                 if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
                     menu = "menu_editor_button_idle_properties"
@@ -415,7 +415,7 @@ class UIEditor:
                 menu = "editor_noprops"
                 return
 
-        elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+        elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
             if element_type == "button":
                 if self.button_style_state.is_state(BUTTON_STYLE_STATE.IDLE):
                     menu = "form_editor_button_idle_properties"
@@ -475,9 +475,9 @@ class UIEditor:
 
                         break
                 else:
-                    if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+                    if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
                         self.app_interface.ui_controller.show_ui("editor_noprops")
-                    elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+                    elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
                         self.app_interface.ui_controller.show_ui("form_editor_noprops")
                     self.selected_element = None
                     self.dragging = False

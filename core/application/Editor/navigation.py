@@ -4,12 +4,12 @@ class Navigation:
         self.app_interface = app_interface
 
     def main_menu(self):
-        editor = self.app_interface.app_object.editor
+        editor = self.app_interface.application.editor
         if editor:
-            self.app_interface.app_object.editor.clean_up_states()
-        browser = self.app_interface.app_object.ProjectBrowser
+            self.app_interface.application.editor.clean_up_states()
+        browser = self.app_interface.application.ProjectBrowser
         if browser:
-            self.app_interface.app_object.ProjectBrowser = None
+            self.app_interface.application.ProjectBrowser = None
         self.app_interface.ui_controller.show_ui("editor_main_menu")
-        self.app_interface.app_object.state.set_state(EDITOR_STATE.NONE)
-        self.app_interface.app_object.editor = None
+        self.app_interface.application.state.set_state(EDITOR_STATE.NONE)
+        self.app_interface.application.editor = None

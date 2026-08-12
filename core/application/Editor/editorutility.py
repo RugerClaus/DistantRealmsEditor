@@ -38,17 +38,17 @@ class EditorUtility:
 
         log_event(f"Created: {filename.resolve()}", "EditorUtility.create_project_file")
 
-        if self.app_interface.app_object:
+        if self.app_interface.application:
             if project_type == "Menu":
-                self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+                self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
                 self.app_interface.ui_controller.clear()
                 self.app_interface.ui_controller.show_ui("editor_noprops")
             else:
-                self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+                self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
                 self.app_interface.ui_controller.clear()
                 self.app_interface.ui_controller.show_ui("form_editor_noprops")
 
-        self.app_interface.app_object.editor.active_file = self.load_project_file(filename)
+        self.app_interface.application.editor.active_file = self.load_project_file(filename)
 
     def create_project(self):
         form = self.app_interface.ui_controller.get_active_ui()
@@ -80,11 +80,11 @@ class EditorUtility:
         project_type = data.get("type")
 
         if project_type == "menu":
-            self.app_interface.app_object.initialize_menu_editor()
-            self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+            self.app_interface.application.initialize_menu_editor()
+            self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
         elif project_type == "form":
-            self.app_interface.app_object.initialize_form_editor()
-            self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+            self.app_interface.application.initialize_form_editor()
+            self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
         else:
             log_event(
                 f"Unknown project type in file: {project_type}",
@@ -92,7 +92,7 @@ class EditorUtility:
             )
             return False
 
-        editor = self.app_interface.app_object.editor
+        editor = self.app_interface.application.editor
 
         editor.active_filename = filename
         editor.active_file = data
@@ -131,12 +131,12 @@ class EditorUtility:
             file_type = data.get("type")
     
             if file_type == "menu":
-                self.app_interface.app_object.initialize_menu_editor()
-                self.app_interface.app_object.state.set_state(EDITOR_STATE.MENU)
+                self.app_interface.application.initialize_menu_editor()
+                self.app_interface.application.state.set_state(EDITOR_STATE.MENU)
                 self.app_interface.ui_controller.clear()
             elif file_type == "form":
-                self.app_interface.app_object.initialize_form_editor()
-                self.app_interface.app_object.state.set_state(EDITOR_STATE.FORM)
+                self.app_interface.application.initialize_form_editor()
+                self.app_interface.application.state.set_state(EDITOR_STATE.FORM)
                 self.app_interface.ui_controller.clear()
             else:
                 log_event(
@@ -145,7 +145,7 @@ class EditorUtility:
                 )
                 return False
     
-            editor = self.app_interface.app_object.editor
+            editor = self.app_interface.application.editor
     
             editor.active_filename = path
             editor.active_file = data
@@ -156,14 +156,14 @@ class EditorUtility:
                 "EditorUtility.load_project_file"
             )
 
-            browser = self.app_interface.app_object.ProjectBrowser
+            browser = self.app_interface.application.ProjectBrowser
 
             if browser:
-                self.app_interface.app_object.ProjectBrowser = None
+                self.app_interface.application.ProjectBrowser = None
 
-            if self.app_interface.app_object.state.is_state(EDITOR_STATE.MENU):
+            if self.app_interface.application.state.is_state(EDITOR_STATE.MENU):
                 self.app_interface.ui_controller.show_ui("editor_noprops")
-            elif self.app_interface.app_object.state.is_state(EDITOR_STATE.FORM):
+            elif self.app_interface.application.state.is_state(EDITOR_STATE.FORM):
                 self.app_interface.ui_controller.show_ui("form_editor_noprops")
     
             return data
@@ -259,7 +259,7 @@ class EditorUtility:
             )
             return False
 
-        browser = self.app_interface.app_object.ProjectBrowser
+        browser = self.app_interface.application.ProjectBrowser
 
         if browser is not None:
             browser.refresh()

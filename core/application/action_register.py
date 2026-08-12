@@ -6,31 +6,31 @@ class ActionRegistrar:
         self.system = app_interface.system
 
     def register(self):
-        self.app_interface.actions.register("create_project",self.app_interface.app_object.util.create_project)
+        self.app_interface.actions.register("create_project",self.app_interface.application.util.create_project)
 
-        self.app_interface.actions.register("create_new_button", lambda: self.app_interface.app_object.editor.add_element("button"))
-        self.app_interface.actions.register("create_new_label", lambda: self.app_interface.app_object.editor.add_element("label"))
-        self.app_interface.actions.register("create_new_header", lambda: self.app_interface.app_object.editor.add_element("header"))
-        self.app_interface.actions.register("create_new_query", lambda: self.app_interface.app_object.editor.add_element("query"))
-        self.app_interface.actions.register("create_new_stxt", lambda: self.app_interface.app_object.editor.add_element("scrollable_text"))
-        self.app_interface.actions.register("new_input_box", lambda: self.app_interface.app_object.editor.add_element("textbox"))
-        self.app_interface.actions.register("create_new_select_box", lambda: self.app_interface.app_object.editor.add_element("select"))
+        self.app_interface.actions.register("create_new_button", lambda: self.app_interface.application.editor.add_element("button"))
+        self.app_interface.actions.register("create_new_label", lambda: self.app_interface.application.editor.add_element("label"))
+        self.app_interface.actions.register("create_new_header", lambda: self.app_interface.application.editor.add_element("header"))
+        self.app_interface.actions.register("create_new_query", lambda: self.app_interface.application.editor.add_element("query"))
+        self.app_interface.actions.register("create_new_stxt", lambda: self.app_interface.application.editor.add_element("scrollable_text"))
+        self.app_interface.actions.register("new_input_box", lambda: self.app_interface.application.editor.add_element("textbox"))
+        self.app_interface.actions.register("create_new_select_box", lambda: self.app_interface.application.editor.add_element("select"))
 
         #button editor:
-        self.app_interface.actions.register("button_hover_style_mode", lambda: self.app_interface.app_object.editor.widgets.toggle_button_style_state())
-        self.app_interface.actions.register("button_idle_style_mode", lambda: self.app_interface.app_object.editor.widgets.toggle_button_style_state())
+        self.app_interface.actions.register("button_hover_style_mode", lambda: self.app_interface.application.editor.widgets.toggle_button_style_state())
+        self.app_interface.actions.register("button_idle_style_mode", lambda: self.app_interface.application.editor.widgets.toggle_button_style_state())
 
         self.app_interface.actions.register(
             "update_widget_properties",
-            lambda: self.app_interface.app_object.editor.update_widget_properties(
+            lambda: self.app_interface.application.editor.update_widget_properties(
                 self.app_interface.ui_controller.get_active_ui().submit()
             )
         )
-        self.app_interface.actions.register("delete_selected_element", lambda: self.app_interface.app_object.editor.delete_selected_element())
-        self.app_interface.actions.register("main_menu", self.app_interface.app_object.navigation.main_menu)
+        self.app_interface.actions.register("delete_selected_element", lambda: self.app_interface.application.editor.delete_selected_element())
+        self.app_interface.actions.register("main_menu", self.app_interface.application.navigation.main_menu)
 
         self.app_interface.actions.register("new_project_form",lambda: self.app_interface.ui_controller.show_ui("newprojectform"))
-        self.app_interface.actions.register("load_project", self.app_interface.app_object.initialize_project_browser)
+        self.app_interface.actions.register("load_project", self.app_interface.application.initialize_project_browser)
 
         self.app_interface.actions.register("open_settings", lambda: self.app_interface.ui_controller.show_ui("editor_settings_root"))
         self.app_interface.actions.register("audio_settings", lambda: self.app_interface.ui_controller.show_ui("editor_audio_settings"))
