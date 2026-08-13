@@ -8,13 +8,13 @@ from core.engine.time import Time
 from core.engine.persistence.persistence import Persistence
 from core.engine.network.update import Update
 from core.engine.network.network import Network
-from core.engine.network.authentication import Authentication
 from core.engine.user import User
 from core.application.app_inspector import app_inspector
 from core.application.save_schema import schema
 from core.engine.telemetry import system_monitor
 
 # state systems
+from core.state.RuntimeLayer.NetworkLayer.Login.statemanager import LoginStateManager
 from core.state.RuntimeLayer.statemanager import RuntimeStateManager
 from core.state.RuntimeLayer.DevTools.Debug.statemanager import DebugStateManager
 from core.state.RuntimeLayer.DevTools.DeveloperMode.statemanager import DeveloperModeStateManager
@@ -34,6 +34,7 @@ class System():
         self.overlay_state = DebugStateManager()
         self.control_state = DeveloperModeStateManager()
         self.state_monitor_state = StateMonitorStateManager()
+        self.login_state = LoginStateManager()
 
         self.time = Time()
 
@@ -47,10 +48,6 @@ class System():
         self.network = Network()
 
         self.user = User(self)
-        self.auth = Authentication(self)
-
-        if self.user.username:
-            self.auth.auto_login()
 
         self.window = Window(self)
         self.sound = AudioEngine(self)
