@@ -631,7 +631,7 @@ class UIEditor:
                 value = properties.pop("is_password", "False")
 
                 if isinstance(value, str):
-                    value = value.strip().lower() == "True"
+                    value = value.strip().lower() == "true"
 
                 element.set_is_password(value)
 
