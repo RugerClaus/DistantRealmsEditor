@@ -14,6 +14,7 @@ from core.application.save_schema import schema
 from core.engine.telemetry import system_monitor
 
 # state systems
+from core.state.RuntimeLayer.NetworkLayer.Login.statemanager import LoginStateManager
 from core.state.RuntimeLayer.statemanager import RuntimeStateManager
 from core.state.RuntimeLayer.DevTools.Debug.statemanager import DebugStateManager
 from core.state.RuntimeLayer.DevTools.DeveloperMode.statemanager import DeveloperModeStateManager
@@ -33,6 +34,7 @@ class System():
         self.overlay_state = DebugStateManager()
         self.control_state = DeveloperModeStateManager()
         self.state_monitor_state = StateMonitorStateManager()
+        self.login_state = LoginStateManager()
 
         self.time = Time()
 
@@ -46,6 +48,7 @@ class System():
         self.network = Network()
 
         self.user = User(self)
+        self.auth = Authentication(self)
 
         if self.user.username:
             self.auth.auto_login()
