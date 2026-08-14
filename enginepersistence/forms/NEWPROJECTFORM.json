@@ -114,7 +114,8 @@
                 0.04
             ],
             "font_size": 25,
-            "max_chars": 30
+            "max_chars": 30,
+            "is_password": false
         },
         {
             "type": "button",

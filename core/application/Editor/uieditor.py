@@ -126,7 +126,8 @@ class UIEditor:
                 "position": [0.1, 0.83],
                 "dimensions": [0.1, 0.03],
                 "font_size": 25,
-                "max_chars": 21
+                "max_chars": 21,
+                "is_password": False
             },
             "select": {
                 "type": "select",
@@ -370,6 +371,11 @@ class UIEditor:
                     "max_chars",
                     100
                 )
+            )
+
+            fields["is_password"] = self.selected_element.data.get(
+                "is_password",
+                False
             )
 
             fields["width"] = str(w)
@@ -621,6 +627,14 @@ class UIEditor:
                     properties.pop("max_chars")
                 )
 
+            if "is_password" in properties:
+                value = properties.pop("is_password", "False")
+
+                if isinstance(value, str):
+                    value = value.strip().lower() == "True"
+
+                element.set_is_password(value)
+
         elif element.type == "select":
 
             if "width" in properties:
@@ -636,6 +650,11 @@ class UIEditor:
             if "padding" in properties:
                 element.set_padding(
                     int(properties.pop("padding"))
+                )
+
+            if "field" in properties:
+                element.set_field(
+                    str(properties.pop("field"))
                 )
 
             if "options" in properties:

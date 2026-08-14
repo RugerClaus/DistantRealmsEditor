@@ -8,6 +8,10 @@ class EditorSelect(EditorWidget):
     def __init__(self, editor, data):
         super().__init__(editor, data)
 
+        self.field = str(
+            data.get("field", "default")
+        )
+
         self.options = data.get("options", [])
 
         self.selected_option = data.get(
@@ -30,6 +34,12 @@ class EditorSelect(EditorWidget):
         self.font = FontEngine(
             self.font_size
         ).font
+
+        self.scale()
+
+    def set_field(self, field):
+        self.field = str(field)
+        self.data["field"] = self.field
 
         self.scale()
 

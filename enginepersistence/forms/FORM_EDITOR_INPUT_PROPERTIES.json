@@ -1154,7 +1154,9 @@
                 0.15,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1183,7 +1185,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1212,7 +1216,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1241,7 +1247,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1270,7 +1278,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1299,7 +1309,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "label",
@@ -1328,7 +1340,9 @@
                 0.1,
                 0.03
             ],
-            "font_size": 25
+            "font_size": 25,
+            "max_chars": 100,
+            "is_password": false
         },
         {
             "type": "textbox",
@@ -1343,7 +1357,8 @@
                 0.03
             ],
             "font_size": 25,
-            "max_chars": 21
+            "max_chars": 21,
+            "is_password": false
         },
         {
             "id": "new_label",
@@ -1359,6 +1374,24 @@
                 0,
                 0
             ]
+        },
+        {
+            "type": "select",
+            "id": "new_select",
+            "options": [
+                "False",
+                "True"
+            ],
+            "selected_option": "True",
+            "position": [
+                0.5033,
+                0.843
+            ],
+            "font_size": 20,
+            "width": 0.1,
+            "height": 0.04,
+            "padding": 10,
+            "field": "is_password"
         }
     ]
 }

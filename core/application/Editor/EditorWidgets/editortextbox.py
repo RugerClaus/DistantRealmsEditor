@@ -14,6 +14,10 @@ class EditorTextBox(EditorWidget):
             data.get("field", "default")
         )
 
+        self.is_password = bool(
+            data.get("is_password", False)
+        )
+
         self.max_chars = int(
             data.get("max_chars", 100)
         )
@@ -86,6 +90,13 @@ class EditorTextBox(EditorWidget):
 
         self.data["text_color"] = list(color)
 
+        self.scale()
+    
+    def set_is_password(self,is_pass):
+        self.is_password = is_pass
+
+        self.data["is_password"] = bool(is_pass)
+        
         self.scale()
 
     def scale(self):
