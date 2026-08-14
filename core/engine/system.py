@@ -48,10 +48,6 @@ class System():
         self.network = Network()
 
         self.user = User(self)
-        self.auth = Authentication(self)
-
-        if self.user.username:
-            self.auth.auto_login()
 
         self.window = Window(self)
         self.sound = AudioEngine(self)
