@@ -13,6 +13,7 @@ config = {
     "UPDATER_LINUX": "",
     "UPDATER_VERSION": "",
     "API_KEY": "",
+    "WINDOW_BACKEND": "pygame",
     "NSTATURL": "https://snowblitz.net",
     "API": {
         "LEADERBOARD": "",
