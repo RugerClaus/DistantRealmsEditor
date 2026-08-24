@@ -34,9 +34,7 @@ class Persistence:
 
         self.workspace_menus = self.workspace_engine_root / "menus"
         self.workspace_forms = self.workspace_engine_root / "forms"
-
-
-        
+        self.world = self.workspace_engine_root / "world"
 
     def developer_mode(self):
         return self.system.control_state.is_state(DEVELOPER_MODE.ON)
@@ -74,7 +72,26 @@ class Persistence:
 
         return path
 
+    def get_world(self, name):
+            filename = f"{name.upper()}.json"
     
+            path = self.world / filename
+            if path.exists():
+                log_event(f"Found workspace world composition file: {path}", "Persistence.get_world")
+                return path
+    
+            return path
+
+    def get_map(self, name):
+        filename = f"{name.upper()}.map"
+
+        path = self.world / filename
+        if path.exists():
+            log_event(f"Found workspace map layer file: {path}", "Persistence.get_map")
+            return path
+
+        return path
+
     def save_engine_ui(self, path, data):
         if not self.can_edit_engine_ui():
             log_event("Blocked engine UI write: developer mode disabled", "Persistence.save_engine_ui")

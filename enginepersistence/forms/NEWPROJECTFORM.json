@@ -72,9 +72,7 @@
             "options": [
                 "Menu",
                 "Form",
-                "form2",
-                "form3",
-                "form4"
+                "Game World"
             ],
             "field": "project_type",
             "text": "",

@@ -4,3 +4,4 @@ class EDITOR_STATE(Enum):
     NONE = auto()
     FORM = auto()
     MENU = auto()
+    GAMEWORLD = auto()

@@ -20,6 +20,8 @@ class EditorUtility:
             directory = persistence.workspace_menus
         elif project_type == "Form":
             directory = persistence.workspace_forms
+        elif project_type == "Game World":
+            directory = persistence.world
         else:
             raise ValueError(f"Unknown project type: {project_type}")
 

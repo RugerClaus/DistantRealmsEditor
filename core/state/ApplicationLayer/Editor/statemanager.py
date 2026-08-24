@@ -5,9 +5,10 @@ from core.state.basestatemanager import BaseStateManager
 class EditorStateManager(BaseStateManager):
     def __init__(self):
         allowed_transitions = {
-            EDITOR_STATE.NONE: [EDITOR_STATE.FORM,EDITOR_STATE.MENU],
+            EDITOR_STATE.NONE: [EDITOR_STATE.FORM,EDITOR_STATE.MENU,EDITOR_STATE.GAMEWORLD],
             EDITOR_STATE.FORM: [EDITOR_STATE.NONE],
-            EDITOR_STATE.MENU: [EDITOR_STATE.NONE]
+            EDITOR_STATE.MENU: [EDITOR_STATE.NONE],
+            EDITOR_STATE.GAMEWORLD: [EDITOR_STATE.NONE]
         }
         super().__init__(
             initial_state=EDITOR_STATE.NONE,
