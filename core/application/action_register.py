@@ -30,7 +30,12 @@ class ActionRegistrar:
         self.distant_realms.actions.register("main_menu", self.distant_realms.application.navigation.main_menu)
 
         self.distant_realms.actions.register("new_project_form",lambda: self.distant_realms.ui_controller.show_ui("newprojectform"))
-        self.distant_realms.actions.register("load_project", self.distant_realms.application.initialize_project_browser)
+        self.distant_realms.actions.register("load_ui_projects", self.distant_realms.application.initialize_ui_project_browser)
+        self.distant_realms.actions.register("load_world_projects", self.distant_realms.application.initialize_ui_project_browser)
+        self.distant_realms.actions.register("load_cell_map_projects", self.distant_realms.application.initialize_ui_project_browser)
+
+        self.distant_realms.actions.register("save_and_quit_world_editor", lambda: self.distant_realms.application.navigation.save_and_quit_we())
+        self.distant_realms.actions.register("save_and_quit_cellmap_editor", lambda: self.distant_realms.application.navigation.save_and_quit_cme())
 
         self.distant_realms.actions.register("open_settings", lambda: self.distant_realms.ui_controller.show_ui("editor_settings_root"))
         self.distant_realms.actions.register("audio_settings", lambda: self.distant_realms.ui_controller.show_ui("editor_audio_settings"))

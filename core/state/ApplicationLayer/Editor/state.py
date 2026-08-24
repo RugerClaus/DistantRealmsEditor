@@ -5,3 +5,4 @@ class EDITOR_STATE(Enum):
     FORM = auto()
     MENU = auto()
     GAMEWORLD = auto()
+    CELLMAP = auto()

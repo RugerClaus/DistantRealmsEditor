@@ -87,11 +87,11 @@ class Application:
     def init(self):
         self.distant_realms.ui_controller.show_ui("editor_main_menu")
 
-    def initialize_project_browser(self):
+    def initialize_ui_project_browser(self):
         import importlib
-        from core.application.Editor import projectbrowser
-        importlib.reload(projectbrowser)
-        self.ProjectBrowser = projectbrowser.ProjectBrowser(self)
+        from core.application.Editor import uiprojectbrowser
+        importlib.reload(uiprojectbrowser)
+        self.ProjectBrowser = uiprojectbrowser.UIProjectBrowser(self)
         self.distant_realms.ui_controller.clear()
         self.distant_realms.ui_controller.show_ui("editor_project_browser")
 
@@ -110,3 +110,19 @@ class Application:
         self.editor = formeditor.FormEditor(self.distant_realms)
         self.distant_realms.ui_controller.clear()
         self.distant_realms.ui_controller.show_ui("form_editor_noprops")
+
+    def initialize_cellmap_editor(self):
+        import importlib
+        from core.application.Editor import cellmap_editor
+        importlib.reload(cellmap_editor)
+        self.editor = cellmap_editor.CMEditor(self.distant_realms)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("cellmap_editor_layout")
+
+    def initialize_world_editor(self):
+        import importlib
+        from core.application.Editor import worldeditor
+        importlib.reload(worldeditor)
+        self.editor = worldeditor.WorldEditor(self.distant_realms)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("world_editor_layout")

@@ -7,7 +7,7 @@ from core.util.colors import red
 from core.ui.widgets.button import Button
 
 
-class ProjectBrowser:
+class UIProjectBrowser:
 
     def __init__(self, application):
 

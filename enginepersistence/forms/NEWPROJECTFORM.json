@@ -72,7 +72,8 @@
             "options": [
                 "Menu",
                 "Form",
-                "Game World"
+                "Game World",
+                "Cell Map"
             ],
             "field": "project_type",
             "text": "",
