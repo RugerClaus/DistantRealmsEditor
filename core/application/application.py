@@ -95,6 +95,22 @@ class Application:
         self.distant_realms.ui_controller.clear()
         self.distant_realms.ui_controller.show_ui("editor_project_browser")
 
+    def initialize_cellmap_project_browser(self):
+        import importlib
+        from core.application.Editor import cellmapprojectbrowser
+        importlib.reload(cellmapprojectbrowser)
+        self.ProjectBrowser = cellmapprojectbrowser.CellMapProjectBrowser(self)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("editor_project_browser")
+
+    def initialize_world_project_browser(self):
+        import importlib
+        from core.application.Editor import worldprojectbrowser
+        importlib.reload(worldprojectbrowser)
+        self.ProjectBrowser = worldprojectbrowser.WorldProjectBrowser(self)
+        self.distant_realms.ui_controller.clear()
+        self.distant_realms.ui_controller.show_ui("editor_project_browser")
+
     def initialize_menu_editor(self):
         import importlib
         from core.application.Editor.Menu import menueditor
