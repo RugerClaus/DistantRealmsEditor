@@ -9,7 +9,7 @@
             "text": "File",
             "position": [
                 0.015,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_file_dropdown",
@@ -38,21 +38,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -123,7 +123,7 @@
             "text": "Edit",
             "position": [
                 0.0425,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_edit_dropdown",
@@ -152,21 +152,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -237,7 +237,7 @@
             "text": "World",
             "position": [
                 0.0785,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "None",
@@ -266,21 +266,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -351,7 +351,7 @@
             "text": "View",
             "position": [
                 0.1165,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_view_dropdown",
@@ -380,21 +380,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -465,7 +465,7 @@
             "text": "Tools",
             "position": [
                 0.1525,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_tools_dropdown",
@@ -494,21 +494,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -579,7 +579,7 @@
             "text": "Help",
             "position": [
                 0.188,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_help_dropdown",
@@ -608,21 +608,21 @@
                     "background": [
                         60,
                         60,
-                        60
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -692,8 +692,8 @@
             "font": "default",
             "text": "Save & Quit",
             "position": [
-                0.955,
-                0.025
+                0.97,
+                0.015
             ],
             "font_size": 20,
             "action": "save_and_quit_world_editor",
@@ -720,23 +720,23 @@
                 },
                 "hover": {
                     "background": [
-                        60,
-                        60,
-                        60
+                        255,
+                        150,
+                        150
                     ],
                     "border": [
-                        200,
-                        20,
-                        20
+                        255,
+                        255,
+                        255
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 1,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [

@@ -167,10 +167,10 @@ class EditorUtility:
             path = persistence.get_form(filename)
 
         elif project_type == "game world":
-            path = persistence.world / filename
+            path = persistence.world / f"{filename}.json"
 
         elif project_type == "cell map":
-            path = persistence.world / filename
+            path = persistence.world / f"{filename}.json"
 
         else:
             log_event(f"Unknown project type: {project_type}","EditorUtility.load_project")
@@ -242,10 +242,10 @@ class EditorUtility:
             self.distant_realms.ui_controller.show_ui("form_editor_noprops")
 
         elif project_type == "game world":
-            self.distant_realms.ui_controller.show_ui("world_editor_base")
+            self.distant_realms.ui_controller.show_ui("world_editor_layout")
 
         elif project_type == "cell map":
-            self.distant_realms.ui_controller.show_ui("cell_map_editor_base")
+            self.distant_realms.ui_controller.show_ui("cell_map_editor_layout")
 
     def save_project_file(self, filename, data):
         if not filename.exists():

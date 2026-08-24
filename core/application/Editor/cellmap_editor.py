@@ -16,3 +16,6 @@ class CMEditor:
 
     def clean_up_states(self):
         pass
+
+    def save(self):
+        pass

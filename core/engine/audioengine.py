@@ -16,7 +16,7 @@ from core.state.RuntimeLayer.Audio.SFX.statemanager import SystemSFXStateManager
 class AudioEngine:
     def __init__(self, system):
         self.system = system
-        default_volume = 0.3
+        default_volume = 0.0
         self.create_volume_files(str(default_volume))
 
         self.interface_sfx_state = InterfaceSFXStateManager()
@@ -61,13 +61,13 @@ class AudioEngine:
                 os.makedirs(f'{file_path}')
             
             if not os.path.exists(f"{file_path}/music_volume"):
-                self.system.persistence.save.write_constant('music_volume',f'{default_volume}')
+                self.system.persistence.save.write_constant('music_volume',f'0')
                 log_event('Music volume file creation: music_volume file created')
             else:
                 log_event('Music volume file creation: music_volume file exists')
             
             if not os.path.exists(f"{file_path}/sfx_volume"):
-                self.system.persistence.save.write_constant('sfx_volume',f'{default_volume}')
+                self.system.persistence.save.write_constant('sfx_volume',f'0')
                 log_event('SFX volume file creation: sfx_volume file created')
             else:
                 log_event('SFX volume file creation: sfx_volume file exists')

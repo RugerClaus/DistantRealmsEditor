@@ -1,62 +1,18 @@
 {
     "type": "menu",
-    "name": "EDITOR_MAIN_MENU",
+    "name": "CELL_MAP_EDITOR_LAYOUT",
     "elements": [
         {
-            "type": "header",
-            "id": "main_menu_header1",
-            "text": "DISTANT",
-            "position": [
-                0.8472,
-                0.1038
-            ],
-            "font_size": 100,
-            "color": [
-                220,
-                0,
-                224
-            ]
-        },
-        {
-            "type": "header",
-            "id": "main_menu_header2",
-            "text": "REALMS",
-            "position": [
-                0.8579668348954578,
-                0.1423076923076923
-            ],
-            "font_size": 100,
-            "color": [
-                106,
-                177,
-                255
-            ]
-        },
-        {
-            "type": "header",
-            "id": "main_menu_header3",
-            "text": "EDITOR",
-            "position": [
-                0.8652,
-                0.1821
-            ],
-            "font_size": 100,
-            "color": [
-                220,
-                0,
-                224
-            ]
-        },
-        {
+            "id": "file_button",
             "type": "button",
-            "id": "new_project_button",
-            "text": "New Project",
-            "font_size": 40,
+            "font": "default",
+            "text": "File",
             "position": [
-                0.12,
-                0.4
+                0.015,
+                0.025
             ],
-            "action": "new_project_form",
+            "font_size": 20,
+            "action": "open_file_dropdown",
             "styles": {
                 "idle": {
                     "background": [
@@ -65,38 +21,38 @@
                         40
                     ],
                     "border": [
-                        0,
-                        0,
+                        255,
+                        255,
                         255
                     ],
-                    "border_width": 2,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "hover": {
                     "background": [
                         60,
-                        255,
-                        60
+                        60,
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
-                        128,
-                        0,
-                        0
+                        255,
+                        255,
+                        255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -161,15 +117,16 @@
             }
         },
         {
+            "id": "edit_button",
             "type": "button",
-            "id": "load_ui_projects_button",
-            "text": "UI Projects",
-            "font_size": 40,
+            "font": "default",
+            "text": "Edit",
             "position": [
-                0.12,
-                0.5
+                0.0425,
+                0.025
             ],
-            "action": "load_ui_projects",
+            "font_size": 20,
+            "action": "open_edit_dropdown",
             "styles": {
                 "idle": {
                     "background": [
@@ -178,38 +135,38 @@
                         40
                     ],
                     "border": [
-                        40,
                         255,
-                        128
+                        255,
+                        255
                     ],
-                    "border_width": 2,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "hover": {
                     "background": [
                         60,
-                        255,
-                        60
+                        60,
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
-                        128,
-                        0,
-                        0
+                        255,
+                        255,
+                        255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -272,166 +229,38 @@
                     "padding": 5
                 }
             }
-        },
-        {
-            "type": "button",
-            "id": "quit_button",
-            "text": "Quit",
-            "font_size": 40,
-            "position": [
-                0.1,
-                0.9
-            ],
-            "action": "quit",
-            "styles": {
-                "idle": {
-                    "background": [
-                        40,
-                        40,
-                        40
-                    ],
-                    "border": [
-                        255,
-                        0,
-                        0
-                    ],
-                    "border_width": 2,
-                    "border_radius": 8,
-                    "text_color": [
-                        255,
-                        255,
-                        255
-                    ],
-                    "padding": 5
-                },
-                "hover": {
-                    "background": [
-                        255,
-                        60,
-                        60
-                    ],
-                    "border": [
-                        255,
-                        255,
-                        255
-                    ],
-                    "border_width": 3,
-                    "border_radius": 8,
-                    "text_color": [
-                        0,
-                        0,
-                        0
-                    ],
-                    "padding": 5
-                },
-                "press": {
-                    "background": [
-                        20,
-                        20,
-                        20
-                    ],
-                    "border": [
-                        255,
-                        255,
-                        255
-                    ],
-                    "border_width": 2,
-                    "border_radius": 8,
-                    "text_color": [
-                        255,
-                        255,
-                        255
-                    ],
-                    "padding": 5
-                },
-                "disable": {
-                    "background": [
-                        20,
-                        20,
-                        20
-                    ],
-                    "border": [
-                        100,
-                        100,
-                        100
-                    ],
-                    "border_width": 2,
-                    "border_radius": 8,
-                    "text_color": [
-                        100,
-                        100,
-                        100
-                    ],
-                    "padding": 5
-                },
-                "focused": {
-                    "background": [
-                        40,
-                        40,
-                        40
-                    ],
-                    "border": [
-                        0,
-                        255,
-                        255
-                    ],
-                    "border_width": 3,
-                    "border_radius": 8,
-                    "text_color": [
-                        255,
-                        255,
-                        255
-                    ],
-                    "padding": 5
-                }
-            }
-        },
-        {
-            "type": "label",
-            "id": "version_label",
-            "text": "Editor v0.1.0-alpha",
-            "position": [
-                0.9,
-                0.975
-            ],
-            "font_size": 30,
-            "color": [
-                220,
-                0,
-                224
-            ]
         },
         {
             "id": "new_button",
             "type": "button",
             "font": "default",
-            "text": "SETTTINGS",
+            "text": "World",
             "position": [
-                0.9325,
-                0.8904000000000001
+                0.0785,
+                0.025
             ],
-            "font_size": 30,
-            "action": "open_settings",
+            "font_size": 20,
+            "action": "None",
             "styles": {
                 "idle": {
                     "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
                         255,
                         255,
                         255
                     ],
-                    "border": [
-                        128,
-                        60,
-                        60
-                    ],
-                    "border_width": 2,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
-                        10,
-                        10,
-                        10
+                        255,
+                        255,
+                        255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "hover": {
                     "background": [
@@ -444,14 +273,14 @@
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -516,35 +345,16 @@
             }
         },
         {
-            "id": "new_stxt",
-            "type": "scrollable_text",
-            "text": "editorchangelog.txt",
-            "position": [
-                0.6967,
-                0.3185
-            ],
-            "color": [
-                255,
-                255,
-                255
-            ],
-            "width": 0.6,
-            "height": 0.2,
-            "align": "left",
-            "line_spacing": 0.01,
-            "font_size": 20
-        },
-        {
-            "id": "load_world_projects_button",
+            "id": "view_button",
             "type": "button",
             "font": "default",
-            "text": "World Projects",
+            "text": "View",
             "position": [
-                0.12,
-                0.6
+                0.1165,
+                0.025
             ],
-            "font_size": 40,
-            "action": "load_world_projects",
+            "font_size": 20,
+            "action": "open_view_dropdown",
             "styles": {
                 "idle": {
                     "background": [
@@ -553,38 +363,38 @@
                         40
                     ],
                     "border": [
-                        40,
                         255,
-                        128
+                        255,
+                        255
                     ],
-                    "border_width": 2,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
                         255,
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "hover": {
                     "background": [
                         60,
-                        255,
-                        60
+                        60,
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
-                    "border_width": 3,
-                    "border_radius": 8,
+                    "border_width": 0,
+                    "border_radius": 0,
                     "text_color": [
-                        128,
-                        0,
-                        0
+                        255,
+                        255,
+                        255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "press": {
                     "background": [
@@ -649,16 +459,16 @@
             }
         },
         {
-            "id": "load_cell_map_projects_button",
+            "id": "tools_button",
             "type": "button",
             "font": "default",
-            "text": "Cell Map Projects",
+            "text": "Tools",
             "position": [
-                0.12,
-                0.7
+                0.1525,
+                0.025
             ],
-            "font_size": 40,
-            "action": "load_cell_map_projects",
+            "font_size": 20,
+            "action": "open_tools_dropdown",
             "styles": {
                 "idle": {
                     "background": [
@@ -667,9 +477,49 @@
                         40
                     ],
                     "border": [
-                        40,
                         255,
-                        128
+                        255,
+                        255
+                    ],
+                    "border_width": 0,
+                    "border_radius": 0,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 2
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        255
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 0,
+                    "border_radius": 0,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 2
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
                     ],
                     "border_width": 2,
                     "border_radius": 8,
@@ -680,25 +530,213 @@
                     ],
                     "padding": 5
                 },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "help_button",
+            "type": "button",
+            "font": "default",
+            "text": "Help",
+            "position": [
+                0.188,
+                0.025
+            ],
+            "font_size": 20,
+            "action": "open_help_dropdown",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 0,
+                    "border_radius": 0,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 2
+                },
                 "hover": {
                     "background": [
                         60,
-                        255,
-                        60
+                        60,
+                        255
                     ],
                     "border": [
                         200,
                         20,
                         20
                     ],
+                    "border_width": 0,
+                    "border_radius": 0,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 2
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
                     "border_width": 3,
                     "border_radius": 8,
                     "text_color": [
-                        128,
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "savequit_button",
+            "type": "button",
+            "font": "default",
+            "text": "Save & Quit",
+            "position": [
+                0.955,
+                0.025
+            ],
+            "font_size": 20,
+            "action": "save_and_quit_world_editor",
+            "styles": {
+                "idle": {
+                    "background": [
+                        240,
+                        150,
+                        150
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 0,
+                    "border_radius": 0,
+                    "text_color": [
+                        0,
                         0,
                         0
                     ],
-                    "padding": 5
+                    "padding": 2
+                },
+                "hover": {
+                    "background": [
+                        255,
+                        150,
+                        150
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 1,
+                    "border_radius": 0,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 2
                 },
                 "press": {
                     "background": [

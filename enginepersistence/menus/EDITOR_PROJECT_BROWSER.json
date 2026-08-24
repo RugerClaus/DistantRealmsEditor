@@ -7,8 +7,8 @@
             "id": "main_menu_header1",
             "text": "DISTANT",
             "position": [
-                0.8633333333333333,
-                0.07851851851851852
+                0.8472,
+                0.1038
             ],
             "font_size": 100,
             "color": [
@@ -22,8 +22,8 @@
             "id": "main_menu_header2",
             "text": "REALMS",
             "position": [
-                0.8583333333333333,
-                0.11555555555555555
+                0.8579668348954578,
+                0.1423076923076923
             ],
             "font_size": 100,
             "color": [
@@ -37,8 +37,8 @@
             "id": "main_menu_header3",
             "text": "EDITOR",
             "position": [
-                0.8566666666666667,
-                0.16444444444444445
+                0.8652,
+                0.1821
             ],
             "font_size": 100,
             "color": [

@@ -3,6 +3,51 @@
     "name": "EDITOR_AUDIO_SETTINGS",
     "elements": [
         {
+            "type": "header",
+            "id": "main_menu_header1",
+            "text": "DISTANT",
+            "position": [
+                0.8472,
+                0.1038
+            ],
+            "font_size": 100,
+            "color": [
+                220,
+                0,
+                224
+            ]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header2",
+            "text": "REALMS",
+            "position": [
+                0.8579668348954578,
+                0.1423076923076923
+            ],
+            "font_size": 100,
+            "color": [
+                106,
+                177,
+                255
+            ]
+        },
+        {
+            "type": "header",
+            "id": "main_menu_header3",
+            "text": "EDITOR",
+            "position": [
+                0.8652,
+                0.1821
+            ],
+            "font_size": 100,
+            "color": [
+                220,
+                0,
+                224
+            ]
+        },
+        {
             "id": "back_to_set",
             "type": "button",
             "font": "default",
