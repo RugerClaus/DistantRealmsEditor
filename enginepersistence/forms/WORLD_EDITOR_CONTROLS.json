@@ -1,6 +1,6 @@
 {
-    "type": "menu",
-    "name": "CELL_MAP_EDITOR_LAYOUT",
+    "type": "form",
+    "name": "WORLD_EDITOR_CONTROLS",
     "elements": [
         {
             "id": "file_button",
@@ -9,7 +9,7 @@
             "text": "File",
             "position": [
                 0.015,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_file_dropdown",
@@ -123,7 +123,7 @@
             "text": "Edit",
             "position": [
                 0.0425,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_edit_dropdown",
@@ -237,7 +237,7 @@
             "text": "World",
             "position": [
                 0.0785,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "None",
@@ -351,7 +351,7 @@
             "text": "View",
             "position": [
                 0.1165,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_view_dropdown",
@@ -465,7 +465,7 @@
             "text": "Tools",
             "position": [
                 0.1525,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_tools_dropdown",
@@ -579,7 +579,7 @@
             "text": "Help",
             "position": [
                 0.188,
-                0.025
+                0.015
             ],
             "font_size": 20,
             "action": "open_help_dropdown",
@@ -692,8 +692,8 @@
             "font": "default",
             "text": "Save & Quit",
             "position": [
-                0.955,
-                0.025
+                0.95,
+                0.015
             ],
             "font_size": 20,
             "action": "save_and_quit_world_editor",
@@ -737,6 +737,120 @@
                         255
                     ],
                     "padding": 2
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "world_map_editor_toggle",
+            "type": "button",
+            "font": "default",
+            "text": "MapEditor",
+            "position": [
+                0.95,
+                0.16
+            ],
+            "font_size": 30,
+            "action": "toggle_game_world_editor_mode",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
                 },
                 "press": {
                     "background": [

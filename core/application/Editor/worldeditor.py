@@ -131,8 +131,6 @@ class WorldEditor:
         self.maps.clear()
         self.layers.clear()
 
-        # World loading will go here.
-
     def save(self):
 
         if self.active_file is None:
@@ -185,12 +183,6 @@ class WorldEditor:
 
             if self.canvas_position is None:
                 return
-
-            world_x,world_y = int(self.world_position[0]*10),int(self.world_position[1]*10)
-            cx,cy = int(self.canvas_position[0]/16),int(self.canvas_position[1]/9)
-            mx,my = int(self.map_position[0]+1),int(self.map_position[1]+1)
-
-            print("canvas position:","(",cx,",",cy,")","; world position:","(",world_x,",",world_y,")\n","map position: ","(",mx,",",my,")")
 
             if self.dragging:
                 pass
