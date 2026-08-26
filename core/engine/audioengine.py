@@ -16,7 +16,9 @@ from core.state.RuntimeLayer.Audio.SFX.statemanager import SystemSFXStateManager
 class AudioEngine:
     def __init__(self, system):
         self.system = system
-        default_volume = 0.0
+        default_volume = 0.3
+        self.ui_click_channel = None
+        self.ui_hover_channel = None
         self.create_volume_files(str(default_volume))
 
         self.interface_sfx_state = InterfaceSFXStateManager()
@@ -25,6 +27,8 @@ class AudioEngine:
         self.system_sfx_state = SystemSFXStateManager()
 
         self.audio_available = self.initialize_audio()
+        self.ui_click_channel = self.system.backend.pygame.mixer.Channel(0)
+        self.ui_hover_channel = self.system.backend.pygame.mixer.Channel(1)
 
         music_enabled = self.system.persistence.load.read_constant("music") == "True"
 
@@ -61,13 +65,13 @@ class AudioEngine:
                 os.makedirs(f'{file_path}')
             
             if not os.path.exists(f"{file_path}/music_volume"):
-                self.system.persistence.save.write_constant('music_volume',f'0')
+                self.system.persistence.save.write_constant('music_volume',f'{default_volume}')
                 log_event('Music volume file creation: music_volume file created')
             else:
                 log_event('Music volume file creation: music_volume file exists')
             
             if not os.path.exists(f"{file_path}/sfx_volume"):
-                self.system.persistence.save.write_constant('sfx_volume',f'0')
+                self.system.persistence.save.write_constant('sfx_volume',f'{default_volume}')
                 log_event('SFX volume file creation: sfx_volume file created')
             else:
                 log_event('SFX volume file creation: sfx_volume file exists')
@@ -150,18 +154,23 @@ class AudioEngine:
         if not self.audio_available:
             return "off"
 
-        if self.interface_sfx_state.is_state(INTERFACE_SFX_STATE.ON):
-            if effect_name in self.sound_effects:
-                sound_effect = self.sound_effects[effect_name]
-                sound_effect.set_volume(self.sfx_volume)
-                sound_effect.play()
-                self.active_sfx[effect_name] = sound_effect
-            else:
-                log_error(f"Sound effect '{effect_name}' not found.")
-        elif self.interface_sfx_state.is_state(INTERFACE_SFX_STATE.NONE):
-            log_error("Missing sound device", "AudioEngine: cannot set sound device")
-        else:
+        if not self.interface_sfx_state.is_state(INTERFACE_SFX_STATE.ON):
             return "off"
+
+        if effect_name not in self.sound_effects:
+            log_error(f"Sound effect '{effect_name}' not found.")
+            return
+
+        sound = self.sound_effects[effect_name]
+        sound.set_volume(self.sfx_volume)
+
+        if effect_name == "button_clicked":
+            return self.ui_click_channel.play(sound)
+
+        if effect_name == "button_hover":
+            return self.ui_hover_channel.play(sound)
+
+        return self.ui_channel.play(sound)
 
     def play_system_sfx(self, effect_name):
         if not self.audio_available:
