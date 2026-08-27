@@ -1,5 +1,5 @@
 {
-    "app_name": "myapp_snapshot",
+    "app_name": "Distant Realms Editor",
     "main": "main.py",
     "updater_main": "updater.py",
     "updater_name": "updater",
@@ -24,7 +24,7 @@
 
     "copy": [
         "enginepersistence",
-        "changelog.txt",
+        "editorchangelog.txt",
         "README.md",
         "LICENSE",
         "instructions.md"
@@ -50,7 +50,7 @@
     },
 
     "deployment": {
-        "server": "youruser@yourhost.name",
-        "remote_dir": "/path/to/directory"
+        "server": "rugerclausweb@plesk17.xmission.com",
+        "remote_dir": "snowblitz.net/downloads/dreditor"
     }
 }

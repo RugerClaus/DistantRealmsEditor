@@ -12,7 +12,7 @@ if getattr(sys, 'frozen', False):
 else:
     ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-GAME_EXECUTABLE = "MyApp"
+GAME_EXECUTABLE = "dr"
 UPDATE_ZIP = os.path.join(ROOT_DIR, "update.zip")
 
 

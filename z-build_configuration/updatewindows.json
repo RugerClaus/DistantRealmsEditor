@@ -1,5 +1,5 @@
 {
-    "app_name": "myapp",
+    "app_name": "Distant Realms Editor",
     "main": "main.py",
     "updater_main": "updater.py",
     "updater_name": "updater",
@@ -24,7 +24,7 @@
 
     "copy": [
         "enginepersistence",
-        "changelog.txt",
+        "editorchangelog.txt",
         "README.md",
         "LICENSE",
         "instructions.md"
@@ -45,12 +45,12 @@
 
     "archive": {
         "enabled": true,
-        "name": "myapp_update_latest_windows.zip",
-        "directory": "myapp_update_windows"
+        "name": "dr_update_latest_windows.zip",
+        "directory": "dr_update_windows"
     },
 
     "deployment": {
-        "server": "youruser@yourhost.name",
-        "remote_dir": "/path/to/directory"
+        "server": "rugerclausweb@plesk17.xmission.com",
+        "remote_dir": "snowblitz.net/downloads/dreditor/update/windows"
     }
 }
