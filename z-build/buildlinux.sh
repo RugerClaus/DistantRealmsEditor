@@ -21,6 +21,8 @@ if [ ! -f "$CONFIG" ]; then
   exit 1
 fi
 
+echo "Setting development mode to false..."
+printf "false" > "$ROOT/environment/dev"
 
 APP_NAME=$(jq -r '.app_name' "$CONFIG")
 MAIN=$(jq -r '.main' "$CONFIG")
@@ -140,6 +142,7 @@ function build_updater() {
 
   rm -rf "$TMP_DIST"
 }
+
 
 function zip_build() {
   if [ "$ARCHIVE_ENABLED" != "true" ]; then

@@ -34,6 +34,8 @@ class ActionRegistrar:
         self.distant_realms.actions.register("load_world_projects", self.distant_realms.application.initialize_world_project_browser)
         self.distant_realms.actions.register("load_cell_map_projects", self.distant_realms.application.initialize_cellmap_project_browser)
 
+        self.distant_realms.actions.register("create_new_map_layer", lambda: self.distant_realms.application.editor.create_new_map_layer())
+
         self.distant_realms.actions.register("toggle_game_world_editor_mode", lambda: print("ass"))
 
         self.distant_realms.actions.register("save_and_quit_world_editor", lambda: self.distant_realms.application.navigation.save_and_quit_we())

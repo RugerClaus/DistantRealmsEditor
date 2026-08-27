@@ -61,6 +61,11 @@ function copy_assets() {
   done < <(jq -r '.copy[]' "$CONFIG")
 
   mkdir -p "$TARGET/logs"
+
+  echo "Disabling developer mode..."
+
+  mkdir -p "$TARGET/environment"
+  printf "false\n" > "$TARGET/environment/dev"
 }
 
 

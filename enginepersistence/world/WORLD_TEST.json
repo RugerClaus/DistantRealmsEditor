@@ -1,5 +1,21 @@
 {
     "type": "game world",
     "name": "WORLD_TEST",
-    "maps": []
+    "maps": [
+        {
+            "file": "terrain.map",
+            "z": 0,
+            "velocity": [
+                0,
+                0
+            ],
+            "width": 9,
+            "height": 9,
+            "camera_follow_x": false,
+            "camera_follow_y": false,
+            "wrap_x": false,
+            "wrap_y": false,
+            "world_x": 0
+        }
+    ]
 }

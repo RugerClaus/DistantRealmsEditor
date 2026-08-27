@@ -16,6 +16,8 @@ class WorldEditor:
 
         self.system.input.CommandModule.sequences["save_project"] = [self.system.input.keys.l_ctrl_key(),self.system.input.keys.s_key()]
 
+        self.system.input.CommandModule.sequences["reload_map_creator"] = [self.system.input.keys.l_ctrl_key(),self.system.input.keys.g_key()]
+
         self.active_file = None
         self.active_filename = None
 
@@ -43,11 +45,15 @@ class WorldEditor:
         self.map_position = None
 
         self.load_canvas()
-        self.load_map_palette()
+        self.load_cell_pallete()
         self.load_options()
         self.load_coordinate_display()
+        self.initialize_map_creator()
 
         self.scale()
+
+    def create_new_map_layer(self):
+        self.map_creator.show()
         
     def load_canvas(self):
         self.canvas_x = 0.0
@@ -55,7 +61,7 @@ class WorldEditor:
         self.canvas_w = 0.75
         self.canvas_h = 9 / 16
 
-    def load_map_palette(self):
+    def load_cell_pallete(self):
         self.palette_x = 0.75
         self.palette_y = 0.03
         self.palette_w = 0.25
@@ -129,7 +135,6 @@ class WorldEditor:
             return
 
         self.maps.clear()
-        self.layers.clear()
 
     def save(self):
 
@@ -187,8 +192,21 @@ class WorldEditor:
             if self.dragging:
                 pass
 
+        
+
+        if self.map_creator.visible:
+            if event.type == self.system.input.keydown():
+                if event.key == self.system.input.keys.escape_key():
+                    self.hide()
+            if command == "reload_map_creator":
+                print("Reloading map creator modal...")
+                self.initialize_map_creator()
+                self.map_creator.visible = True
+            self.map_creator.handle_event(event,command)
+
     def update(self):
-        pass
+        if self.map_creator.visible:
+            self.map_creator.update()
 
     def draw(self):
         self.distant_realms.system.window.fill(white)
@@ -203,12 +221,12 @@ class WorldEditor:
                 self.canvas_rect
             )
 
-        if self.map_palette:
-            self.map_palette.fill(beige)
+        if self.cell_pallete:
+            self.cell_pallete.fill(beige)
 
             self.distant_realms.system.window.blit(
-                self.map_palette,
-                self.map_palette_rect
+                self.cell_pallete,
+                self.cell_pallete_rect
             )
 
         if self.options:
@@ -231,6 +249,9 @@ class WorldEditor:
                 self.coordinate_display,
                 self.coordinate_display_rect
             )
+
+        if self.map_creator.visible:
+            self.map_creator.draw()
 
     def get_canvas_position(self, mouse_pos):
 
@@ -288,28 +309,20 @@ class WorldEditor:
             topleft=(x, y)
         )
 
-        # ---------------------------------------------------------
-        # MAP PALETTE
-        # ---------------------------------------------------------
-
         x = int(ww * self.palette_x)
         y = int(wh * self.palette_y)
 
         width = int(ww * self.palette_w)
         height = int(wh * self.palette_h)
 
-        self.map_palette = self.distant_realms.system.window.make_surface(
+        self.cell_pallete = self.distant_realms.system.window.make_surface(
             width,
             height
         )
 
-        self.map_palette_rect = self.map_palette.get_rect(
+        self.cell_pallete_rect = self.cell_pallete.get_rect(
             topleft=(x, y)
         )
-
-        # ---------------------------------------------------------
-        # OPTIONS
-        # ---------------------------------------------------------
 
         x = int(ww * self.options_x)
         y = int(wh * self.options_y)
@@ -325,10 +338,6 @@ class WorldEditor:
         self.options_rect = self.options.get_rect(
             topleft=(x, y)
         )
-
-        # ---------------------------------------------------------
-        # COORDINATE DISPLAY
-        # ---------------------------------------------------------
 
         x = self.canvas_rect.left
         y = self.canvas_rect.bottom + self.coordinate_display_h / 2
@@ -383,3 +392,9 @@ class WorldEditor:
                 self.grid_color,
                 self.grid_line_width
             )
+
+    def initialize_map_creator(self):
+        import importlib
+        from application.Editor.modals import map_creator
+        importlib.reload(map_creator)
+        self.map_creator = map_creator.MapCreator(self.distant_realms)

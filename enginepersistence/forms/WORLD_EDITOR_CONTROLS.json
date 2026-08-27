@@ -801,16 +801,16 @@
             }
         },
         {
-            "id": "world_map_editor_toggle",
+            "id": "create_map_button",
             "type": "button",
             "font": "default",
-            "text": "MapEditor",
+            "text": "Create Map",
             "position": [
                 0.95,
-                0.16
+                0.14
             ],
-            "font_size": 30,
-            "action": "toggle_game_world_editor_mode",
+            "font_size": 25,
+            "action": "create_new_map_layer",
             "styles": {
                 "idle": {
                     "background": [
@@ -830,7 +830,7 @@
                         255,
                         255
                     ],
-                    "padding": 5
+                    "padding": 2
                 },
                 "hover": {
                     "background": [
