@@ -4,8 +4,8 @@ from core.state.RuntimeLayer.DevTools.DeveloperMode.state import DEVELOPER_MODE
 from core.util.colors import *
 from core.state.ApplicationLayer.Editor.statemanager import EditorStateManager
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
-from core.application.Editor.editorutility import EditorUtility
-from core.application.Editor.navigation import Navigation
+from application.Editor.editorutility import EditorUtility
+from application.Editor.navigation import Navigation
 
 class Application:
     def __init__(self,distant_realms):
@@ -89,7 +89,7 @@ class Application:
 
     def initialize_ui_project_browser(self):
         import importlib
-        from core.application.Editor import uiprojectbrowser
+        from application.Editor import uiprojectbrowser
         importlib.reload(uiprojectbrowser)
         self.ProjectBrowser = uiprojectbrowser.UIProjectBrowser(self)
         self.distant_realms.ui_controller.clear()
@@ -97,7 +97,7 @@ class Application:
 
     def initialize_cellmap_project_browser(self):
         import importlib
-        from core.application.Editor import cellmapprojectbrowser
+        from application.Editor import cellmapprojectbrowser
         importlib.reload(cellmapprojectbrowser)
         self.ProjectBrowser = cellmapprojectbrowser.CellMapProjectBrowser(self)
         self.distant_realms.ui_controller.clear()
@@ -105,7 +105,7 @@ class Application:
 
     def initialize_world_project_browser(self):
         import importlib
-        from core.application.Editor import worldprojectbrowser
+        from application.Editor import worldprojectbrowser
         importlib.reload(worldprojectbrowser)
         self.ProjectBrowser = worldprojectbrowser.WorldProjectBrowser(self)
         self.distant_realms.ui_controller.clear()
@@ -113,7 +113,7 @@ class Application:
 
     def initialize_menu_editor(self):
         import importlib
-        from core.application.Editor.Menu import menueditor
+        from application.Editor.Menu import menueditor
         importlib.reload(menueditor)
         self.editor = menueditor.MenuEditor(self.distant_realms)
         self.distant_realms.ui_controller.clear()
@@ -121,7 +121,7 @@ class Application:
 
     def initialize_form_editor(self):
         import importlib
-        from core.application.Editor.Form import formeditor
+        from application.Editor.Form import formeditor
         importlib.reload(formeditor)
         self.editor = formeditor.FormEditor(self.distant_realms)
         self.distant_realms.ui_controller.clear()
@@ -129,7 +129,7 @@ class Application:
 
     def initialize_cellmap_editor(self):
         import importlib
-        from core.application.Editor import cellmap_editor
+        from application.Editor import cellmap_editor
         importlib.reload(cellmap_editor)
         self.editor = cellmap_editor.CMEditor(self.distant_realms)
         self.distant_realms.ui_controller.clear()
@@ -137,7 +137,7 @@ class Application:
 
     def initialize_world_editor(self):
         import importlib
-        from core.application.Editor import worldeditor
+        from application.Editor import worldeditor
         importlib.reload(worldeditor)
         self.editor = worldeditor.WorldEditor(self.distant_realms)
         self.distant_realms.ui_controller.clear()

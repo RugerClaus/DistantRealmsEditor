@@ -1,6 +1,6 @@
 from core.ui.font import FontEngine
 from core.util.colors import white, black
-from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
+from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
 class EditorSelect(EditorWidget):

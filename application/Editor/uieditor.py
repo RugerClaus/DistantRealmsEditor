@@ -1,15 +1,15 @@
 import ast
 from core.util.colors import *
-from core.application.Editor.EditorWidgets.widgetutility import WidgetUtility
-from core.application.Editor.EditorWidgets.editorbutton import EditorButton
-from core.application.Editor.EditorWidgets.editorlabel import EditorLabel
-from core.application.Editor.EditorWidgets.editorheader import EditorHeader
-from core.application.Editor.EditorWidgets.editorcentertext import EditorCenterText
-from core.application.Editor.EditorWidgets.editorimage import EditorImage
-from core.application.Editor.EditorWidgets.editorquery import EditorQuery
-from core.application.Editor.EditorWidgets.editorscrollabletext import EditorScrollableText
-from core.application.Editor.EditorWidgets.editorselect import EditorSelect
-from core.application.Editor.EditorWidgets.editortextbox import EditorTextBox
+from application.Editor.EditorWidgets.widgetutility import WidgetUtility
+from application.Editor.EditorWidgets.editorbutton import EditorButton
+from application.Editor.EditorWidgets.editorlabel import EditorLabel
+from application.Editor.EditorWidgets.editorheader import EditorHeader
+from application.Editor.EditorWidgets.editorcentertext import EditorCenterText
+from application.Editor.EditorWidgets.editorimage import EditorImage
+from application.Editor.EditorWidgets.editorquery import EditorQuery
+from application.Editor.EditorWidgets.editorscrollabletext import EditorScrollableText
+from application.Editor.EditorWidgets.editorselect import EditorSelect
+from application.Editor.EditorWidgets.editortextbox import EditorTextBox
 
 from core.state.ApplicationLayer.Editor.Button.Style.state import BUTTON_STYLE_STATE
 from core.state.ApplicationLayer.Editor.Button.Style.statemanager import ButtonStyleStateManager

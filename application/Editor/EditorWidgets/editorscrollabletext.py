@@ -1,4 +1,4 @@
-from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
+from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
 class EditorScrollableText(EditorWidget):

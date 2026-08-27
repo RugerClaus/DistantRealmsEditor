@@ -1,18 +1,31 @@
 from core.ui.font import FontEngine
-from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
+from core.util.colors import white
+from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
-class EditorHeader(EditorWidget):
+class EditorQuery(EditorWidget):
     def __init__(self, editor, data):
         super().__init__(editor, data)
 
-        self.text = str(data.get("text", "Label"))
-        self.font_size = data.get("font_size", 30)
-        self.color = tuple(
-            data.get("color", [255, 255, 255])
+        self.text = str(
+            data.get("text", "Query")
         )
 
-        self.font = FontEngine(self.font_size).font
+        self.font_size = data.get(
+            "font_size",
+            40
+        )
+
+        self.color = tuple(
+            data.get(
+                "color",
+                white
+            )
+        )
+
+        self.font = FontEngine(
+            self.font_size
+        ).font
 
         self.scale()
 
@@ -27,8 +40,13 @@ class EditorHeader(EditorWidget):
         wh = self.editor.canvas.get_height()
         self.font = FontEngine(self.font_size).font
 
-        x = int(ww * self.position[0])
-        y = int(wh * self.position[1])
+        x = int(
+            ww * self.position[0]
+        )
+
+        y = int(
+            wh * self.position[1]
+        )
 
         self.surface = self.font.render(
             self.text,
@@ -41,6 +59,10 @@ class EditorHeader(EditorWidget):
         )
 
     def draw(self):
+
+        if self.text is None:
+            return
+
         self.system.window.blit(
             self.surface,
             self.rect

@@ -1,5 +1,5 @@
 from core.ui.font import FontEngine
-from core.application.Editor.EditorWidgets.editorwidget import EditorWidget
+from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
 class EditorCenterText(EditorWidget):

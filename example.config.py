@@ -4,7 +4,7 @@ config = {
     "TITLE": "Distant Realms Editor",
     "AUTHORS": ["RugerClaus"],
     "VERSION": "0.1.0-alpha",
-    "FRAMEWORK VERSION": "0.6.0-alpha",
+    "FRAMEWORK VERSION": "0.7.0-alpha",
     "OS": platform.system(),
     "OSV": platform.version(),
     "OSR": platform.release(),
