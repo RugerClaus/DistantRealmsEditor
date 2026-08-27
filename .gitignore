@@ -8,3 +8,5 @@ logs/*/*.log
 logs/*.log
 update/
 config.py
+tools/
+freeze_source/
