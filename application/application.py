@@ -133,13 +133,9 @@ class Application:
         from application.Editor import cellmap_editor
         importlib.reload(cellmap_editor)
         self.editor = cellmap_editor.CMEditor(self.distant_realms)
-        self.distant_realms.ui_controller.clear()
-        self.distant_realms.ui_controller.show_ui("cell_map_editor_layout")
 
     def initialize_world_editor(self):
         import importlib
         from application.Editor import worldeditor
         importlib.reload(worldeditor)
         self.editor = worldeditor.WorldEditor(self.distant_realms)
-        self.distant_realms.ui_controller.clear()
-        self.distant_realms.ui_controller.show_ui("world_editor_layout")

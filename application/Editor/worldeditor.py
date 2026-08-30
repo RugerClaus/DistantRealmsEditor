@@ -42,6 +42,8 @@ class WorldEditor:
 
         self.dirty = False
 
+        self.distant_realms.ui_controller.show_ui("world_editor_controls")
+
         self.coordinate_font = FontEngine(20)
         self.canvas_position = None
         self.world_position = None
@@ -52,12 +54,22 @@ class WorldEditor:
         self.load_options()
         self.load_coordinate_display()
         self.initialize_map_creator()
+        
+        self.scale()
+        self.update_ui()
 
-        for element in self.distant_realms.ui_controller.get_active_ui().children:
+    def update_ui(self):
+
+        active_ui = self.distant_realms.ui_controller.get_active_ui()
+
+        if active_ui is None:
+            return
+
+        for element in active_ui.children:
             if element.id == "world_name":
                 element.text = self.active_filename
+                break
 
-        self.scale()
 
     def create_new_map_layer(self):
         self.map_creator.show()
