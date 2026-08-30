@@ -913,6 +913,36 @@
                     "padding": 5
                 }
             }
+        },
+        {
+            "id": "world_name",
+            "type": "label",
+            "text": "world.json",
+            "position": [
+                0.75,
+                0.015
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "new_label",
+            "type": "label",
+            "text": "World:",
+            "position": [
+                0.69,
+                0.015
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
         }
     ]
 }

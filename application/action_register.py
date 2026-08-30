@@ -36,7 +36,7 @@ class ActionRegistrar:
 
         self.distant_realms.actions.register("create_new_map_layer", lambda: self.distant_realms.application.editor.create_new_map_layer())
 
-        self.distant_realms.actions.register("toggle_game_world_editor_mode", lambda: print("ass"))
+        self.distant_realms.actions.register("cancel_map_generation", lambda: self.distant_realms.application.editor.map_creator.hide())
 
         self.distant_realms.actions.register("save_and_quit_world_editor", lambda: self.distant_realms.application.navigation.save_and_quit_we())
         self.distant_realms.actions.register("save_and_quit_cellmap_editor", lambda: self.distant_realms.application.navigation.save_and_quit_cme())

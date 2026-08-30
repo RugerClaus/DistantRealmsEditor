@@ -79,9 +79,9 @@ class WorldProjectBrowser:
 
                 self.files.append({
                     "name": path.stem,
-                    "type": project_type
+                    "type": project_type,
+                    "filename": str(path)
                 })
-
     def create_buttons(self):
         for index, project in enumerate(self.files):
 
@@ -91,9 +91,12 @@ class WorldProjectBrowser:
                 project["name"],
                 (0.5, 0.5),
                 font_size=20,
-                action=lambda p=project: self.application.util.load_project(
-                    p["name"],
-                    p["type"]
+                action=lambda p=project: (
+                    print("BROWSER PROJECT:", p),
+                    self.application.util.load_project(
+                        p["name"],
+                        p["type"]
+                    )
                 )
             )
 

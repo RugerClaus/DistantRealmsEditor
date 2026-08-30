@@ -4,6 +4,7 @@ from core.ui.font import FontEngine
 from core.state.ApplicationLayer.Editor.state import EDITOR_STATE
 from core.state.ApplicationLayer.Editor.WorldEditor.state import WORLD_EDITOR_STATE
 from core.state.ApplicationLayer.Editor.WorldEditor.statemanager import WorldEditorStateManager
+from application.Editor.WorldEditor.editorworld import EditorWorld
 
 
 class WorldEditor:
@@ -30,8 +31,10 @@ class WorldEditor:
 
         self.maps = []
 
-        self.world_width = 9
-        self.world_height = 9
+        self.editor_world = EditorWorld(self.system)
+
+        self.world_width = self.editor_world.view_width
+        self.world_height = self.editor_world.view_height
 
         self.draw_grid = True
         self.grid_color = gray
@@ -49,6 +52,10 @@ class WorldEditor:
         self.load_options()
         self.load_coordinate_display()
         self.initialize_map_creator()
+
+        for element in self.distant_realms.ui_controller.get_active_ui().children:
+            if element.id == "world_name":
+                element.text = self.active_filename
 
         self.scale()
 
@@ -131,10 +138,49 @@ class WorldEditor:
         )
 
     def load_world(self):
-        if self.active_file is None:
+
+        print("WORLD EDITOR LOAD WORLD")
+        print("ACTIVE FILE:", self.active_file)
+        print("ACTIVE FILENAME:", self.active_filename)
+
+        if self.active_filename is None:
+            print("NO ACTIVE FILENAME")
             return
 
-        self.maps.clear()
+        self.editor_world.load(
+            self.active_filename
+        )
+
+        print(
+            "EDITOR WORLD:",
+            len(self.editor_world.maps),
+            self.editor_world.view_width,
+            self.editor_world.view_height
+        )
+
+        self.world_width = self.editor_world.view_width
+        self.world_height = self.editor_world.view_height
+
+    def select_world_position(self, world_x, world_y):
+
+        maps = self.editor_world.get_maps_at(
+            world_x,
+            world_y
+        )
+
+        if not maps:
+            return
+
+        self.selected_world_position = (
+            world_x,
+            world_y
+        )
+
+        self.selected_map = None
+
+        self.state.set_state(
+            WORLD_EDITOR_STATE.MAP
+        )
 
     def save(self):
 
@@ -155,13 +201,10 @@ class WorldEditor:
         mouse_pos = self.system.input.get_mouse_pos()
 
         if self.canvas_rect.collidepoint(mouse_pos):
-
             self.canvas_position = self.get_canvas_position(mouse_pos)
             self.world_position = self.get_world_position(mouse_pos)
             self.map_position = self.get_world_cell(mouse_pos)
-
         else:
-
             self.canvas_position = None
             self.world_position = None
             self.map_position = None
@@ -178,6 +221,17 @@ class WorldEditor:
             if not self.canvas_rect.collidepoint(event.pos):
                 return
 
+            if self.state.is_state(WORLD_EDITOR_STATE.WORLD):
+
+                world_x, world_y = self.get_world_position(event.pos)
+
+                self.select_world_position(
+                    int(world_x),
+                    int(world_y)
+                )
+
+                return
+
         elif event.type == self.distant_realms.system.input.mouse_button_up():
 
             if event.button == 1:
@@ -192,29 +246,38 @@ class WorldEditor:
             if self.dragging:
                 pass
 
-        
-
         if self.map_creator.visible:
+
             if event.type == self.system.input.keydown():
+
                 if event.key == self.system.input.keys.escape_key():
-                    self.hide()
+                    self.distant_realms.ui_controller.show_ui("world_editor_controls")
+                    self.map_creator.hide()
+
             if command == "reload_map_creator":
                 print("Reloading map creator modal...")
                 self.initialize_map_creator()
                 self.map_creator.visible = True
-            self.map_creator.handle_event(event,command)
+
+            self.map_creator.handle_event(event, command)
 
     def update(self):
         if self.map_creator.visible:
             self.map_creator.update()
 
     def draw(self):
+
         self.distant_realms.system.window.fill(white)
 
         if self.canvas:
+
             self.canvas.fill(black)
 
-            self.render_grid()
+            if self.state.is_state(WORLD_EDITOR_STATE.WORLD):
+                self.render_world()
+
+            elif self.state.is_state(WORLD_EDITOR_STATE.MAP):
+                self.render_selected_world_position()
 
             self.distant_realms.system.window.blit(
                 self.canvas,
@@ -222,6 +285,7 @@ class WorldEditor:
             )
 
         if self.cell_pallete:
+
             self.cell_pallete.fill(beige)
 
             self.distant_realms.system.window.blit(
@@ -230,6 +294,7 @@ class WorldEditor:
             )
 
         if self.options:
+
             self.options.fill(light_gray)
 
             self.distant_realms.system.window.blit(
@@ -253,6 +318,38 @@ class WorldEditor:
         if self.map_creator.visible:
             self.map_creator.draw()
 
+    def render_selected_world_position(self):
+
+        if not hasattr(self, "selected_world_position"):
+            return
+
+        world_x, world_y = self.selected_world_position
+
+        maps = self.editor_world.get_maps_at(
+            world_x,
+            world_y
+        )
+
+        if not maps:
+            return
+
+        width = self.canvas.get_width()
+        height = self.canvas.get_height()
+
+        maps.sort(
+            key=lambda map: map.z_index
+        )
+
+        for map in maps:
+
+            self.render_map(
+                map,
+                0,
+                0,
+                width,
+                height
+            )
+
     def get_canvas_position(self, mouse_pos):
 
         mouse_x, mouse_y = mouse_pos
@@ -274,16 +371,17 @@ class WorldEditor:
         )
 
     def get_world_cell(self, mouse_pos):
+
         world_x, world_y = self.get_world_position(mouse_pos)
 
         column = int(world_x)
         row = int(world_y)
 
         if (
-            column < 0
-            or column >= self.world_width
-            or row < 0
-            or row >= self.world_height
+            column < self.editor_world.view_x
+            or column >= self.editor_world.view_x + self.editor_world.view_width
+            or row < self.editor_world.view_y
+            or row >= self.editor_world.view_y + self.editor_world.view_height
         ):
             return None
 
@@ -354,21 +452,32 @@ class WorldEditor:
             center=(self.canvas_rect.width/2, y)
         )
 
+        self.map_creator.scale()
+
     def clean_up_states(self):
         pass
 
 
     def render_grid(self):
+
         if not self.draw_grid:
             return
 
         width = self.canvas.get_width()
         height = self.canvas.get_height()
 
-        for column in range(self.world_width + 1):
+        for column in range(
+            int(self.editor_world.view_width) + 1
+        ):
 
-            x = round(
-                column * width / self.world_width
+            world_x = (
+                self.editor_world.view_x
+                + column
+            )
+
+            x, _ = self.world_to_canvas(
+                world_x,
+                self.editor_world.view_y
             )
 
             self.distant_realms.system.window.draw_line(
@@ -379,10 +488,18 @@ class WorldEditor:
                 self.grid_line_width
             )
 
-        for row in range(self.world_height + 1):
+        for row in range(
+            int(self.editor_world.view_height) + 1
+        ):
 
-            y = round(
-                row * height / self.world_height
+            world_y = (
+                self.editor_world.view_y
+                + row
+            )
+
+            _, y = self.world_to_canvas(
+                self.editor_world.view_x,
+                world_y
             )
 
             self.distant_realms.system.window.draw_line(
@@ -391,6 +508,82 @@ class WorldEditor:
                 (width, y),
                 self.grid_color,
                 self.grid_line_width
+            )
+
+    def world_to_canvas(self, world_x, world_y):
+
+        x = (
+            (world_x - self.editor_world.view_x)
+            / self.editor_world.view_width
+            * self.canvas.get_width()
+        )
+
+        y = (
+            (world_y - self.editor_world.view_y)
+            / self.editor_world.view_height
+            * self.canvas.get_height()
+        )
+
+        return round(x), round(y)
+
+    def world_size_to_canvas(self, width, height):
+
+        return (
+            round(
+                width
+                / self.editor_world.view_width
+                * self.canvas.get_width()
+            ),
+            round(
+                height
+                / self.editor_world.view_height
+                * self.canvas.get_height()
+            )
+        )
+
+    def render_world(self):
+
+        for map in self.editor_world.maps:
+
+            x, y = self.world_to_canvas(
+                map.world_x,
+                map.world_y
+            )
+
+            width, height = self.world_size_to_canvas(
+                map.map_width,
+                map.map_height
+            )
+
+            self.render_map(
+                map,
+                x,
+                y,
+                width,
+                height
+            )
+
+        self.render_grid()
+
+    def render_map(self, map, x, y, width, height):
+    
+            map.render_layer()
+    
+            layer = map.layer_surface
+    
+            if (
+                layer.get_width() != width
+                or layer.get_height() != height
+            ):
+                layer = self.distant_realms.system.window.transform_scale(
+                    layer,
+                    width,
+                    height
+                )
+    
+            self.canvas.blit(
+                layer,
+                (x, y)
             )
 
     def initialize_map_creator(self):

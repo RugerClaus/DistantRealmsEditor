@@ -70,7 +70,8 @@ class Application:
             self.ProjectBrowser.draw()
 
     def scale(self):
-        pass
+        if self.editor:
+            self.editor.scale()
 
     def clean_up_states(self):
         self.distant_realms.system.app_inspector.clear()

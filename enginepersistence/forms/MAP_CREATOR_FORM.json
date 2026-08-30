@@ -1,5 +1,598 @@
 {
     "type": "form",
     "name": "MAP_CREATOR_FORM",
-    "elements": []
+    "elements": [
+        {
+            "type": "textbox",
+            "id": "filename",
+            "field": "filename",
+            "position": [
+                0.55,
+                0.3
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 30,
+            "is_password": false
+        },
+        {
+            "id": "file_name_label",
+            "type": "label",
+            "text": "File Name:",
+            "position": [
+                0.435,
+                0.3
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "new_header",
+            "type": "header",
+            "text": "New Map Layer",
+            "position": [
+                0.5,
+                0.1
+            ],
+            "font_size": 60,
+            "color": [
+                200,
+                200,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "layer_z_position",
+            "field": "layer_z_position",
+            "position": [
+                0.55,
+                0.33
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "z_index_label",
+            "type": "label",
+            "text": "Z Index (depth):",
+            "position": [
+                0.4125,
+                0.33
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "velocity_x",
+            "field": "velocity_x",
+            "position": [
+                0.55,
+                0.36
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "velocity_x_label",
+            "type": "label",
+            "text": "Velocity X:",
+            "position": [
+                0.4315,
+                0.36
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "select",
+            "id": "camera_follow_x",
+            "options": [
+                "True",
+                "False"
+            ],
+            "selected_option": "True",
+            "position": [
+                0.55,
+                0.42
+            ],
+            "font_size": 20,
+            "width": 0.15,
+            "height": 0.03,
+            "padding": 10,
+            "field": "camera_follow_x"
+        },
+        {
+            "id": "camera_follow_x_label",
+            "type": "label",
+            "text": "Camera Follow X:",
+            "position": [
+                0.41,
+                0.42
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "velocity_y",
+            "field": "velocity_y",
+            "position": [
+                0.55,
+                0.39
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "velocity_y_label",
+            "type": "label",
+            "text": "Velocity Y:",
+            "position": [
+                0.4315,
+                0.39
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "select",
+            "id": "camera_follow_y",
+            "options": [
+                "True",
+                "False"
+            ],
+            "selected_option": "True",
+            "position": [
+                0.55,
+                0.45
+            ],
+            "font_size": 20,
+            "width": 0.15,
+            "height": 0.03,
+            "padding": 10,
+            "field": "camera_follow_y"
+        },
+        {
+            "id": "camera_follow_y_label",
+            "type": "label",
+            "text": "Camera Follow Y:",
+            "position": [
+                0.41,
+                0.45
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "select",
+            "id": "wrap_x",
+            "options": [
+                "True",
+                "False"
+            ],
+            "selected_option": "True",
+            "position": [
+                0.55,
+                0.48
+            ],
+            "font_size": 20,
+            "width": 0.15,
+            "height": 0.03,
+            "padding": 10,
+            "field": "wrap_x"
+        },
+        {
+            "type": "select",
+            "id": "wrap_y",
+            "options": [
+                "True",
+                "False"
+            ],
+            "selected_option": "True",
+            "position": [
+                0.55,
+                0.51
+            ],
+            "font_size": 20,
+            "width": 0.15,
+            "height": 0.03,
+            "padding": 10,
+            "field": "wrap_y"
+        },
+        {
+            "id": "wrap_x_label",
+            "type": "label",
+            "text": "Wrap X:",
+            "position": [
+                0.44049999999999995,
+                0.48
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "wrap_y_label",
+            "type": "label",
+            "text": "Wrap Y:",
+            "position": [
+                0.44049999999999995,
+                0.51
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "world_x",
+            "field": "world_x",
+            "position": [
+                0.55,
+                0.54
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "world_x_label",
+            "type": "label",
+            "text": "World X:",
+            "position": [
+                0.439,
+                0.54
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "world_y",
+            "field": "world_y",
+            "position": [
+                0.55,
+                0.57
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "world_y_label",
+            "type": "label",
+            "text": "World Y:",
+            "position": [
+                0.439,
+                0.57
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "cell_pallette",
+            "field": "cell_pallette",
+            "position": [
+                0.55,
+                0.6
+            ],
+            "dimensions": [
+                0.15,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "cell_pallete_label",
+            "type": "label",
+            "text": "Cell Pallette:",
+            "position": [
+                0.4235,
+                0.6
+            ],
+            "font_size": 25,
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "id": "generate_map_button",
+            "type": "button",
+            "font": "default",
+            "text": "Generate Map",
+            "position": [
+                0.42,
+                0.68
+            ],
+            "font_size": 30,
+            "action": "generate_map",
+            "styles": {
+                "idle": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        20,
+                        200,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        },
+        {
+            "id": "cancel_map_creation",
+            "type": "button",
+            "font": "default",
+            "text": "Cancel",
+            "position": [
+                0.6,
+                0.68
+            ],
+            "font_size": 30,
+            "action": "cancel_map_generation",
+            "styles": {
+                "idle": {
+                    "background": [
+                        200,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "hover": {
+                    "background": [
+                        60,
+                        60,
+                        60
+                    ],
+                    "border": [
+                        200,
+                        20,
+                        20
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "press": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                },
+                "disable": {
+                    "background": [
+                        20,
+                        20,
+                        20
+                    ],
+                    "border": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "border_width": 2,
+                    "border_radius": 8,
+                    "text_color": [
+                        100,
+                        100,
+                        100
+                    ],
+                    "padding": 5
+                },
+                "focused": {
+                    "background": [
+                        40,
+                        40,
+                        40
+                    ],
+                    "border": [
+                        0,
+                        255,
+                        255
+                    ],
+                    "border_width": 3,
+                    "border_radius": 8,
+                    "text_color": [
+                        255,
+                        255,
+                        255
+                    ],
+                    "padding": 5
+                }
+            }
+        }
+    ]
 }

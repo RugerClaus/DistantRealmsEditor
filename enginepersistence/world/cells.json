@@ -1,0 +1,60 @@
+{
+    "type": "cell map",
+    "name": "cells",
+
+    "cell_map": {
+        "0": {
+            "name": "empty",
+            "color": null,
+            "properties": {
+                "collidable": false,
+                "receives_light": false
+            }
+        },
+
+        "1": {
+            "name": "grass",
+            "color": [0, 255, 0],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "2": {
+            "name": "yellow",
+            "color": [255, 255, 0],
+            "properties": {
+                "collidable": false,
+                "receives_light": false
+            }
+        },
+
+        "3": {
+            "name": "cloud",
+            "color": [255, 255, 255],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "4": {
+            "name": "dirt",
+            "color": [139, 69, 19],
+            "properties": {
+                "collidable": false,
+                "receives_light": false
+            }
+        },
+
+        "5": {
+            "name": "snow",
+            "color": [255, 250, 250],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        }
+    }
+}

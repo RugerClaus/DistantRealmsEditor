@@ -447,6 +447,11 @@ class UIEditor:
 
         self.update_fields()
 
+    def scale(self):
+        self.load_canvas()
+        self.load_widget_palette()
+        self.load_options()
+
     def handle_event(self, event,command):
 
         if command == "save_project":
@@ -454,12 +459,6 @@ class UIEditor:
             self.save()
         elif command == "delete_element":
             self.delete_selected_element()
-
-        if event.type == self.distant_realms.system.input.video_resize_event():
-            self.load_canvas()
-            self.load_widget_palette()
-            self.load_options()
-            return
 
         if event.type == self.distant_realms.system.input.mouse_button_down():
             if event.button == 1:

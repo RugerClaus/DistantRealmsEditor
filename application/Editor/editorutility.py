@@ -173,12 +173,20 @@ class EditorUtility:
             path = persistence.world / f"{filename}.json"
 
         else:
-            log_event(f"Unknown project type: {project_type}","EditorUtility.load_project")
+            log_event(
+                f"Unknown project type: {project_type}",
+                "EditorUtility.load_project"
+            )
 
             return False
 
+        print("LOAD_PROJECT:", filename, project_type)
+
         if not path.exists():
-            log_event(f"Project file does not exist: {path}","EditorUtility.load_project")
+            log_event(
+                f"Project file does not exist: {path}",
+                "EditorUtility.load_project"
+            )
 
             return False
 
@@ -188,20 +196,30 @@ class EditorUtility:
         file_type = data.get("type")
 
         if not self.is_supported_project_type(file_type):
-            log_event(f"Unknown project type in file: {file_type}","EditorUtility.load_project")
+            log_event(
+                f"Unknown project type in file: {file_type}",
+                "EditorUtility.load_project"
+            )
 
             return False
 
         self.initialize_editor_for_type(file_type)
+
         editor = self.distant_realms.application.editor
 
         editor.active_filename = path
         editor.active_file = data
 
+        if hasattr(editor, "load_world"):
+            editor.load_world()
+
         if hasattr(editor, "load_canvas"):
             editor.load_canvas()
 
-        log_event(f"Loaded project file: {path.resolve()}","EditorUtility.load_project")
+        log_event(
+            f"Loaded project file: {path.resolve()}",
+            "EditorUtility.load_project"
+        )
 
         browser = self.distant_realms.application.ProjectBrowser
 
