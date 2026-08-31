@@ -231,7 +231,7 @@
             }
         },
         {
-            "id": "new_button",
+            "id": "world_button",
             "type": "button",
             "font": "default",
             "text": "World",
@@ -240,7 +240,7 @@
                 0.015
             ],
             "font_size": 20,
-            "action": "None",
+            "action": "open_world_button_dropdown",
             "styles": {
                 "idle": {
                     "background": [
@@ -806,8 +806,8 @@
             "font": "default",
             "text": "Create Map",
             "position": [
-                0.95,
-                0.14
+                0.7,
+                0.95
             ],
             "font_size": 25,
             "action": "create_new_map_layer",

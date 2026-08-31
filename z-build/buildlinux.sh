@@ -217,3 +217,6 @@ else
 fi
 
 echo "Build completed."
+
+echo "Setting development mode to true..."
+printf "true" > "$ROOT/environment/dev"

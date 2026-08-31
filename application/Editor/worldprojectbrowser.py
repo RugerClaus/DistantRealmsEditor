@@ -94,7 +94,6 @@ class WorldProjectBrowser:
                 (0.5, 0.5),
                 font_size=20,
                 action=lambda p=project: (
-                    print("BROWSER PROJECT:", p),
                     self.application.util.load_project(
                         p["name"],
                         p["type"]

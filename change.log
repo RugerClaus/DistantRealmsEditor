@@ -32,3 +32,12 @@ Development version Alpha 0.0.3 - 2026-08-09
 - Added ScrollableText, Query, and Input widgets
 - Main menu now displays changelog
 - Editor is fully functional according to its design
+
+Development version Alpha 0.1.0 - 2026-09-02
+---------------------------------------------
+- Added world Editor
+- Added map selector
+- Added cell palette
+- Can edit worlds of any size and add as many maps to any world as you please 
+- Can render the whole world at once or a single position at a time
+- Bug fixes to UIEditor
