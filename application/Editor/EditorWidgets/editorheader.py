@@ -1,4 +1,3 @@
-from core.ui.font import FontEngine
 from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
@@ -12,7 +11,7 @@ class EditorHeader(EditorWidget):
             data.get("color", [255, 255, 255])
         )
 
-        self.font = FontEngine(self.font_size).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 
@@ -25,7 +24,7 @@ class EditorHeader(EditorWidget):
     def scale(self):
         ww = self.editor.canvas.get_width()
         wh = self.editor.canvas.get_height()
-        self.font = FontEngine(self.font_size).font
+        self.font = self.system.font.get_font(self.font_size)
 
         x = int(ww * self.position[0])
         y = int(wh * self.position[1])

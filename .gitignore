@@ -10,3 +10,5 @@ update/
 config.py
 tools/
 freeze_source/
+build/
+spec/

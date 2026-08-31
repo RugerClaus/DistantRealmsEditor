@@ -1,6 +1,4 @@
-from core.ui.font import FontEngine
 from application.Editor.EditorWidgets.editorwidget import EditorWidget
-
 
 class EditorButton(EditorWidget):
     def __init__(self, editor, data):
@@ -42,7 +40,7 @@ class EditorButton(EditorWidget):
         else:
             style = self.styles[state_name]
 
-        self.font = FontEngine(self.font_size).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.text_surface = self.font.render(
             str(self.text),

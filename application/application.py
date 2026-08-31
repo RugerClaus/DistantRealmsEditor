@@ -1,3 +1,4 @@
+# core.application
 from helper import sine
 from core.state.RuntimeLayer.DevTools.DeveloperMode.state import DEVELOPER_MODE
 
@@ -10,6 +11,7 @@ from application.Editor.navigation import Navigation
 class Application:
     def __init__(self,distant_realms):
         self.distant_realms = distant_realms
+        self.system = distant_realms.system
         self.state = EditorStateManager()
         self.util = EditorUtility(distant_realms)
         self.editor = None
@@ -29,7 +31,7 @@ class Application:
 
         
 
-        if self.distant_realms.system.control_state.is_state(DEVELOPER_MODE.ON):
+        if self.system.control_state.is_state(DEVELOPER_MODE.ON):
 
             if command == "reload_menu_editor":
                 self.initialize_menu_editor()
@@ -42,13 +44,13 @@ class Application:
         
         if self.state.is_state(EDITOR_STATE.NONE):
 
-            pulse = sine(self.distant_realms.system.time.get_current_time())
+            pulse = sine(self.system.time.get_current_time())
             fade_color = (
                 int(50 * pulse), 
                 int(50 * pulse), 
                 int(50 * pulse)
             )
-            self.distant_realms.system.window.fill((fade_color))
+            self.system.window.fill((fade_color))
             self.clean_up_states()
 
 
@@ -60,6 +62,7 @@ class Application:
         else:
             if self.editor:
                 self.editor.update()
+                self.system.app_inspector["Editor"] = self.state.state_name
 
     def draw(self):
         
@@ -74,8 +77,8 @@ class Application:
             self.editor.scale()
 
     def clean_up_states(self):
-        self.distant_realms.system.app_inspector.clear()
-        self.distant_realms.system.clean_up_states([self.state.state])
+        self.system.app_inspector.clear()
+        self.system.clean_up_states([self.state.state])
 
     def register_debug_telemetry(self):
         # exmaple:
@@ -106,7 +109,7 @@ class Application:
 
     def initialize_world_project_browser(self):
         import importlib
-        from application.Editor import worldprojectbrowser
+        from application.Editor.WorldEditor import worldprojectbrowser
         importlib.reload(worldprojectbrowser)
         self.ProjectBrowser = worldprojectbrowser.WorldProjectBrowser(self)
         self.distant_realms.ui_controller.clear()
@@ -136,6 +139,6 @@ class Application:
 
     def initialize_world_editor(self):
         import importlib
-        from application.Editor import worldeditor
+        from application.Editor.WorldEditor import worldeditor
         importlib.reload(worldeditor)
         self.editor = worldeditor.WorldEditor(self.distant_realms)

@@ -1,4 +1,3 @@
-from core.ui.font import FontEngine
 from core.util.colors import white, black
 from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
@@ -31,9 +30,7 @@ class EditorSelect(EditorWidget):
             data.get("background_color", white)
         )
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 
@@ -63,9 +60,7 @@ class EditorSelect(EditorWidget):
         self.font_size = int(size)
         self.data["font_size"] = self.font_size
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 
@@ -91,9 +86,7 @@ class EditorSelect(EditorWidget):
         canvas_width = self.editor.canvas.get_width()
         canvas_height = self.editor.canvas.get_height()
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         width = max(
             1,

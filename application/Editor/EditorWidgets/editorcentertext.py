@@ -1,4 +1,3 @@
-from core.ui.font import FontEngine
 from application.Editor.EditorWidgets.editorwidget import EditorWidget
 
 
@@ -15,9 +14,7 @@ class EditorCenterText(EditorWidget):
             40
         )
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 

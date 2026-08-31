@@ -1,4 +1,3 @@
-from core.ui.font import FontEngine
 from application.Editor.EditorWidgets.editorwidget import EditorWidget
 from core.util.colors import black, white
 
@@ -41,9 +40,7 @@ class EditorTextBox(EditorWidget):
             )
         )
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 
@@ -65,9 +62,7 @@ class EditorTextBox(EditorWidget):
         self.font_size = int(size)
         self.data["font_size"] = self.font_size
 
-        self.font = FontEngine(
-            self.font_size
-        ).font
+        self.font = self.system.font.get_font(self.font_size)
 
         self.scale()
 

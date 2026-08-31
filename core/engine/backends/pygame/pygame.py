@@ -11,4 +11,5 @@ class PGInterface:
         import pygame
         self.pygame = pygame
         pygame.init()
+        pygame.font.init()
 
