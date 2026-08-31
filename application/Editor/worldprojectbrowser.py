@@ -80,8 +80,10 @@ class WorldProjectBrowser:
                 self.files.append({
                     "name": path.stem,
                     "type": project_type,
-                    "filename": str(path)
+                    "filename": path,
+                    "data": data
                 })
+
     def create_buttons(self):
         for index, project in enumerate(self.files):
 

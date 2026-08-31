@@ -56,20 +56,28 @@ class WorldEditor:
         self.initialize_map_creator()
         
         self.scale()
-        self.update_ui()
-
+        self.ui_updated = False
+        
     def update_ui(self):
-
         active_ui = self.distant_realms.ui_controller.get_active_ui()
 
         if active_ui is None:
             return
 
+        if self.active_file is None:
+            return
+
+        world_name = str(
+            self.active_file.get("name", "")
+        )
+
         for element in active_ui.children:
+
             if element.id == "world_name":
-                element.text = self.active_filename
+                element.text = world_name
                 break
 
+        self.ui_updated = True
 
     def create_new_map_layer(self):
         self.map_creator.show()
@@ -276,6 +284,9 @@ class WorldEditor:
     def update(self):
         if self.map_creator.visible:
             self.map_creator.update()
+
+        if self.active_file and self.active_filename and not self.ui_updated:
+            self.update_ui()
 
     def draw(self):
 
