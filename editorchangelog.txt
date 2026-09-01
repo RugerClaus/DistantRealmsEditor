@@ -1,4 +1,4 @@
-Development version Alpha 0.1.0 - 2026-08-09
+Development version Alpha 0.1.0 - 2026-09-01
 - Added world Editor
 - Added map selector
 - Added cell palette
