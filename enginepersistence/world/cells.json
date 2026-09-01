@@ -55,6 +55,114 @@
                 "collidable": false,
                 "receives_light": true
             }
+        },
+
+        "6": {
+            "name": "water",
+            "color": [0, 120, 255],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "7": {
+            "name": "stone",
+            "color": [100, 100, 100],
+            "properties": {
+                "collidable": true,
+                "receives_light": true
+            }
+        },
+
+        "8": {
+            "name": "lava",
+            "color": [255, 60, 0],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "9": {
+            "name": "sand",
+            "color": [240, 210, 120],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "10": {
+            "name": "purple",
+            "color": [160, 32, 240],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "11": {
+            "name": "pink",
+            "color": [255, 80, 180],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "12": {
+            "name": "cyan",
+            "color": [0, 220, 220],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "13": {
+            "name": "orange",
+            "color": [255, 140, 0],
+            "properties": {
+                "collidable": false,
+                "receives_light": true
+            }
+        },
+
+        "14": {
+            "name": "blue",
+            "color": [30, 70, 220],
+            "properties": {
+                "collidable": false,
+                "receives_light": false
+            }
+        },
+
+        "15": {
+            "name": "red",
+            "color": [220, 20, 40],
+            "properties": {
+                "collidable": false,
+                "receives_light": false
+            }
+        },
+
+        "16": {
+            "name": "teal",
+            "color": [0, 150, 120],
+            "properties": {
+                "collidable": true,
+                "receives_light": true
+            }
+        },
+
+        "17": {
+            "name": "violet",
+            "color": [100, 60, 200],
+            "properties": {
+                "collidable": true,
+                "receives_light": false
+            }
         }
     }
 }

@@ -62,7 +62,7 @@ class Application:
         else:
             if self.editor:
                 self.editor.update()
-                self.system.app_inspector["Editor"] = self.state.state_name
+                self.system.app_inspector["Editor"] = self.state.state
 
     def draw(self):
         

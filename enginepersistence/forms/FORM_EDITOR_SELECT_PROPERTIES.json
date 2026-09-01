@@ -1144,14 +1144,14 @@
         },
         {
             "type": "textbox",
-            "id": "field",
-            "field": "field",
+            "id": "padding",
+            "field": "padding",
             "position": [
-                0.125,
-                0.83
+                0.33,
+                0.89
             ],
             "dimensions": [
-                0.15,
+                0.1,
                 0.03
             ],
             "font_size": 25,
@@ -1365,6 +1365,37 @@
             "position": [
                 0.235,
                 0.86
+            ],
+            "font_size": 25,
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "textbox",
+            "id": "new_textbox",
+            "field": "default",
+            "position": [
+                0.1,
+                0.83
+            ],
+            "dimensions": [
+                0.1,
+                0.03
+            ],
+            "font_size": 25,
+            "max_chars": 21,
+            "is_password": false
+        },
+        {
+            "id": "new_label",
+            "type": "label",
+            "text": "Padding:",
+            "position": [
+                0.235,
+                0.89
             ],
             "font_size": 25,
             "color": [

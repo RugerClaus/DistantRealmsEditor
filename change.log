@@ -33,7 +33,7 @@ Development version Alpha 0.0.3 - 2026-08-09
 - Main menu now displays changelog
 - Editor is fully functional according to its design
 
-Development version Alpha 0.1.0 - 2026-09-02
+Development version Alpha 0.1.0 - 2026-09-01
 ---------------------------------------------
 - Added world Editor
 - Added map selector
@@ -41,3 +41,4 @@ Development version Alpha 0.1.0 - 2026-09-02
 - Can edit worlds of any size and add as many maps to any world as you please 
 - Can render the whole world at once or a single position at a time
 - Bug fixes to UIEditor
+- Builds now reset dev to true after building

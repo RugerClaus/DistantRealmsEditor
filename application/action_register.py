@@ -34,8 +34,10 @@ class ActionRegistrar:
         self.distant_realms.actions.register("load_world_projects", self.distant_realms.application.initialize_world_project_browser)
         self.distant_realms.actions.register("load_cell_map_projects", self.distant_realms.application.initialize_cellmap_project_browser)
 
-        self.distant_realms.actions.register("create_new_map_layer", lambda: self.distant_realms.application.editor.create_new_map_layer())
+        self.distant_realms.actions.register("create_new_map_layer", lambda: self.distant_realms.application.editor.map_creator.show())
 
+        self.distant_realms.actions.register("generate_map", lambda: self.distant_realms.application.editor.map_creator.submit())
+        self.distant_realms.actions.register("apply_map_layer_properties", lambda: self.distant_realms.application.editor.map_properties.submit())
         self.distant_realms.actions.register("cancel_map_generation", lambda: self.distant_realms.application.editor.map_creator.hide())
 
         self.distant_realms.actions.register("save_and_quit_world_editor", lambda: self.distant_realms.application.navigation.save_and_quit_we())

@@ -335,6 +335,10 @@ class UIEditor:
                 self.selected_element.data.get("height", 0.06)
             )
 
+            fields["padding"] = str(
+                self.selected_element.data.get("padding", 10)
+            )
+
             fields["field"] = self.selected_element.data.get(
                 "field",
                 "default"
@@ -456,7 +460,6 @@ class UIEditor:
 
         if command == "save_project":
             self.update_widget_properties(self.distant_realms.ui_controller.get_active_ui().submit())
-            self.save()
         elif command == "delete_element":
             self.delete_selected_element()
 
@@ -519,11 +522,19 @@ class UIEditor:
 
         self.update_fields()
 
-    def update_widget_properties(self, properties):
+    def update_widget_properties(self, properties=None):
         element = self.selected_element
 
         if element is None:
             return
+
+        if properties is None:
+            active_ui = self.distant_realms.ui_controller.get_active_ui()
+
+            if active_ui is None:
+                return
+
+            properties = active_ui.submit()
 
         style_name = self.button_style_state.state.name.lower()
 
@@ -603,14 +614,10 @@ class UIEditor:
                 )
 
                 if "width" in properties:
-                    width = float(
-                        properties.pop("width")
-                    )
+                    width = float(properties.pop("width"))
 
                 if "height" in properties:
-                    height = float(
-                        properties.pop("height")
-                    )
+                    height = float(properties.pop("height"))
 
                 element.set_dimensions(
                     (width, height)
@@ -620,7 +627,7 @@ class UIEditor:
                 element.set_field(
                     properties.pop("field")
                 )
-            
+
             if "max_chars" in properties:
                 element.set_max_chars(
                     properties.pop("max_chars")
@@ -659,8 +666,6 @@ class UIEditor:
             if "options" in properties:
                 options = properties.pop("options")
 
-                # The form field contains the Python-style
-                # list as text, so convert it back into a list.
                 if isinstance(options, str):
                     try:
                         options = ast.literal_eval(options)
