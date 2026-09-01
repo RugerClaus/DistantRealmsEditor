@@ -755,12 +755,18 @@ class WorldEditor:
         self.options = self.distant_realms.system.window.make_surface(width, height)
         self.options_rect = self.options.get_rect(topleft=(x, y))
 
+        coordinate_gap = 6
+        coordinate_height = int(wh * self.coordinate_display_h)
+
         x = self.canvas_rect.left
-        y = self.canvas_rect.bottom + self.coordinate_display_h / 2
+        y = self.canvas_rect.bottom + coordinate_gap
         width = self.canvas_rect.width
-        height = int(wh * self.coordinate_display_h)
+        height = coordinate_height
+
         self.coordinate_display = self.distant_realms.system.window.make_surface(width, height)
-        self.coordinate_display_rect = self.coordinate_display.get_rect(center=(self.canvas_rect.width / 2, y))
+        self.coordinate_display_rect = self.coordinate_display.get_rect(
+            topleft=(x, y)
+        )
 
         self.map_creator.scale()
         self.map_selector.scale()
